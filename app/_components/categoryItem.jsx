@@ -1,13 +1,14 @@
 "use client"
 import CustomImage from '@/components/shared/customImage'
 import { getTranslatedValue } from '@/lib/functions';
+import Link from 'next/link';
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 
 export default function CategoryItem({ item }) {
   const { i18n } = useTranslation();
   return (
-    <main className='bg-[#EBEBEB99] rounded-2xl p-4'>
+    <Link href={`/${item?.id}`} className='bg-[#EBEBEB99] rounded-2xl p-4'>
       <div className="relative mx-auto aspect-[4/3] rounded-[4px] overflow-hidden">
         <CustomImage
           src={item?.image ? `https://q-bit.uz${item?.image}` : "/placeholder.svg"}
@@ -22,6 +23,6 @@ export default function CategoryItem({ item }) {
         <h1 className='text-xl font-medium'>{getTranslatedValue(item.name, i18n?.language)}</h1>
         <p className='text-md text-red-500'>POS система</p>
       </div>
-    </main>
+    </Link>
   )
 }

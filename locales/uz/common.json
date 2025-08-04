@@ -316,6 +316,12 @@
     "workingHours": "Ish vaqti",
     "workingTime": "Du-Ju 9:00-18:00"
   },
+  "homePage": {
+    "manufacturerTitle": "Tovarlar bo'yicha ishlab chiqaruvchilar",
+    "discountTitle": "Aktsiyalar va eng yaxshi mahsulotlar",
+    "categoryTitle": "Kategoriyalar",
+    "categoryLink": "Barcha kategoriyalar"
+  },  
   "common": {
     "loading": "Yuklanmoqda...",
     "error": "Xatolik",
@@ -325,7 +331,8 @@
     "delete": "O'chirish",
     "edit": "Tahrirlash",
     "close": "Yopish",
-    "currency": "so'm"
+    "currency": "so'm",
+    "noProductsFound": "Mahsulotlar topilmadi"
   },
   "language": {
     "ru": "Русский",

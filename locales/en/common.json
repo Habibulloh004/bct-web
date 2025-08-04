@@ -246,7 +246,7 @@
       "phone": {
         "label": "Phone Number",
         "placeholder": "99 999-99-99",
-        "validation":"Phone number must be 13 characters long",
+        "validation": "Phone number must be 13 characters long",
         "validation_type": "Please select a payment type"
       },
       "paymentType": {
@@ -316,6 +316,12 @@
     "workingHours": "Working Hours",
     "workingTime": "Mon-Fri 9:00-18:00"
   },
+  "homePage": {
+    "manufacturerTitle": "Products by Manufacturer",
+    "discountTitle": "Promotions and Top Products",
+    "categoryTitle": "Categories",
+    "categoryLink": "All Categories"
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error",
@@ -325,7 +331,8 @@
     "delete": "Delete",
     "edit": "Edit",
     "close": "Close",
-    "currency": "sum"
+    "currency": "sum",
+    "noProductsFound": "No products found"
   },
   "language": {
     "ru": "Русский",

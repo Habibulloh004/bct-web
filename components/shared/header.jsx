@@ -17,12 +17,14 @@ import MobileCategoryMenu from "./MobileCategoryMenu";
 import DesktopCategoryDropdown from "./DesktopCategoryDropdown";
 import MobileLanguageSwitcher from "../MobileLanguageSwitcher";
 import LanguageSwitcher from "../LanguageSwitcher";
+import { useCartStore } from "@/store/useCartStore";
+import SearchPopover from "./searchComponent";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileLanguageOpen, setMobileLanguageOpen] = useState(false); // Yangi state
   const { t, i18n } = useTranslation();
-
+  const { items } = useCartStore();
   const languages = [
     { code: 'ru', name: t('language.ru'), flag: '🇷🇺' },
     { code: 'en', name: t('language.en'), flag: '🇺🇸' },
@@ -54,7 +56,7 @@ export default function Header() {
       </div>
 
       <main className="absolute w-11/12 max-w-[1440px] h-full mx-auto flex items-center justify-between px-2 sm:px-4">
-        
+
         {/* Mobile Menu Button + Logo */}
         <div className="flex items-center gap-2 sm:gap-4">
           {/* Mobile Menu Button - faqat mobile'da ko'rinadi */}
@@ -67,7 +69,7 @@ export default function Header() {
                 <SheetHeader className="p-6 border-b">
                   <SheetTitle className="text-left">{t('header.menu')}</SheetTitle>
                 </SheetHeader>
-                
+
                 <div className="flex flex-col h-full overflow-y-auto">
                   {/* Categories - Custom Mobile Menu */}
                   <MobileCategoryMenu onLinkClick={handleMobileMenuClose} />
@@ -101,11 +103,11 @@ export default function Header() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <Image 
-              src="/logo.png" 
-              className="w-[100px] h-[50px] max-md:w-[75px] max-md:h-[40px] p-1 sm:p-2 rounded-md bg-white" 
-              alt="Logo" 
-              width={100} 
+            <Image
+              src="/logo.png"
+              className="w-[100px] h-[50px] max-md:w-[75px] max-md:h-[40px] p-1 sm:p-2 rounded-md bg-white"
+              alt="Logo"
+              width={100}
               height={100}
             />
           </Link>
@@ -116,13 +118,13 @@ export default function Header() {
           {/* Custom Categories Dropdown */}
           <DesktopCategoryDropdown />
 
-          <Link 
-            href="/about-us" 
+          <Link
+            href="/about-us"
             className="text-white text-lg font-[400] hover:text-white/80 transition-colors"
           >
             {t('header.aboutUs')}
           </Link>
-          
+
           <Link
             href="/warranty-check"
             className="text-white text-lg font-[400] hover:text-white/80 transition-colors"
@@ -134,50 +136,58 @@ export default function Header() {
         {/* Right Side Icons */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Search Icon */}
-          <Link href="/search">
-            <Button 
-              variant="none" 
+          {/* <Link href="/search">
+            <Button
+              variant="none"
               className="h-8 w-8 sm:h-10 sm:w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
             >
-              <Image 
-                loading="eager" 
-                src="/icons/search.png" 
-                alt="Search Icon" 
-                width={16} 
+              <Image
+                loading="eager"
+                src="/icons/search.png"
+                alt="Search Icon"
+                width={16}
                 height={16}
                 className="sm:w-5 sm:h-5"
               />
             </Button>
-          </Link>
+          </Link> */}
+          <SearchPopover />
+
 
           {/* Cart Icon */}
-          <Link href="/cart">
-            <Button 
-              variant="none" 
+          <Link href="/cart" className="relative">
+            <Button
+              variant="none"
               className="h-8 w-8 sm:h-10 sm:w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
             >
-              <Image 
-                loading="eager" 
-                src="/icons/shop.png" 
-                alt="Cart Icon" 
-                width={18} 
+              <Image
+                loading="eager"
+                src="/icons/shop.png"
+                alt="Cart Icon"
+                width={18}
                 height={18}
                 className="sm:w-6 sm:h-6"
               />
             </Button>
+            {items.length > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white
+                text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+                {items.length}
+              </span>
+            )}
           </Link>
 
           {/* User Icon */}
           <Link href="/profile">
-            <Button 
-              variant="none" 
+            <Button
+              variant="none"
               className="h-8 w-8 sm:h-10 sm:w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
             >
-              <Image 
-                loading="eager" 
-                src="/icons/user.png" 
-                alt="User Icon" 
-                width={18} 
+              <Image
+                loading="eager"
+                src="/icons/user.png"
+                alt="User Icon"
+                width={18}
                 height={18}
                 className="sm:w-6 sm:h-6"
               />

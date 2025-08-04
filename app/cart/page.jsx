@@ -11,10 +11,23 @@ import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import { useTranslation } from 'react-i18next';
+import { useCartStore } from "@/store/useCartStore";
+import { getTranslatedValue } from "@/lib/functions";
 
 export default function Cart() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { items } = useCartStore(); // Assuming useCartStore is imported from your store
+  const removeItem = (id) => {
+    useCartStore.getState().removeItem(id);
+  }
 
+  const increment = (id) => {
+    useCartStore.getState().increment(id);
+  };
+
+  const decrement = (id) => {
+    useCartStore.getState().decrement(id);
+  };
   return (
     <main className="pt-24 md:pt-32 w-11/12 mx-auto max-w-[1440px] space-y-4">
       <div className="flex justify-center items-center">
@@ -37,7 +50,7 @@ export default function Cart() {
                   <div className="flex-1">
                     <h3 className="text-sm font-semibold mb-1">PM86</h3>
                     <p className="text-red-500 font-bold text-sm mb-3">1 500 000 {t('common.currency')}</p>
-                    
+
                     <div className="w-full flex items-center gap-3 bg-black text-white px-3 py-2 rounded-xl mb-3">
                       <button className="w-full h-full text-lg font-bold">-</button>
                       <span className="text-sm font-semibold">1</span>
@@ -100,28 +113,41 @@ export default function Cart() {
           <ResizablePanel defaultSize={60} minSize={40} className="rounded-xl bg-[#F9F9F9] p-6">
             <h2 className="text-lg font-semibold mb-2">{t('cart.yourOrder')}</h2>
             <div className="scrollbar-custom overflow-y-auto max-h-[500px] space-y-4 pr-2">
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+              {items?.map((item, index) => (
                 <div
                   key={index}
                   className="bg-white rounded-xl flex items-center justify-between p-4 shadow-sm"
                 >
                   <div className="space-y-2">
-                    <h3 className="text-sm font-semibold">PM86</h3>
+                    <h3 className="text-sm font-semibold">{getTranslatedValue(item?.name, i18n.language)}</h3>
                     <p className="text-red-500 font-bold">1 500 000 {t('common.currency')}</p>
 
-                    <div className="flex items-center gap-4 bg-black text-white px-4 py-2 rounded-full w-fit">
-                      <button className="text-xl font-bold">-</button>
-                      <span className="text-lg font-semibold">1</span>
-                      <button className="text-xl font-bold">+</button>
-                    </div>
+                    <div className="w-full flex items-center gap-4 bg-black text-white px-4 py-2 rounded-full">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => decrement(item?.id)}
+                        className="text-xl px-2 text-white hover:bg-transparent hover:text-white"
+                      >
+                        -
+                      </Button>
+                      <span className="w-4 text-center text-lg font-semibold">{item?.count}</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => increment(item?.id)}
+                        className="text-xl px-2 text-white hover:bg-transparent hover:text-white"
+                      >
+                        +
+                      </Button>                    </div>
 
-                    <button className="text-xs text-gray-500 hover:underline">
+                    <button onClick={() => removeItem(item?.id)} className=" cursor-pointer text-xs text-gray-500 hover:underline">
                       {t('cart.buttons.remove')}
                     </button>
                   </div>
 
                   <Image
-                    src="/images/categoryItem1.png"
+                    src={item?.image[0] ? `https://q-bit.uz${item?.image[0]}` : '/placeholder.svg'}
                     alt="Product"
                     width={100}
                     height={100}

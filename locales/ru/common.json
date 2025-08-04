@@ -316,6 +316,12 @@
     "workingHours": "Время работы",
     "workingTime": "Пн-Пт 9:00-18:00"
   },
+  "homePage":{
+    "manufacturerTitle":"Товары по производителям",
+    "discountTitle":"Акции и Топ товары",
+    "categoryTitle":"Категории",
+    "categoryLink":"Все категории"
+  },
   "common": {
     "loading": "Загрузка...",
     "error": "Ошибка",
@@ -325,7 +331,8 @@
     "delete": "Удалить",
     "edit": "Редактировать",
     "close": "Закрыть",
-    "currency": "сум"
+    "currency": "сум",
+    "noProductsFound": "Товары не найдены"
   },
   "language": {
     "ru": "Русский",
