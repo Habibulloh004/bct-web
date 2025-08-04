@@ -6,8 +6,10 @@ import {
   SelectContent,
   SelectTrigger,
   SelectValue,
+  SelectItem,
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
+import { Checkbox } from "../ui/checkbox";
 import { cn } from "@/lib/utils";
 import { PasswordInput } from "../ui/password-input";
 import {
@@ -28,7 +30,7 @@ export const FormFieldType = {
   SELECT: "select",
   SKELETON: "skeleton",
   CURRENCY: "currency",
-  EMAIL: "email", // ✅ Yangi qo‘shildi
+  EMAIL: "email",
   NUMBER: "number",
 };
 
@@ -42,7 +44,7 @@ const RenderInput = ({ field, className, props, rules }) => {
             {...field}
             value={field.value || ""}
             className={cn(
-              "textBig focus:border-white/50 ",
+              "textBig focus:border-white/50",
               props.className,
               className
             )}
@@ -107,19 +109,30 @@ const RenderInput = ({ field, className, props, rules }) => {
             value={field.value || ""}
             onValueChange={field.onChange}
           >
-            <FormControl>
-              <SelectTrigger
-                className={cn(
-                  "shad-select-trigger border-b-2 border-border",
-                  props.className,
-                  className
-                )}
-              >
-                <SelectValue placeholder={props.placeholder} />
-              </SelectTrigger>
-            </FormControl>
-            <SelectContent className={cn("shad-select-content z-[99999]")}>
-              {props.children}
+            <SelectTrigger
+              className={cn(
+                "flex items-center justify-between rounded-md border h-12 px-4 bg-[#F6F7F9] text-sm text-black placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+                props.className,
+                className
+              )}
+            >
+              <SelectValue placeholder={props.placeholder} />
+            </SelectTrigger>
+            <SelectContent
+              className={cn(
+                "z-[99999] rounded-md border bg-white p-1 text-sm shadow-lg",
+                props.contentClassName
+              )}
+            >
+              {props.options?.map((option) => (
+                <SelectItem
+                  key={option.value}
+                  value={option.value}
+                  className="cursor-pointer px-3 py-2 hover:bg-black hover:text-white rounded-md"
+                >
+                  {option.label}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </FormControl>
@@ -156,6 +169,36 @@ const RenderInput = ({ field, className, props, rules }) => {
             )}
           />
         </FormControl>
+      );
+    case FormFieldType.CHECKBOX:
+      return (
+        <div className="flex items-start space-x-3">
+          <FormControl>
+            <Checkbox
+              checked={field.value || false}
+              onCheckedChange={field.onChange}
+              disabled={props.disabled}
+              className={cn(
+                "data-[state=checked]:bg-black data-[state=checked]:border-black mt-1",
+                props.className,
+                className
+              )}
+            />
+          </FormControl>
+          {props.label && (
+            <div className="grid gap-1.5 leading-none">
+              <label
+                className={cn(
+                  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer",
+                  props.labelClass
+                )}
+                onClick={() => field.onChange(!field.value)}
+              >
+                {props.label}
+              </label>
+            </div>
+          )}
+        </div>
       );
     case FormFieldType.SKELETON:
       return props.renderSkeleton ? props.renderSkeleton(field) : null;

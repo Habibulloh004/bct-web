@@ -1,0 +1,165 @@
+{
+  "register": {
+    "title": "Akkaunt ro'yxatdan o'tish",
+    "subtitle": "Yangi akkaunt yarating",
+    "form": {
+      "name": {
+        "label": "To'liq ism",
+        "placeholder": "To'liq ismingizni kiriting",
+        "validation": {
+          "min": "Ism kamida 2 ta belgidan iborat bo'lishi kerak",
+          "max": "Ism ko'pi bilan 50 ta belgidan iborat bo'lishi kerak"
+        }
+      },
+      "email": {
+        "label": "Email manzil",
+        "placeholder": "example@email.com",
+        "validation": {
+          "invalid": "Iltimos, to'g'ri email manzilini kiriting"
+        }
+      },
+      "phone": {
+        "label": "Telefon raqam",
+        "placeholder": "+998 (XX) XXX-XX-XX",
+        "validation": {
+          "short": "Telefon raqam juda qisqa",
+          "long": "Telefon raqam juda uzun"
+        }
+      },
+      "password": {
+        "label": "Parol",
+        "placeholder": "••••••••",
+        "validation": {
+          "min": "Parol kamida 6 ta belgidan iborat bo'lishi kerak",
+          "max": "Parol ko'pi bilan 100 ta belgidan iborat bo'lishi kerak"
+        }
+      },
+      "agree": {
+        "label": {
+          "prefix": "Akkaunt yaratish orqali men",
+          "terms": "Foydalanish shartlari",
+          "and": "va",
+          "privacy": "Maxfiylik siyosati"
+        },
+        "validation": {
+          "required": "Foydalanish shartlariga rozilik berish shart"
+        }
+      }
+    },
+    "buttons": {
+      "submit": "Ro'yxatdan o'tish",
+      "submitting": "Ro'yxatdan o'tmoqda...",
+      "haveAccount": "Allaqachon akkountingiz bormi?"
+    },
+    "toast": {
+      "loading": {
+        "title": "Ro'yxatdan o'tmoqda...",
+        "description": "Iltimos, kuting"
+      },
+      "success": {
+        "title": "Muvaffaqiyatli ro'yxatdan o'tdingiz! 🎉",
+        "description": "Akkountingiz muvaffaqiyatli yaratildi"
+      },
+      "error": {
+        "title": "Ro'yxatdan o'tishda xatolik! ❌",
+        "description": "Ro'yxatdan o'tishda xatolik yuz berdi"
+      }
+    }
+  },
+  "header": {
+    "categories": "Kategoriyalar",
+    "aboutUs": "Biz haqimizda",
+    "warrantyCheck": "Kafolat tekshiruvi",
+    "menu": "Menyu",
+    "categoryList": {
+      "smartphones": "Smartfonlar",
+      "laptops": "Noutbuklar",
+      "accessories": "Aksessuarlar"
+    }
+  },
+  "login": {
+    "title": "Akkountga kirish",
+    "subtitle": "Xush kelibsiz",
+    "form": {
+      "phone": {
+        "label": "Telefon raqam",
+        "placeholder": "+998 (XX) XXX-XX-XX",
+        "validation": {
+          "short": "Telefon raqam juda qisqa",
+          "long": "Telefon raqam juda uzun"
+        }
+      },
+      "password": {
+        "label": "Parol",
+        "placeholder": "••••••••",
+        "validation": {
+          "min": "Parol kamida 6 ta belgidan iborat bo'lishi kerak"
+        }
+      }
+    },
+    "buttons": {
+      "submit": "Kirish",
+      "submitting": "Kirmoqda...",
+      "register": "Ro'yxatdan o'tish",
+      "noAccount": "Akkountingiz yo'qmi?"
+    },
+    "toast": {
+      "loading": {
+        "title": "Tizimga kirmoqda...",
+        "description": "Iltimos, kuting"
+      },
+      "success": {
+        "title": "Muvaffaqiyatli kirdingiz! 🎉",
+        "description": "Tizimga xush kelibsiz"
+      },
+      "error": {
+        "title": "Kirishda xatolik! ❌",
+        "description": "Noto'g'ri telefon raqam yoki parol"
+      }
+    }
+  },
+  "footer": {
+    "company": {
+      "name": "\"BCTechnologies\" MChJ",
+      "address": "Manzil: O'zbekiston, Toshkent sh., Afrosiab ko'ch. 16",
+      "phone": "Telefon",
+      "email": "Email"
+    },
+    "social": {
+      "title": "Ijtimoiy tarmoqlarda biz"
+    },
+    "quickLinks": {
+      "title": "Tezkor havolalar"
+    },
+    "legal": {
+      "title": "Huquqiy ma'lumotlar"
+    },
+    "links": {
+      "aboutUs": "Biz haqimizda",
+      "contact": "Aloqa",
+      "faq": "Savol-javoblar",
+      "terms": "Foydalanish shartlari",
+      "privacy": "Maxfiylik siyosati"
+    },
+    "copyright": {
+      "text": "Barcha huquqlar himoyalangan."
+    },
+    "workingHours": "Ish vaqti",
+    "workingTime": "Du-Ju 9:00-18:00"
+  },
+  "common": {
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik",
+    "success": "Muvaffaqiyatli",
+    "cancel": "Bekor qilish",
+    "save": "Saqlash",
+    "delete": "O'chirish",
+    "edit": "Tahrirlash",
+    "close": "Yopish"
+  },
+  "language": {
+    "ru": "Русский",
+    "en": "English",
+    "uz": "O'zbek"
+  }
+}
