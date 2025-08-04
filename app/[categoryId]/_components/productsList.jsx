@@ -12,6 +12,8 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
 import ProductItem from "@/app/_components/productItem";
 import PaginationComponent from "./paginationComponent";
+import { getTranslatedValue } from "@/lib/functions";
+import { useTranslation } from "react-i18next";
 
 const sortOptions = [
   { label: "По популярности", value: "popularity" },
@@ -21,7 +23,8 @@ const sortOptions = [
   { label: "По алфавиту (Я-А)", value: "alpha_desc" },
 ];
 
-export default function ProductsList({ page, products }) {
+export default function ProductsList({ categoryData,page, products }) {
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(sortOptions[0]); // default: popularity
   const triggerRef = useRef(null);
@@ -46,7 +49,7 @@ export default function ProductsList({ page, products }) {
     <div className="max-w-[1440px] mx-auto w-11/12 space-y-4">
       <div className="flex justify-between items-center">
         <h1 className="text-center font-bold text-2xl">
-          Мобильные компьютеры
+          {getTranslatedValue(categoryData?.name,i18n.language) || "Все товары"}
         </h1>
         <div className="flex justify-end items-center gap-3">
           <span className="text-base font-medium text-[#666666]">Сортировка:</span>

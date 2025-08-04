@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useCategories } from '@/hooks/useCategories';
+import { getTranslatedValue } from '@/lib/functions';
+import i18n from '@/lib/i18n';
 
 export default function DesktopCategoryDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +15,7 @@ export default function DesktopCategoryDropdown() {
   const dropdownRef = useRef(null);
   const hoverTimeoutRef = useRef(null);
   const closeTimeoutRef = useRef(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { topCategories, getCategoriesByTopCategory, loading } = useCategories();
 
   // Dropdown tashqarisiga click qilganda yopish
@@ -22,7 +24,7 @@ export default function DesktopCategoryDropdown() {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);
         setHoveredTopCategory(null);
-        
+
         // Clear any pending timeouts
         if (hoverTimeoutRef.current) {
           clearTimeout(hoverTimeoutRef.current);
@@ -140,7 +142,9 @@ export default function DesktopCategoryDropdown() {
                       <>
                         {/* Top Category with Subcategories - Only Trigger */}
                         <div className="flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-gray-50 cursor-pointer">
-                          <span className="font-medium">{topCategory.name}</span>
+                          <span className="font-medium">
+                            {getTranslatedValue(topCategory.name, i18n.language)}
+                          </span>
                           <ChevronRight className="w-4 h-4 text-gray-400" />
                         </div>
 
@@ -160,7 +164,7 @@ export default function DesktopCategoryDropdown() {
                                     onClick={handleDropdownClose}
                                     className="block px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
                                   >
-                                    {category.name}
+                                    {getTranslatedValue(category.name, i18n.language)}
                                   </Link>
                                 ))}
                               </div>
@@ -171,7 +175,9 @@ export default function DesktopCategoryDropdown() {
                     ) : (
                       /* Top Category without Subcategories - Disabled */
                       <div className="flex items-center justify-between px-4 py-3 text-gray-400 cursor-not-allowed">
-                        <span>{topCategory.name}</span>
+                        <span>
+                          {getTranslatedValue(topCategory.name, i18n.language)}
+                        </span>
                         <span className="text-xs">(скоро)</span>
                       </div>
                     )}

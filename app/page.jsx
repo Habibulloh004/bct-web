@@ -13,16 +13,22 @@ const categories = await getData({
   tag: "categories",
   revalidate: 3600
 });
-  console.log(categories)
+const banners = await getData({
+  endpoint: "/api/banners",
+  tag: "banners",
+  revalidate: 0
+});
+const products = await getData({
+    endpoint: `/api/products?page=${1}&limit=10`,
+    tag: 'categories',
+    revalidate: 3600
+  })
+  console.log({banners})
   return (
     <main className='pt-24 font-poppins'>
-      <Banner banners={[
-        { image: '/images/background1.jpg', title: 'Welcome to Our Store', description: 'Discover the latest gadgets and accessories' },
-        { image: '/images/background1.jpg', title: 'Welcome to Our Store', description: 'Discover the latest gadgets and accessories' },
-        { image: '/images/background1.jpg', title: 'Welcome to Our Store', description: 'Discover the latest gadgets and accessories' },
-      ]} />
+      <Banner banners={banners?.data} />
       <Category categories={categories?.data} />
-      <Discounts />
+      <Discounts products={products} />
       <Manufacturer />
       <AboutUs />
     </main>

@@ -4,13 +4,13 @@ import { getTranslatedValue } from '@/lib/functions';
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 
-export default function CategoryItem({item}) {
+export default function CategoryItem({ item }) {
   const { i18n } = useTranslation();
   return (
     <main className='bg-[#EBEBEB99] rounded-2xl p-4'>
       <div className="relative mx-auto aspect-[4/3] rounded-[4px] overflow-hidden">
         <CustomImage
-          src={`https://q-bit.uz${item?.image}`}
+          src={item?.image ? `https://q-bit.uz${item?.image}` : "/placeholder.svg"}
           alt={`banner-img`}
           fill
           loading="eager"

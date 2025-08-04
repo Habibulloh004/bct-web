@@ -118,6 +118,175 @@
       }
     }
   },
+  "aboutUs": {
+    "title": "Biz haqimizda",
+    "company": {
+      "name": "Bar Code Technologies",
+      "foundedYear": "2005",
+      "description": "\"Bar Code Technologies\" kompaniyasi 2005 yilda tashkil etilgan. Horeca va Retail sohasidagi yetakchi kompaniyalar bilan muvaffaqiyatli hamkorlik qilib, mutaxassislar jamoasiga ega bo'lib, quyidagi vazifalarni bajaradi:",
+      "goals": [
+        "mijozlarda ichki tartib-qoidalar va biznes-jarayonlarini optimallashtirish;",
+        "mijoz xodimlari uchun zamonaviy savdo va ishlab chiqarish usullaridan foydalanish maqsadida tezlashtirilgan o'qitish va qayta tayyorlash kurslarini tashkil etish;",
+        "jarayonlarni rejalashtirish va biznes egalariga eng ilg'or boshqaruv va nazorat vositalarini berish",
+        "sotish, xarid qilish va tarqatishni tahlil qilish va prognozlash uchun barcha vositalarni ulash."
+      ]
+    },
+    "services": {
+      "title": "Ko'p yillik ish davomida kompaniya turli sohalarda korxonalarni avtomatlashtirish bo'yicha katta tajribaga ega bo'ldi:",
+      "items": [
+        {
+          "title": "Restoran (Kafe)",
+          "description": "Har qanday ovqatlanish korxonasining ishini avtomatlashtiramiz"
+        },
+        {
+          "title": "Do'kon (Supermarket)",
+          "description": "Har qanday savdo korxonasining ishini avtomatlashtiramiz"
+        },
+        {
+          "title": "Dorixona (Tibbiyot)",
+          "description": "Har qanday dorixonaning ishini avtomatlashtiramiz"
+        },
+        {
+          "title": "Ishlab chiqarish",
+          "description": "Ishlab chiqarish jarayonlarini avtomatlashtiramiz"
+        },
+        {
+          "title": "Omborxona",
+          "description": "Omborda tovar hisobi endi bosh og'rig'i bo'lmaydi"
+        },
+        {
+          "title": "Avtoyuvish",
+          "description": "Qulay, tez va ishonchli avtoyuvish boshqaruv tizimi"
+        }
+      ]
+    },
+    "stats": {
+      "title": "Kompaniya Raqamlarda",
+      "soldTitle": "Barcha vaqt davomida sotilgan",
+      "items": [
+        {
+          "value": "14",
+          "label": "yil O'zbekiston bozorida"
+        },
+        {
+          "value": "1000+",
+          "label": "mamnun mijozlar"
+        },
+        {
+          "value": "50+",
+          "label": "vendor hamkorlar"
+        },
+        {
+          "value": "170",
+          "label": "asbob-uskunalar"
+        },
+        {
+          "value": "10000+",
+          "label": "shtrix-kod skanerlari"
+        },
+        {
+          "value": "3000+",
+          "label": "tarozilar"
+        },
+        {
+          "value": "5000+",
+          "label": "printerlar (chek, yorliq)"
+        },
+        {
+          "value": "1000+",
+          "label": "kassir ish joylari"
+        }
+      ]
+    },
+    "vendors": {
+      "title": "Vendorlar"
+    },
+    "projects": {
+      "title": "Bizning Loyihalar"
+    },
+    "clients": {
+      "title": "Bizning Mijozlar"
+    }
+  },
+  "cart": {
+    "title": "Savatcha",
+    "yourOrder": "Sizning buyurtmangiz",
+    "summary": {
+      "order": "Buyurtma",
+      "bonus": "Bonus",
+      "delivery": "Yetkazib berish",
+      "total": "Umumiy summa"
+    },
+    "buttons": {
+      "remove": "Olib tashlash",
+      "order": "Buyurtma berish"
+    },
+    "empty": "Savatchangiz bo'sh"
+  },
+  "warrantyCheck": {
+    "title": "Kafolat tekshiruvi",
+    "form": {
+      "serialNumber": {
+        "label": "Seriya raqami",
+        "placeholder": "Seriya raqamini kiriting"
+      },
+      "check": "Tekshirish"
+    },
+    "result": {
+      "customer": "Xaridor",
+      "purchaseDate": "Xarid sanasi",
+      "product": "Mahsulot",
+      "warranty": "Kafolat",
+      "expiresOn": "Kafolat tugaydi"
+    }
+  },
+  "confirmOrder": {
+    "title": "Buyurtmani tasdiqlash",
+    "form": {
+      "phone": {
+        "label": "Telefon raqam",
+        "placeholder": "99 999-99-99",
+        "validation": "Telefon raqami 13 belgidan iborat bo'lishi kerak",
+        "validation_type": "Iltimos, to'lov turini tanlang"
+      },
+      "paymentType": {
+        "label": "To'lov turi",
+        "placeholder": "Tanlang",
+        "options": {
+          "cash": "Naqd",
+          "card": "Karta",
+          "online": "Onlayn"
+        }
+      }
+    },
+    "yourOrder": "Sizning buyurtmangiz",
+    "buttons": {
+      "cancel": "Bekor qilish",
+      "confirm": "Tasdiqlash"
+    }
+  },
+  "product": {
+    "addToCart": "Savatchaga qo'shish",
+    "checkWarranty": "Kafolat tekshiruvi",
+    "characteristics": "Xususiyatlar",
+    "features": "Imkoniyatlar",
+    "description": "2x2 MU-MIMO qo'llab-quvvatlash bilan to'ldirilgan Wi-Fi 6 texnologiyasi tufayli tez va ishonchli ulanishdan bahramand bo'ling. Bu zamonaviy korporativ model, shuningdek, Enterprise Hot-Swap, BLE Beacon va yuqori zarba bardoshliligi kabi biznes uchun maxsus funksiyalar bilan jihozlangan."
+  },
+  "category": {
+    "title": "Mobil Kompyuterlar",
+    "sort": {
+      "label": "Saralash:",
+      "popularity": "Mashhurlik bo'yicha",
+      "priceAsc": "Narx: Arzondan qimmanga",
+      "priceDesc": "Narx: Qimmatdan arzonga",
+      "alphaAsc": "Alifbo bo'yicha (A-Z)",
+      "alphaDesc": "Alifbo bo'yicha (Z-A)"
+    },
+    "pagination": {
+      "previous": "Oldingi",
+      "next": "Keyingi"
+    }
+  },
   "footer": {
     "company": {
       "name": "\"BCTechnologies\" MChJ",
@@ -155,7 +324,8 @@
     "save": "Saqlash",
     "delete": "O'chirish",
     "edit": "Tahrirlash",
-    "close": "Yopish"
+    "close": "Yopish",
+    "currency": "so'm"
   },
   "language": {
     "ru": "Русский",

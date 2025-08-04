@@ -30,19 +30,11 @@ const Banner = ({ banners }) => {
                   <CarouselItem key={i} className="">
                     <Link
                       className="mt-1 relative"
-                      href="/banners"
+                      href={`/${item?.category_id}/${item?.product_id}`}
                     >
-                      <div className="z-[100] absolute top-[17%] left-[13%] space-y-2">
-                        <h1 className=" text-white font-bold text-4xl">
-                          Новинки
-                        </h1>
-                        <p className="font-[300] ml-6 text-white text-3xl">
-                          Продано за все время
-                        </p>
-                      </div>
-                      <div className="relative mx-auto aspect-[16/4] rounded-[10px] overflow-hidden">
+                      <div className="relative mx-auto aspect-[12/5] sm:aspect-[15/5] md:aspect-[16/4] rounded-[10px] overflow-hidden">
                         <CustomImage
-                          src={'/images/background1.jpg'}
+                          src={`https://q-bit.uz${item?.image}`}
                           alt={`banner-img`}
                           fill
                           loading="eager"

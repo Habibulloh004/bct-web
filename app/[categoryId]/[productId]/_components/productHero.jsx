@@ -41,18 +41,18 @@ export default function ProductHero() {
         </div>
 
         {/* Center check warranty button */}
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <Button className="bg-white text-black px-6 py-2 rounded-md border h-11">
             Проверить гарантию
           </Button>
         </div>
 
         {/* Right images */}
-        <div className="flex gap-6">
+        <div className="flex gap-2">
           {[1, 2].map((_, index) => (
             <div
               key={index}
-              className="relative w-[240px] min-h-[240px] aspect-[2/3] rounded-md overflow-hidden"
+              className="relative w-[240px] min-h-[240px] aspect-[2/3] rounded-md"
             >
               <CustomImage
                 src="/images/categoryItem1.png"

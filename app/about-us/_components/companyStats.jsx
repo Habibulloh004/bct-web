@@ -1,107 +1,71 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
-
-const statsTop = [
-  {
-    value: "14",
-    label: "лет на рынке Узбекистана",
-    icon: "/stats/1.png",
-  },
-  {
-    value: "1000+",
-    label: "довольных клиентов",
-    icon: "/stats/2.png",
-  },
-  {
-    value: "50+",
-    label: "вендоров-партнёров",
-    icon: "/stats/3.png",
-  },
-  {
-    value: "170",
-    label: "единиц оборудования",
-    icon: "/stats/4.png",
-  },
-];
-
-const statsBottom = [
-  {
-    value: "10000+",
-    label: "сканеров штрих-кода",
-    icon: "/stats/5.png",
-  },
-  {
-    value: "3000+",
-    label: "весов",
-    icon: "/stats/6.png",
-  },
-  {
-    value: "5000+",
-    label: "принтеров (чек, этикеток)",
-    icon: "/stats/7.png",
-  },
-  {
-    value: "1000+",
-    label: "рабочих мест кассира",
-    icon: "/stats/8.png",
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 const CompanyStats = () => {
+  const { t } = useTranslation();
+
+  const stats = t('aboutUs.stats.items', { returnObjects: true });
+  const statsTop = stats.slice(0, 4);  
+  const statsBottom = stats.slice(4, 8);
+
   return (
     <div
-      className="bg-cover bg-center py-16 text-white"
+      className="bg-cover bg-center py-12 md:py-16 text-white"
       style={{
-        backgroundImage: "url('/images/background1.jpg')", // 🔁 joylashtiring
+        backgroundImage: "url('/images/background1.jpg')",
       }}
     >
-      <div className="max-w-7xl w-11/12 mx-auto space-y-12">
-        <h2 className="text-center text-2xl md:text-3xl font-semibold">
-          Компания В Цифрах
+      <div className="max-w-7xl w-11/12 mx-auto space-y-8 md:space-y-12">
+        <h2 className="text-center text-xl md:text-2xl lg:text-3xl font-semibold px-4">
+          {t('aboutUs.stats.title')}
         </h2>
 
         {/* Top Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {statsTop.map((stat, idx) => (
             <div
               key={idx}
-              className="bg-white text-black p-5 rounded-xl shadow flex items-center justify-between min-h-36"
+              className="bg-white text-black p-4 md:p-5 rounded-xl shadow flex flex-col sm:flex-row sm:items-center sm:justify-between min-h-[120px] md:min-h-36"
             >
-              <div>
-                <h3 className="text-2xl font-bold">{stat.value}</h3>
-                <p className="text-sm mt-1">{stat.label}</p>
+              <div className="mb-3 sm:mb-0">
+                <h3 className="text-xl md:text-2xl font-bold">{stat.value}</h3>
+                <p className="text-xs md:text-sm mt-1">{stat.label}</p>
               </div>
               <Image
-                src={stat.icon}
+                src={`/stats/${idx + 1}.png`}
                 alt={stat.label}
                 width={75}
                 height={75}
+                className="w-12 h-12 md:w-[75px] md:h-[75px] self-center sm:self-auto"
               />
             </div>
           ))}
         </div>
 
-
-        <h2 className="text-center text-2xl font-semibold mt-10">
-          Продано за все время
+        <h2 className="text-center text-xl md:text-2xl font-semibold mt-8 md:mt-10 px-4">
+          {t('aboutUs.stats.soldTitle')}
         </h2>
 
         {/* Bottom Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {statsBottom.map((stat, idx) => (
             <div
               key={idx}
-              className="bg-white text-black p-5 rounded-xl shadow flex items-center justify-between min-h-36"
+              className="bg-white text-black p-4 md:p-5 rounded-xl shadow flex flex-col sm:flex-row sm:items-center sm:justify-between min-h-[120px] md:min-h-36"
             >
-              <div>
-                <h3 className="text-2xl font-bold">{stat.value}</h3>
-                <p className="text-sm mt-1">{stat.label}</p>
+              <div className="mb-3 sm:mb-0">
+                <h3 className="text-xl md:text-2xl font-bold">{stat.value}</h3>
+                <p className="text-xs md:text-sm mt-1">{stat.label}</p>
               </div>
               <Image
-                src={stat.icon}
+                src={`/stats/${idx + 5}.png`}
                 alt={stat.label}
                 width={75}
                 height={75}
+                className="w-12 h-12 md:w-[75px] md:h-[75px] self-center sm:self-auto"
               />
             </div>
           ))}

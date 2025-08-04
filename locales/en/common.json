@@ -118,6 +118,175 @@
       }
     }
   },
+  "aboutUs": {
+    "title": "About Us",
+    "company": {
+      "name": "Bar Code Technologies",
+      "foundedYear": "2005",
+      "description": "The company \"Bar Code Technologies\" was founded in 2005. Successfully works with leading companies in the field of Horeca and Retail and has a team of specialists to:",
+      "goals": [
+        "optimize internal procedures and business processes for clients;",
+        "organize accelerated training and retraining courses for client employees in order to use modern methods of trade and production;",
+        "implement process planning and give business owners the most advanced management and control tools",
+        "connect all means for analysis and forecasting of sales, purchases and distribution."
+      ]
+    },
+    "services": {
+      "title": "Over the years of work, the company has gained extensive experience in automating enterprises in various fields:",
+      "items": [
+        {
+          "title": "Restaurant (Cafe)",
+          "description": "We automate the work of any catering establishment"
+        },
+        {
+          "title": "Store (Supermarket)",
+          "description": "We automate the work of any retail establishment"
+        },
+        {
+          "title": "Pharmacy (Medicine)",
+          "description": "We automate the work of any pharmacy"
+        },
+        {
+          "title": "Production",
+          "description": "We automate production processes"
+        },
+        {
+          "title": "Warehouse",
+          "description": "Product accounting in the warehouse will no longer be a headache"
+        },
+        {
+          "title": "Car Wash",
+          "description": "Convenient, fast and reliable car wash management system"
+        }
+      ]
+    },
+    "stats": {
+      "title": "Company in Numbers",
+      "soldTitle": "Sold over all time",
+      "items": [
+        {
+          "value": "14",
+          "label": "years in the Uzbekistan market"
+        },
+        {
+          "value": "1000+",
+          "label": "satisfied customers"
+        },
+        {
+          "value": "50+",
+          "label": "vendor partners"
+        },
+        {
+          "value": "170",
+          "label": "equipment units"
+        },
+        {
+          "value": "10000+",
+          "label": "barcode scanners"
+        },
+        {
+          "value": "3000+",
+          "label": "scales"
+        },
+        {
+          "value": "5000+",
+          "label": "printers (receipt, label)"
+        },
+        {
+          "value": "1000+",
+          "label": "cashier workstations"
+        }
+      ]
+    },
+    "vendors": {
+      "title": "Vendors"
+    },
+    "projects": {
+      "title": "Our Projects"
+    },
+    "clients": {
+      "title": "Our Clients"
+    }
+  },
+  "cart": {
+    "title": "Cart",
+    "yourOrder": "Your Order",
+    "summary": {
+      "order": "Order",
+      "bonus": "Bonus",
+      "delivery": "Delivery",
+      "total": "Total Amount"
+    },
+    "buttons": {
+      "remove": "Remove",
+      "order": "Order"
+    },
+    "empty": "Your cart is empty"
+  },
+  "warrantyCheck": {
+    "title": "Warranty Check",
+    "form": {
+      "serialNumber": {
+        "label": "Serial Number",
+        "placeholder": "Enter serial number"
+      },
+      "check": "Check"
+    },
+    "result": {
+      "customer": "Customer",
+      "purchaseDate": "Purchase Date",
+      "product": "Product",
+      "warranty": "Warranty",
+      "expiresOn": "Warranty expires on"
+    }
+  },
+  "confirmOrder": {
+    "title": "Order Confirmation",
+    "form": {
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "99 999-99-99",
+        "validation":"Phone number must be 13 characters long",
+        "validation_type": "Please select a payment type"
+      },
+      "paymentType": {
+        "label": "Payment Type",
+        "placeholder": "Select",
+        "options": {
+          "cash": "Cash",
+          "card": "Card",
+          "online": "Online"
+        }
+      }
+    },
+    "yourOrder": "Your Order",
+    "buttons": {
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    }
+  },
+  "product": {
+    "addToCart": "Add to Cart",
+    "checkWarranty": "Check Warranty",
+    "characteristics": "Characteristics",
+    "features": "Features",
+    "description": "Enjoy fast and reliable connection with Wi-Fi 6 technology, enhanced with 2x2 MU-MIMO support. This modern enterprise model is also equipped with specialized business functions such as Enterprise Hot-Swap, BLE Beacon and high impact resistance."
+  },
+  "category": {
+    "title": "Mobile Computers",
+    "sort": {
+      "label": "Sort by:",
+      "popularity": "By popularity",
+      "priceAsc": "Price: Low to High",
+      "priceDesc": "Price: High to Low",
+      "alphaAsc": "Alphabetically (A-Z)",
+      "alphaDesc": "Alphabetically (Z-A)"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    }
+  },
   "footer": {
     "company": {
       "name": "BCTechnologies LLC",
@@ -155,7 +324,8 @@
     "save": "Save",
     "delete": "Delete",
     "edit": "Edit",
-    "close": "Close"
+    "close": "Close",
+    "currency": "sum"
   },
   "language": {
     "ru": "Русский",

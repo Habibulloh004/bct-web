@@ -41,7 +41,7 @@ export default function Header() {
   };
 
   return (
-    <header className="z-[998] pt-1 fixed top-0 left-0 w-screen h-20 lg:h-24 flex justify-center items-center">
+    <header className="z-[998] pt-1 bg-white fixed top-0 left-0 w-screen h-20 lg:h-24 flex justify-center items-center">
       <div className="w-full h-full relative">
         <Image
           src="/images/background1.jpg"
@@ -189,7 +189,7 @@ export default function Header() {
             <LanguageSwitcher />
           </div>
 
-          {/* Mobile Language Button - TO'G'RILANGAN */}
+          {/* Mobile Language Button - TO'G'RILANGAN
           <div className="lg:hidden relative">
             <Sheet open={mobileLanguageOpen} onOpenChange={setMobileLanguageOpen}>
               <SheetTrigger asChild>
@@ -230,7 +230,7 @@ export default function Header() {
                 </div>
               </SheetContent>
             </Sheet>
-          </div>
+          </div> */}
         </div>
       </main>
     </header>
