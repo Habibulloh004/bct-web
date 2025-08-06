@@ -13,17 +13,19 @@ export function useCategories() {
     const fetchCategories = async () => {
       try {
         setLoading(true);
-        
+
         // Top categories olish
         const topCategoriesResponse = await getData({
           endpoint: '/api/top-categories',
-          tag: 'top-categories'
+          tag: ['top-categories'],
+          revalidate: 3600
         });
-        
+
         // Categories olish
         const categoriesResponse = await getData({
           endpoint: '/api/categories',
-          tag: 'categories'
+          tag: ["top-categories", 'categories'],
+          revalidate: 3600
         });
 
         setTopCategories(topCategoriesResponse.data || []);

@@ -29,7 +29,7 @@ export default function SearchPopover() {
   useEffect(() => {
     const delayDebounce = setTimeout(async () => {
       if (query.trim().length >= 2) {
-        const data = await getData({ endpoint: `/api/products?page=1&limit=10&search=${query}`, tag: "search", revalidate: 0 });
+        const data = await getData({ endpoint: `/api/products?page=1&limit=10&search=${query}`, tag: ["products", "categories", "top-categories"], revalidate: 3600 });
         setResults(data?.data || []);
         console.log("Search results:", data);
       } else {
