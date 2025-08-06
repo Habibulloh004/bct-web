@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    domains: ["q-bit.uz"],
     remotePatterns: [
       // Production domain (your existing config)
       {
@@ -13,7 +14,7 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
-        port: '8080',  
+        port: '8080',
         pathname: '/uploads/**',
       },
       // Alternative localhost formats

@@ -17,23 +17,40 @@ import { useTranslation } from "react-i18next";
 import CustomImage from "@/components/shared/customImage";
 import { getData } from "@/actions/get";
 import { formatNumber, imageUrl } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function SearchPopover() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { i18n, t } = useTranslation();
   const router = useRouter();
 
-  // Debounced search effect
+  // Yozishda loading yoqiladi
   useEffect(() => {
+    if (query.trim().length >= 2) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+      setResults([]);
+    }
+
     const delayDebounce = setTimeout(async () => {
       if (query.trim().length >= 2) {
-        const data = await getData({ endpoint: `/api/products?page=1&limit=10&search=${query}`, tag: ["products", "categories", "top-categories"], revalidate: 3600 });
-        setResults(data?.data || []);
-        console.log("Search results:", data);
-      } else {
-        setResults([]);
+        try {
+          const data = await getData({
+            endpoint: `/api/products?page=1&limit=10&search=${query}`,
+            tag: ["products", "categories", "top-categories"],
+            revalidate: 3600,
+          });
+          setResults(data?.data || []);
+        } catch (error) {
+          console.error("Search error:", error);
+          setResults([]);
+        } finally {
+          setLoading(false);
+        }
       }
     }, 500); // 500ms debounce
 
@@ -77,39 +94,50 @@ export default function SearchPopover() {
           />
 
           <div className="max-h-[300px] overflow-y-auto mt-4 space-y-2">
-            {results.length === 0 && query.length >= 2 && (
+            {loading ? (
+              Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="flex items-center gap-3 p-2">
+                  <Skeleton className="w-14 h-14 rounded-md" />
+                  <div className="flex flex-col gap-2 w-full">
+                    <Skeleton className="h-4 w-3/5" />
+                    <Skeleton className="h-3 w-1/3" />
+                  </div>
+                </div>
+              ))
+            ) : results.length === 0 && query.length >= 2 ? (
               <p className="text-sm text-muted-foreground">
                 {t("search.no_results")}
               </p>
+            ) : (
+              results.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => handleSelect(item.id, item.category_id)}
+                  className="flex items-center gap-3 cursor-pointer hover:bg-muted rounded-md p-2 transition-all"
+                >
+                  <div className="relative w-14 h-14 shrink-0 rounded-md overflow-hidden bg-white border">
+                    <CustomImage
+                      src={
+                        item?.image?.length > 0
+                          ? `${imageUrl}${item.image[0]}`
+                          : "/placeholder.svg"
+                      }
+                      alt="product"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="text-sm font-semibold">
+                      {getTranslatedValue(item.name || "", i18n.language)}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {formatNumber(item.price)} {t("common.currency")}
+                    </p>
+                  </div>
+                </div>
+              ))
             )}
-            {results.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => handleSelect(item.id, item.category_id)}
-                className="flex items-center gap-3 cursor-pointer hover:bg-muted rounded-md p-2 transition-all"
-              >
-                <div className="relative w-14 h-14 shrink-0 rounded-md overflow-hidden bg-white border">
-                  <CustomImage
-                    src={
-                      item?.image?.length > 0
-                        ? `${imageUrl}${item.image[0]}`
-                        : "/placeholder.svg"
-                    }
-                    alt="product"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <p className="text-sm font-semibold">
-                    {getTranslatedValue(item.name || "", i18n.language)}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {formatNumber(item.price)} {t("common.currency")}
-                  </p>
-                </div>
-              </div>
-            ))}
           </div>
         </DialogContent>
       </Dialog>
