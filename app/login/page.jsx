@@ -17,6 +17,8 @@ import { useRouter } from "next/navigation";
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
+  const router = useRouter();
+  
   // Dynamic validation schema with translations
   const LoginValidation = z.object({
     phone: z
@@ -47,18 +49,23 @@ export default function LoginPage() {
     });
 
     try {
-      // FormData yaratish (server action uchun)
+      // FormData for server action
       const formData = new FormData();
       formData.append('phone', values.phone);
       formData.append('password', values.password);
 
-      // Server action chaqirish
+      // Server action call
       const result = await loginUser(formData);
 
       if (result.success) {
         console.log('User logged in successfully:', JSON.stringify(result.data));
-        localStorage.setItem("userData", JSON.stringify(result.data))
-        // Loading toast'ni dismiss qilish
+        
+        // Safe localStorage access
+        if (typeof window !== "undefined") {
+          localStorage.setItem("userData", JSON.stringify(result.data));
+        }
+        
+        // Dismiss loading toast
         toast.dismiss(loadingToast);
 
         // Success toast
@@ -67,11 +74,11 @@ export default function LoginPage() {
           duration: 4000,
         });
 
-        // Formani tozalash
+        // Reset form
         form.reset();
 
-        // Redirect to dashboard or home page
-        window.location.href = '/profile'; // yoki Next.js router ishlatishingiz mumkin
+        // Redirect using Next.js router
+        router.push('/profile');
 
       } else {
         throw new Error(result.error);
@@ -80,7 +87,7 @@ export default function LoginPage() {
     } catch (error) {
       console.error('Login error:', error);
 
-      // Loading toast'ni dismiss qilish
+      // Dismiss loading toast
       toast.dismiss(loadingToast);
 
       // Error toast

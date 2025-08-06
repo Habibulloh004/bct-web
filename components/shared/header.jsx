@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Sheet,
   SheetContent,
@@ -22,9 +22,11 @@ import SearchPopover from "./searchComponent";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileLanguageOpen, setMobileLanguageOpen] = useState(false); // Yangi state
+  const [userData, setUserData] = useState(null);
+  const [isClient, setIsClient] = useState(false);
   const { t, i18n } = useTranslation();
   const { items } = useCartStore();
+  
   const languages = [
     { code: 'ru', name: t('language.ru'), flag: '🇷🇺' },
     { code: 'en', name: t('language.en'), flag: '🇺🇸' },
@@ -33,16 +35,28 @@ export default function Header() {
 
   const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
 
+  // Safe localStorage access
+  useEffect(() => {
+    setIsClient(true);
+    if (typeof window !== "undefined") {
+      const storedUserData = localStorage.getItem("userData");
+      if (storedUserData) {
+        try {
+          setUserData(JSON.parse(storedUserData));
+        } catch (error) {
+          console.error("Error parsing userData:", error);
+        }
+      }
+    }
+  }, []);
+
   const handleMobileMenuClose = () => {
     setMobileMenuOpen(false);
   };
 
   const handleLanguageChange = (langCode) => {
     i18n.changeLanguage(langCode);
-    setMobileLanguageOpen(false);
   };
-
-  const userData = localStorage.getItem("userData")?JSON.parse(localStorage.getItem("userData")):null
 
   return (
     <header className="z-[998] pt-1 bg-white fixed top-0 left-0 w-screen h-20 lg:h-24 flex justify-center items-center">
@@ -61,7 +75,7 @@ export default function Header() {
 
         {/* Mobile Menu Button + Logo */}
         <div className="flex items-center gap-2 sm:gap-4">
-          {/* Mobile Menu Button - faqat mobile'da ko'rinadi */}
+          {/* Mobile Menu Button */}
           <div className="lg:hidden">
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
@@ -73,10 +87,8 @@ export default function Header() {
                 </SheetHeader>
 
                 <div className="flex flex-col h-full overflow-y-auto">
-                  {/* Categories - Custom Mobile Menu */}
                   <MobileCategoryMenu onLinkClick={handleMobileMenuClose} />
-
-                  {/* Navigation Links */}
+                  
                   <div className="p-4 border-b space-y-2">
                     <Link
                       href="/about-us"
@@ -94,7 +106,6 @@ export default function Header() {
                     </Link>
                   </div>
 
-                  {/* Language Switcher */}
                   <div className="p-4 mt-auto">
                     <MobileLanguageSwitcher onLanguageChange={handleMobileMenuClose} />
                   </div>
@@ -115,18 +126,15 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Desktop Navigation - faqat desktop'da ko'rinadi */}
+        {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-8">
-          {/* Custom Categories Dropdown */}
           <DesktopCategoryDropdown />
-
           <Link
             href="/about-us"
             className="text-white text-lg font-[400] hover:text-white/80 transition-colors"
           >
             {t('header.aboutUs')}
           </Link>
-
           <Link
             href="/warranty-check"
             className="text-white text-lg font-[400] hover:text-white/80 transition-colors"
@@ -137,24 +145,7 @@ export default function Header() {
 
         {/* Right Side Icons */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Search Icon */}
-          {/* <Link href="/search">
-            <Button
-              variant="none"
-              className="h-8 w-8 sm:h-10 sm:w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
-            >
-              <Image
-                loading="eager"
-                src="/icons/search.png"
-                alt="Search Icon"
-                width={16}
-                height={16}
-                className="sm:w-5 sm:h-5"
-              />
-            </Button>
-          </Link> */}
           <SearchPopover />
-
 
           {/* Cart Icon */}
           <Link href="/cart" className="relative">
@@ -178,82 +169,41 @@ export default function Header() {
               </span>
             )}
           </Link>
-          {userData?.id ? (
-
-            <Link href="/profile">
-              <Button
-                variant="none"
-                className="h-8 w-8 sm:h-10 sm:w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
-              >
-                <Image
-                  loading="eager"
-                  src="/icons/user.png"
-                  alt="User Icon"
-                  width={18}
-                  height={18}
-                  className="sm:w-6 sm:h-6"
-                />
-              </Button>
-            </Link>
-          ) : (
-            <Link href="/login">
-              <Button
-                variant="none"
-                className="h-8 w-auto sm:h-10 sm:w-auto p-2 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
-              >
+          
+          {/* User Icon - Only render on client */}
+          {isClient && (
+            userData?.id ? (
+              <Link href="/profile">
+                <Button
+                  variant="none"
+                  className="h-8 w-8 sm:h-10 sm:w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
+                >
+                  <Image
+                    loading="eager"
+                    src="/icons/user.png"
+                    alt="User Icon"
+                    width={18}
+                    height={18}
+                    className="sm:w-6 sm:h-6"
+                  />
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/login">
+                <Button
+                  variant="none"
+                  className="h-8 w-auto sm:h-10 sm:w-auto p-2 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
+                >
                   {t("login.buttons.submit")}
-              </Button>
-            </Link>
+                </Button>
+              </Link>
+            )
           )}
-          {/* User Icon */}
 
-          {/* Language Switcher - faqat desktop'da ko'rinadi */}
+          {/* Language Switcher - desktop only */}
           <div className="hidden lg:block">
             <LanguageSwitcher />
           </div>
-
-          {/* Mobile Language Button - TO'G'RILANGAN
-          <div className="lg:hidden relative">
-            <Sheet open={mobileLanguageOpen} onOpenChange={setMobileLanguageOpen}>
-              <SheetTrigger asChild>
-                <Button 
-                  variant="none" 
-                  className="h-8 w-8 sm:h-10 sm:w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out flex items-center justify-center"
-                >
-                  <span className="text-xs font-semibold text-gray-800">
-                    {currentLanguage.code}
-                  </span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-80 p-0 z-[9999]">
-                <SheetHeader className="p-6 border-b">
-                  <SheetTitle className="text-left">{t('language.title', 'Tilni tanlang')}</SheetTitle>
-                </SheetHeader>
-                
-                <div className="p-6">
-                  <div className="space-y-2">
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => handleLanguageChange(lang.code)}
-                        className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg transition-colors ${
-                          i18n.language === lang.code 
-                            ? 'bg-blue-50 text-blue-600 border border-blue-200' 
-                            : 'text-gray-700 hover:bg-gray-50'
-                        }`}
-                      >
-                        <span className="text-xl">{lang.flag}</span>
-                        <span className="font-medium">{lang.name}</span>
-                        {i18n.language === lang.code && (
-                          <span className="ml-auto text-blue-600">✓</span>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div> */}
         </div>
       </main>
     </header>

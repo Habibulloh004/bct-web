@@ -15,37 +15,56 @@ import {
   Settings,
   LogOut
 } from 'lucide-react';
-import { getData } from '@/actions/get';
 import { useOrderStore } from '@/store/useOrderStore';
 import OrderHistorySection from './_components/orderHistory';
+import { useRouter } from 'next/navigation';
 
 export default function ProfilePage() {
   const { t } = useTranslation();
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const orders = useOrderStore((state) => state.orders);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const userData = localStorage.getItem("userData")
-        setUserData(userData ? JSON.parse(userData) : null);
+        // Safe localStorage access
+        if (typeof window !== "undefined") {
+          const storedData = localStorage.getItem("userData");
+          if (storedData) {
+            setUserData(JSON.parse(storedData));
+          } else {
+            // Redirect to login if no user data
+            router.push('/login');
+          }
+        }
       } catch (error) {
         console.error('Error fetching user data:', error);
+        router.push('/login');
       } finally {
         setLoading(false);
       }
     };
 
     fetchUserData();
-  }, []);
+  }, [router]);
+
   const getInitials = (name) => {
+    if (!name) return '';
     return name
       .split(' ')
       .map(n => n[0])
       .join('')
       .toUpperCase()
       .slice(0, 2);
+  };
+
+  const handleLogout = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("userData");
+      router.push('/login');
+    }
   };
 
   if (loading) {
@@ -63,6 +82,12 @@ export default function ProfilePage() {
       <div className="pt-32 flex justify-center items-center min-h-screen">
         <div className="text-center">
           <div className="text-lg text-red-600">{t('profile.error') || 'Error loading profile'}</div>
+          <Button 
+            className="mt-4"
+            onClick={() => router.push('/login')}
+          >
+            Go to Login
+          </Button>
         </div>
       </div>
     );
@@ -114,7 +139,6 @@ export default function ProfilePage() {
                 <Edit2 className="w-4 h-4" />
                 {t('profile.buttons.edit') || 'Edit Profile'}
               </Button>
-
             </div>
           </div>
         </div>
@@ -157,7 +181,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-    <OrderHistorySection/>
+        <OrderHistorySection/>
 
         {/* Account Actions */}
         <div className="bg-white rounded-xl shadow-sm p-6 mt-6">
@@ -178,10 +202,7 @@ export default function ProfilePage() {
             <Button
               variant="outline"
               className="h-12 justify-start gap-3 text-red-600 hover:text-red-700 hover:bg-red-50"
-              onClick={() => {
-                localStorage.removeItem("userData");
-                window.location.href = "/login"
-              }}
+              onClick={handleLogout}
             >
               <LogOut className="w-4 h-4" />
               {t('profile.buttons.logout') || 'Logout'}

@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -10,6 +10,8 @@ const CustomImage = ({
   className,
   loading: loadingImg,
   property,
+  fill = true,
+  ...props
 }) => {
   const [loading, setLoading] = useState(true);
 
@@ -19,7 +21,7 @@ const CustomImage = ({
       <Image
         src={src}
         alt={alt}
-        layout="fill"
+        fill={fill}
         loading={loadingImg ? loadingImg : "lazy"}
         quality={100}
         className={cn(
@@ -29,8 +31,9 @@ const CustomImage = ({
             ? "scale-110 blur-2xl grayscale"
             : "scale-100 blur-0 grayscale-0"
         )}
-        onLoadingComplete={() => setLoading(false)}
-        property={property}
+        onLoad={() => setLoading(false)}
+        priority={property === "true"}
+        {...props}
       />
     </div>
   );
