@@ -95,7 +95,7 @@ export default function ProductItem({ item }) {
           alt="banner-img"
           fill
           loading="eager"
-          className="object-cover w-full h-full"
+          className="object-contain w-full h-full"
           property="true"
         />
       </div>

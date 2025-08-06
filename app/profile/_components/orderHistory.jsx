@@ -76,7 +76,7 @@ export default function OrderHistorySection() {
 
               {/* Total */}
               <div className="text-right font-semibold text-base mt-4">
-                {t("confirmOrder.total") || "Total"}:{" "}
+                {t("confirmOrder.total") || "Total"}{" "}
                 {formatNumber(order.totalAmount)} {t("common.currency") || "сум"}
               </div>
             </div>
