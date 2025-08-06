@@ -6,11 +6,12 @@ import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useCategories } from '@/hooks/useCategories';
+import { getTranslatedValue } from '@/lib/functions';
 
 export default function MobileCategoryMenu({ onLinkClick }) {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [expandedTopCategory, setExpandedTopCategory] = useState(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { topCategories, getCategoriesByTopCategory, loading } = useCategories();
 
   const toggleCategories = () => {
@@ -34,13 +35,12 @@ export default function MobileCategoryMenu({ onLinkClick }) {
         className="w-full flex items-center justify-between px-4 py-4 text-left hover:bg-gray-50 transition-colors"
       >
         <span className="font-medium text-gray-900">{t('header.categories')}</span>
-        <ChevronDown 
-          className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
-            isCategoriesOpen ? 'rotate-180' : ''
-          }`} 
+        <ChevronDown
+          className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${isCategoriesOpen ? 'rotate-180' : ''
+            }`}
         />
       </button>
-      
+
       {/* Categories Content */}
       {isCategoriesOpen && (
         <div className="bg-gray-50">
@@ -51,7 +51,7 @@ export default function MobileCategoryMenu({ onLinkClick }) {
             </div>
           ) : topCategories.length === 0 ? (
             <div className="p-4 text-center text-gray-500">
-              Категории не найдены
+              {t('category.notFound')}
             </div>
           ) : (
             <>
@@ -69,11 +69,10 @@ export default function MobileCategoryMenu({ onLinkClick }) {
                           onClick={() => toggleTopCategory(topCategory.id)}
                           className="w-full flex items-center justify-between px-4 py-3 text-left text-gray-700 hover:bg-gray-100 transition-colors"
                         >
-                          <span className="font-medium">{topCategory.name}</span>
-                          <ChevronDown 
-                            className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
-                              isExpanded ? 'rotate-180' : ''
-                            }`} 
+                          <span className="font-medium">{getTranslatedValue(topCategory.name,i18n.language)}</span>
+                          <ChevronDown
+                            className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''
+                              }`}
                           />
                         </button>
 
@@ -87,7 +86,7 @@ export default function MobileCategoryMenu({ onLinkClick }) {
                                 onClick={onLinkClick}
                                 className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-800 transition-colors border-b border-gray-100 last:border-b-0"
                               >
-                                {category.name}
+                                {getTranslatedValue(category.name, i18n.language)}
                               </Link>
                             ))}
                           </div>
@@ -96,7 +95,7 @@ export default function MobileCategoryMenu({ onLinkClick }) {
                     ) : (
                       /* Top Category without Subcategories - Disabled */
                       <div className="flex items-center justify-between px-4 py-3 text-gray-400">
-                        <span>{topCategory.name}</span>
+                        <span>{getTranslatedValue(topCategory.name,i18n.language)}</span>
                         <span className="text-xs">(скоро)</span>
                       </div>
                     )}

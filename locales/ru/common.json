@@ -313,6 +313,7 @@
   },
   "category": {
     "title": "Мобильные компьютеры",
+    "notFound":"Категории не найдены",
     "sort": {
       "label": "Сортировка:",
       "popularity": "По популярности",
@@ -327,37 +328,37 @@
     }
   },
   "profile": {
-  "error": "Ошибка загрузки профиля",
-  "member_since": "Участник с",
-  "status": {
-    "active": "Активный аккаунт",
-    "inactive": "Неактивный аккаунт"
+    "error": "Ошибка загрузки профиля",
+    "member_since": "Участник с",
+    "status": {
+      "active": "Активный аккаунт",
+      "inactive": "Неактивный аккаунт"
+    },
+    "sections": {
+      "personal_info": "Личная информация",
+      "account_info": "Информация об аккаунте",
+      "order_history": "История заказов",
+      "account_actions": "Действия с аккаунтом"
+    },
+    "fields": {
+      "full_name": "Полное имя",
+      "email": "Email адрес",
+      "phone": "Номер телефона",
+      "registration_date": "Дата регистрации",
+      "last_login": "Последний вход",
+      "last_updated": "Последнее обновление",
+      "user_id": "ID пользователя"
+    },
+    "buttons": {
+      "edit": "Редактировать профиль",
+      "settings": "Настройки",
+      "change_password": "Изменить пароль",
+      "notifications": "Настройки уведомлений",
+      "logout": "Выход",
+      "start_shopping": "Начать покупки"
+    },
+    "no_orders": "Заказы не найдены"
   },
-  "sections": {
-    "personal_info": "Личная информация",
-    "account_info": "Информация об аккаунте",
-    "order_history": "История заказов",
-    "account_actions": "Действия с аккаунтом"
-  },
-  "fields": {
-    "full_name": "Полное имя",
-    "email": "Email адрес",
-    "phone": "Номер телефона",
-    "registration_date": "Дата регистрации",
-    "last_login": "Последний вход",
-    "last_updated": "Последнее обновление",
-    "user_id": "ID пользователя"
-  },
-  "buttons": {
-    "edit": "Редактировать профиль",
-    "settings": "Настройки",
-    "change_password": "Изменить пароль",
-    "notifications": "Настройки уведомлений",
-    "logout": "Выход",
-    "start_shopping": "Начать покупки"
-  },
-  "no_orders": "Заказы не найдены"
-},
   "footer": {
     "company": {
       "name": "ООО \"BCTechnologies\"",
@@ -392,6 +393,11 @@
     "discountTitle": "Акции и Топ товары",
     "categoryTitle": "Категории",
     "categoryLink": "Все категории"
+  },
+  "search": {
+    "dialog_title": "Поиск товаров",
+    "input_placeholder": "Введите название...",
+    "no_results": "Ничего не найдено."
   },
   "common": {
     "loading": "Загрузка...",

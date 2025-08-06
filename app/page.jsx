@@ -8,22 +8,25 @@ import AboutUs from './_components/aboutUs'
 import { getData } from '@/actions/get'
 
 export default async function HomePage() {
-const categories = await getData({
-  endpoint: "/api/categories",
-  tag: "categories",
-  revalidate: 3600
-});
-const banners = await getData({
-  endpoint: "/api/banners",
-  tag: "banners",
-  revalidate: 0
-});
-const products = await getData({
+  const categories = await getData({
+    endpoint: "/api/categories",
+    tag: "categories",
+    revalidate: 300 // 5 minutes (5 * 60 = 300 seconds)
+  });
+
+  const banners = await getData({
+    endpoint: "/api/banners",
+    tag: "banners",
+    revalidate: 300 // 5 minutes (5 * 60 = 300 seconds)
+  });
+
+  let products = await getData({
     endpoint: `/api/products?page=${1}&limit=10`,
     tag: 'categories',
-    revalidate: 3600
+    revalidate: 300 // 5 minutes (5 * 60 = 300 seconds)
   })
-  console.log({banners, categories, products})
+  console.log({ banners, categories, products })
+
   return (
     <main className='pt-32 font-poppins'>
       <Banner banners={banners?.data} />

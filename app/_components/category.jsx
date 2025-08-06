@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { useTranslation } from 'react-i18next'
 
 export default function Category({ categories }) {
+  console.log(categories)
   const { t } = useTranslation();
   if (categories?.length > 0) {
     return (

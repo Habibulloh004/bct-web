@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useCartStore } from "@/store/useCartStore";
-import { imageUrl } from "@/lib/utils";
+import { formatNumber, imageUrl } from "@/lib/utils";
 
 export default function ProductItem({ item }) {
   const { i18n } = useTranslation();
@@ -42,7 +42,7 @@ export default function ProductItem({ item }) {
           <h1 className="text-base font-semibold">
             {getTranslatedValue(item?.name || "", i18n.language)}
           </h1>
-          <p className="text-sm text-red-500">POS система</p>
+          <p className="text-sm text-red-500">{getTranslatedValue(item?.top_category_name || "POS система***POS система***POS система", i18n?.language)}</p>
           <p className="text-sm text-muted-foreground line-clamp-3">
             {getTranslatedValue(item?.ads_title || "", i18n.language)}
           </p>
@@ -57,7 +57,7 @@ export default function ProductItem({ item }) {
               addProduct(item);
             }}
           >
-            {item.price?item.price?.toLocaleString("ru-RU"):1000} сум
+            {item.price ? formatNumber(item.price) : 1000} сум
           </Button>
         ) : (
           <div
@@ -73,14 +73,14 @@ export default function ProductItem({ item }) {
               −
             </Button>
             <span className="text-sm font-semibold">{cartItem.count}</span>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => increment(item.id)}
-                className="text-xl px-2 text-white hover:bg-transparent hover:text-white"
-              >
-                +
-              </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => increment(item.id)}
+              className="text-xl px-2 text-white hover:bg-transparent hover:text-white"
+            >
+              +
+            </Button>
           </div>
         )}
       </div>

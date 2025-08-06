@@ -16,13 +16,13 @@ import { getTranslatedValue } from "@/lib/functions";
 import { useTranslation } from "react-i18next";
 import CustomImage from "@/components/shared/customImage";
 import { getData } from "@/actions/get";
-import { imageUrl } from "@/lib/utils";
+import { formatNumber, imageUrl } from "@/lib/utils";
 
 export default function SearchPopover() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const router = useRouter();
 
   // Debounced search effect
@@ -63,14 +63,14 @@ export default function SearchPopover() {
       </Button>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-xl w-full rounded-xl p-6">
+        <DialogContent className="max-w-xl w-11/12 rounded-xl p-6">
           <DialogHeader>
-            <DialogTitle>Поиск товаров</DialogTitle>
+            <DialogTitle>{t("search.dialog_title")}</DialogTitle>
           </DialogHeader>
 
           <Input
             autoFocus
-            placeholder="Введите название..."
+            placeholder={t("search.input_placeholder")}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="mt-2"
@@ -79,7 +79,7 @@ export default function SearchPopover() {
           <div className="max-h-[300px] overflow-y-auto mt-4 space-y-2">
             {results.length === 0 && query.length >= 2 && (
               <p className="text-sm text-muted-foreground">
-                Ничего не найдено.
+                {t("search.no_results")}
               </p>
             )}
             {results.map((item) => (
@@ -105,7 +105,7 @@ export default function SearchPopover() {
                     {getTranslatedValue(item.name || "", i18n.language)}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    {item.price?.toLocaleString("ru-RU")} сум
+                    {formatNumber(item.price)} {t("common.currency")}
                   </p>
                 </div>
               </div>

@@ -21,8 +21,8 @@ export default function CategoryItem({ item }) {
         />
       </div>
       <div className='flex justify-center flex-col items-center gap-2 w-full'>
-        <h1 className='text-xl font-medium'>{getTranslatedValue(item.name, i18n?.language)}</h1>
-        <p className='text-md text-red-500'>POS система</p>
+        <h1 className='text-xl font-medium'>{getTranslatedValue(item?.name, i18n?.language)}</h1>
+        <p className='text-md text-red-500'>{getTranslatedValue(item?.top_category_name || "POS система***POS система***POS система", i18n?.language)} </p>
       </div>
     </Link>
   )

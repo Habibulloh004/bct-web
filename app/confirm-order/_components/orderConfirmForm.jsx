@@ -15,6 +15,7 @@ import { createOrder } from "@/actions/post";
 import { toast } from "sonner";
 import { Loader2, CheckCircle2, Home } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useOrderStore } from "@/store/useOrderStore";
 
 export default function OrderConfirmForm() {
   const { t, i18n } = useTranslation();
@@ -90,6 +91,13 @@ export default function OrderConfirmForm() {
 
       if (response && response.success) {
         console.log('✅ Order created successfully:', response.data);
+        useOrderStore.getState().addNewOrder({
+          phone: values.phone,
+          paymentType: values.paymentType,
+          items: [...items],
+          totalAmount: items.reduce((total, item) => total + (item.price * item.count), 0),
+          created_at: new Date().toISOString() // ixtiyoriy vaqt belgilash
+        });
 
         // Show success toast
         toast.success(

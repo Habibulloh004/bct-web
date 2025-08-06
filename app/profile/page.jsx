@@ -16,11 +16,14 @@ import {
   LogOut
 } from 'lucide-react';
 import { getData } from '@/actions/get';
+import { useOrderStore } from '@/store/useOrderStore';
+import OrderHistorySection from './_components/orderHistory';
 
 export default function ProfilePage() {
   const { t } = useTranslation();
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const orders = useOrderStore((state) => state.orders);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -154,21 +157,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Order History Section */}
-        <div className="bg-white rounded-xl shadow-sm p-6 mt-6">
-          <h2 className="text-xl font-semibold mb-6">
-            {t('profile.sections.order_history') || 'Order History'}
-          </h2>
-          <div className="text-center py-8 text-gray-500">
-            <p>{t('profile.no_orders') || 'No orders found'}</p>
-            <Button
-              className="mt-4"
-              onClick={() => {/* Navigate to catalog */ }}
-            >
-              {t('profile.buttons.start_shopping') || 'Start Shopping'}
-            </Button>
-          </div>
-        </div>
+    <OrderHistorySection/>
 
         {/* Account Actions */}
         <div className="bg-white rounded-xl shadow-sm p-6 mt-6">
@@ -189,7 +178,10 @@ export default function ProfilePage() {
             <Button
               variant="outline"
               className="h-12 justify-start gap-3 text-red-600 hover:text-red-700 hover:bg-red-50"
-              onClick={() => {/* Handle logout */ }}
+              onClick={() => {
+                localStorage.removeItem("userData");
+                window.location.href = "/login"
+              }}
             >
               <LogOut className="w-4 h-4" />
               {t('profile.buttons.logout') || 'Logout'}

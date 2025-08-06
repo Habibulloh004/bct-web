@@ -313,6 +313,7 @@
   },
   "category": {
     "title": "Mobile Computers",
+    "notFound":"Category not found",
     "sort": {
       "label": "Sort by:",
       "popularity": "By popularity",
@@ -392,6 +393,11 @@
     "discountTitle": "Promotions and Top Products",
     "categoryTitle": "Categories",
     "categoryLink": "All Categories"
+  },
+  "search": {
+    "dialog_title": "Search products",
+    "input_placeholder": "Enter product name...",
+    "no_results": "No results found."
   },
   "common": {
     "loading": "Loading...",

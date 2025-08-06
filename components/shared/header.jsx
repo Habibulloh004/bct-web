@@ -42,6 +42,8 @@ export default function Header() {
     setMobileLanguageOpen(false);
   };
 
+  const userData = localStorage.getItem("userData")?JSON.parse(localStorage.getItem("userData")):null
+
   return (
     <header className="z-[998] pt-1 bg-white fixed top-0 left-0 w-screen h-20 lg:h-24 flex justify-center items-center">
       <div className="w-full h-full relative">
@@ -176,23 +178,34 @@ export default function Header() {
               </span>
             )}
           </Link>
+          {userData?.id ? (
 
+            <Link href="/profile">
+              <Button
+                variant="none"
+                className="h-8 w-8 sm:h-10 sm:w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
+              >
+                <Image
+                  loading="eager"
+                  src="/icons/user.png"
+                  alt="User Icon"
+                  width={18}
+                  height={18}
+                  className="sm:w-6 sm:h-6"
+                />
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/login">
+              <Button
+                variant="none"
+                className="h-8 w-auto sm:h-10 sm:w-auto p-2 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
+              >
+                  {t("login.buttons.submit")}
+              </Button>
+            </Link>
+          )}
           {/* User Icon */}
-          <Link href="/profile">
-            <Button
-              variant="none"
-              className="h-8 w-8 sm:h-10 sm:w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
-            >
-              <Image
-                loading="eager"
-                src="/icons/user.png"
-                alt="User Icon"
-                width={18}
-                height={18}
-                className="sm:w-6 sm:h-6"
-              />
-            </Button>
-          </Link>
 
           {/* Language Switcher - faqat desktop'da ko'rinadi */}
           <div className="hidden lg:block">

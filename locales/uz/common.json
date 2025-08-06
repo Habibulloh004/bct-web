@@ -345,6 +345,7 @@
   },
   "category": {
     "title": "Mobil Kompyuterlar",
+    "notFound":"Kategoriyalar mavjud emas!",
     "sort": {
       "label": "Saralash:",
       "popularity": "Mashhurlik bo'yicha",
@@ -392,6 +393,11 @@
     "discountTitle": "Aktsiyalar va eng yaxshi mahsulotlar",
     "categoryTitle": "Kategoriyalar",
     "categoryLink": "Barcha kategoriyalar"
+  },
+  "search": {
+    "dialog_title": "Mahsulot qidirish",
+    "input_placeholder": "Mahsulot nomini kiriting...",
+    "no_results": "Hech narsa topilmadi."
   },
   "common": {
     "loading": "Yuklanmoqda...",
