@@ -16,6 +16,7 @@ import { getTranslatedValue } from "@/lib/functions";
 import { useTranslation } from "react-i18next";
 import CustomImage from "@/components/shared/customImage";
 import { getData } from "@/actions/get";
+import { imageUrl } from "@/lib/utils";
 
 export default function SearchPopover() {
   const [open, setOpen] = useState(false);
@@ -91,7 +92,7 @@ export default function SearchPopover() {
                   <CustomImage
                     src={
                       item?.image?.length > 0
-                        ? `https://q-bit.uz${item.image[0]}`
+                        ? `${imageUrl}${item.image[0]}`
                         : "/placeholder.svg"
                     }
                     alt="product"

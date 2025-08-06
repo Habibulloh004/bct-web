@@ -1,13 +1,18 @@
-import CustomImage from '@/components/shared/customImage'
-import React from 'react'
+"use client"
 
-export default function ProductFeatures() {
+import CustomImage from '@/components/shared/customImage'
+import { getTranslatedValue } from '@/lib/functions'
+import { getInitialsFromName } from '@/lib/utils'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+
+export default function ProductFeatures({ productData }) {
+  const { i18n } = useTranslation()
   return (
     <div className='max-w-[1440px] w-11/12 mx-auto flex justify-center items-center flex-col'>
-      <h1 className='text-2xl font-bold pt-10'>PM86</h1>
-      <p className='w-2/3 text-center mx-auto pt-3'>Наслаждайтесь быстрым и надежным подключением благодаря технологии Wi-Fi 6, дополненной поддержкой 2x2 MU-MIMO</p>
-      <p className='w-2/3 text-center mx-auto'>Эта современная корпоративная модель также оснащена специализированными функциями для бизнеса, такими как Enterprise Hot-Swap, BLE Beacon и высокая ударопрочность.</p>
-      <div className='flex justify-center items-center gap-4 pt-10'>
+      <h1 className='text-2xl font-bold pt-10'>{getTranslatedValue(productData?.name, i18n.language)}</h1>
+      <p className='text-start pt-3'>{getTranslatedValue(productData?.ads_title, i18n.language)}</p>
+      {/* <div className='flex justify-center items-center gap-4 pt-10'>
         <div
           className="relative w-[240px] min-h-[240px] aspect-[2/3] rounded-md overflow-hidden"
         >
@@ -44,8 +49,10 @@ export default function ProductFeatures() {
             property={"true"}
           />
         </div>
+      </div> */}
+      <div className='pt-4'>
+        {getTranslatedValue(productData?.description)}
       </div>
-      <p>Xarakteristika</p>
     </div>
   )
 }

@@ -12,11 +12,11 @@ import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import Link from 'next/link';
 import { loginUser } from "@/actions/post";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
-
   // Dynamic validation schema with translations
   const LoginValidation = z.object({
     phone: z
@@ -40,12 +40,12 @@ export default function LoginPage() {
   const onSubmit = async (values) => {
     console.log("Form submitted:", values);
     setIsLoading(true);
-    
+
     // Loading toast
     const loadingToast = toast.loading(t('login.toast.loading.title'), {
       description: t('login.toast.loading.description')
     });
-    
+
     try {
       // FormData yaratish (server action uchun)
       const formData = new FormData();
@@ -54,41 +54,41 @@ export default function LoginPage() {
 
       // Server action chaqirish
       const result = await loginUser(formData);
-      
+
       if (result.success) {
-        console.log('User logged in successfully:', result.data);
-        
+        console.log('User logged in successfully:', JSON.stringify(result.data));
+        localStorage.setItem("userData", JSON.stringify(result.data))
         // Loading toast'ni dismiss qilish
         toast.dismiss(loadingToast);
-        
+
         // Success toast
         toast.success(t('login.toast.success.title'), {
           description: t('login.toast.success.description'),
           duration: 4000,
         });
-        
+
         // Formani tozalash
         form.reset();
-        
+
         // Redirect to dashboard or home page
-        // window.location.href = '/dashboard'; // yoki Next.js router ishlatishingiz mumkin
-        
+        window.location.href = '/profile'; // yoki Next.js router ishlatishingiz mumkin
+
       } else {
         throw new Error(result.error);
       }
-      
+
     } catch (error) {
       console.error('Login error:', error);
-      
+
       // Loading toast'ni dismiss qilish
       toast.dismiss(loadingToast);
-      
+
       // Error toast
       toast.error(t('login.toast.error.title'), {
         description: error.message || t('login.toast.error.description'),
         duration: 5000,
       });
-      
+
     } finally {
       setIsLoading(false);
     }
@@ -110,7 +110,7 @@ export default function LoginPage() {
             {t('login.subtitle')}
           </p>
         </div>
-        
+
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -140,8 +140,8 @@ export default function LoginPage() {
               {/* Register Link */}
               <p className="text-sm sm:text-base text-center text-gray-600">
                 {t('login.buttons.noAccount')}{" "}
-                <Link 
-                  href="/register" 
+                <Link
+                  href="/register"
                   className="text-blue-600 hover:text-blue-700 hover:underline font-medium transition-colors"
                 >
                   {t('login.buttons.register')}
@@ -149,8 +149,8 @@ export default function LoginPage() {
               </p>
 
               {/* Submit Button */}
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={isLoading}
                 className="text-white bg-black hover:bg-black/80 w-full sm:w-auto sm:min-w-[200px] md:min-w-[250px] p-2 sm:p-3 md:p-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm sm:text-base transition-all duration-200"
               >

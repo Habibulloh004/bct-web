@@ -62,7 +62,10 @@
       },
       "error": {
         "title": "Ro'yxatdan o'tishda xatolik! ❌",
-        "description": "Ro'yxatdan o'tishda xatolik yuz berdi"
+        "description": "Ro'yxatdan o'tishda xatolik yuz berdi",
+        "email": "Email allaqachon ishlatilmoqda",
+        "phone": "Telefon raqami allaqachon ishlatilmoqda",
+        "network": "Tarmoq xatosi. Internet ulanishingizni tekshiring"
       }
     }
   },
@@ -242,27 +245,63 @@
   },
   "confirmOrder": {
     "title": "Buyurtmani tasdiqlash",
+    "yourOrder": "Sizning buyurtmangiz",
+    "noItems": "Savatcha bo'sh",
+    "total": "Jami:",
     "form": {
       "phone": {
-        "label": "Telefon raqam",
-        "placeholder": "99 999-99-99",
-        "validation": "Telefon raqami 13 belgidan iborat bo'lishi kerak",
-        "validation_type": "Iltimos, to'lov turini tanlang"
+        "label": "Telefon raqami",
+        "placeholder": "Telefon raqamingizni kiriting",
+        "validation": "To'g'ri telefon raqami kiriting",
+        "validation_type": "To'lov usulini tanlang"
       },
       "paymentType": {
-        "label": "To'lov turi",
-        "placeholder": "Tanlang",
+        "label": "To'lov usuli",
+        "placeholder": "To'lov usulini tanlang",
         "options": {
-          "cash": "Naqd",
-          "card": "Karta",
-          "online": "Onlayn"
+          "cash": "Naqd pul",
+          "card": "Plastik karta",
+          "online": "Onlayn to'lov"
         }
       }
     },
-    "yourOrder": "Sizning buyurtmangiz",
     "buttons": {
       "cancel": "Bekor qilish",
-      "confirm": "Tasdiqlash"
+      "confirm": "Buyurtmani tasdiqlash",
+      "creating": "Buyurtma yaratilmoqda..."
+    },
+    "errors": {
+      "noItems": "Savatcha bo'sh",
+      "noItemsDesc": "Buyurtma berishdan oldin savatchaga mahsulot qo'shing",
+      "invalidPhone": "Telefon raqami formati noto'g'ri",
+      "invalidProducts": "Mahsulot ma'lumotlarida xatolik",
+      "network": "Tarmoq xatosi. Internet ulanishingizni tekshiring."
+    },
+    "toast": {
+      "loading": {
+        "title": "Buyurtma yaratilmoqda...",
+        "description": "Buyurtmangizni qayta ishlaganimizni kuting"
+      },
+      "success": {
+        "title": "Buyurtma yaratildi!",
+        "description": "Sizning buyurtmangiz muvaffaqiyatli yaratildi. Tez orada siz bilan bog'lanamiz."
+      },
+      "error": {
+        "title": "Buyurtma yaratishda xatolik"
+      }
+    },
+    "info": {
+      "title": "Ma'lumot:",
+      "description": "Buyurtma yaratilgandan so'ng, menejerimiz tafsilotlarni aniqlash uchun siz bilan bog'lanadi."
+    },
+    "success": {
+      "title": "Buyurtma qabul qilindi!",
+      "message": "Sizning buyurtmangiz muvaffaqiyatli rasmiylashtirilib. Menejerimiz yaqin orada siz bilan tasdiqlash uchun bog'lanadi.",
+      "orderSummary": "Buyurtma tafsilotlari",
+      "contactInfo": "Aloqa ma'lumotlari:",
+      "contactDetails": "Agar savollaringiz bo'lsa, qo'ng'iroq qiling: +998 (71) 123-45-67",
+      "returnToMenu": "Menyuga qaytish",
+      "continueShopping": "Xaridni davom ettirish"
     }
   },
   "product": {
@@ -271,6 +310,38 @@
     "characteristics": "Xususiyatlar",
     "features": "Imkoniyatlar",
     "description": "2x2 MU-MIMO qo'llab-quvvatlash bilan to'ldirilgan Wi-Fi 6 texnologiyasi tufayli tez va ishonchli ulanishdan bahramand bo'ling. Bu zamonaviy korporativ model, shuningdek, Enterprise Hot-Swap, BLE Beacon va yuqori zarba bardoshliligi kabi biznes uchun maxsus funksiyalar bilan jihozlangan."
+  },
+  "profile": {
+    "error": "Profilni yuklashda xatolik",
+    "member_since": "A'zo",
+    "status": {
+      "active": "Faol akkaunt",
+      "inactive": "Nofaol akkaunt"
+    },
+    "sections": {
+      "personal_info": "Shaxsiy ma'lumotlar",
+      "account_info": "Akkaunt ma'lumotlari",
+      "order_history": "Buyurtmalar tarixi",
+      "account_actions": "Akkaunt amallar"
+    },
+    "fields": {
+      "full_name": "To'liq ism",
+      "email": "Email manzil",
+      "phone": "Telefon raqam",
+      "registration_date": "Ro'yxatdan o'tgan sana",
+      "last_login": "Oxirgi kirish",
+      "last_updated": "Oxirgi yangilanish",
+      "user_id": "Foydalanuvchi ID"
+    },
+    "buttons": {
+      "edit": "Profilni tahrirlash",
+      "settings": "Sozlamalar",
+      "change_password": "Parolni o'zgartirish",
+      "notifications": "Bildirishnoma sozlamalari",
+      "logout": "Chiqish",
+      "start_shopping": "Xarid boshlash"
+    },
+    "no_orders": "Buyurtmalar topilmadi"
   },
   "category": {
     "title": "Mobil Kompyuterlar",
@@ -321,7 +392,7 @@
     "discountTitle": "Aktsiyalar va eng yaxshi mahsulotlar",
     "categoryTitle": "Kategoriyalar",
     "categoryLink": "Barcha kategoriyalar"
-  },  
+  },
   "common": {
     "loading": "Yuklanmoqda...",
     "error": "Xatolik",

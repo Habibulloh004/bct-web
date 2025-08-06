@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
       <body className={`${poppins.variable} antialiased`}>
         <LanguageProvider>
           <Header />
-          <Toaster />
+          <Toaster closeButton />
           <div className="min-h-[calc(100vh-242px)]">
             {children}
           </div>

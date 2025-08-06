@@ -1,6 +1,7 @@
 "use client"
 import CustomImage from '@/components/shared/customImage'
 import { getTranslatedValue } from '@/lib/functions';
+import { imageUrl } from '@/lib/utils';
 import Link from 'next/link';
 import React from 'react'
 import { useTranslation } from 'react-i18next';
@@ -11,7 +12,7 @@ export default function CategoryItem({ item }) {
     <Link href={`/${item?.id}`} className='bg-[#EBEBEB99] rounded-2xl p-4'>
       <div className="relative mx-auto aspect-[4/3] rounded-[4px] overflow-hidden">
         <CustomImage
-          src={item?.image ? `https://q-bit.uz${item?.image}` : "/placeholder.svg"}
+          src={item?.image ? `${imageUrl}${item?.image}` : "/placeholder.svg"}
           alt={`banner-img`}
           fill
           loading="eager"

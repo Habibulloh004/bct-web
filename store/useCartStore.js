@@ -50,6 +50,10 @@ export const useCartStore = create(
           items: get().items.filter((item) => item.id !== productId),
         });
       },
+      getTotalPrice: () => {
+        return get().items.reduce((sum, item) => sum + item.price * item.count, 0);
+      }
+      ,
 
       // ✅ Savatni tozalash
       clearCart: () => set({ items: [] }),

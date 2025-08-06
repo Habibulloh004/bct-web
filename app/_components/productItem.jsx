@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useCartStore } from "@/store/useCartStore";
+import { imageUrl } from "@/lib/utils";
 
 export default function ProductItem({ item }) {
   const { i18n } = useTranslation();
@@ -84,17 +85,17 @@ export default function ProductItem({ item }) {
         )}
       </div>
 
-      <div className="relative aspect-[4/3] w-[100%] min-w-[100px] rounded-lg overflow-hidden">
+      <div className="relative w-full h-full rounded-lg overflow-hidden">
         <CustomImage
           src={
             item?.image?.length > 0
-              ? `https://q-bit.uz${item?.image[0]}`
+              ? `${imageUrl}${item?.image[0]}`
               : "/placeholder.svg"
           }
           alt="banner-img"
           fill
           loading="eager"
-          className="object-contain w-full h-full"
+          className="object-cover w-full h-full"
           property="true"
         />
       </div>

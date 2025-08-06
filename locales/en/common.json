@@ -62,7 +62,10 @@
       },
       "error": {
         "title": "Registration error! ❌",
-        "description": "An error occurred during registration"
+        "description": "An error occurred during registration",
+        "email": "Email is already in use",
+        "phone": "Phone number is already in use",
+        "network": "Network error. Please check your internet connection"
       }
     }
   },
@@ -242,27 +245,63 @@
   },
   "confirmOrder": {
     "title": "Order Confirmation",
+    "yourOrder": "Your Order",
+    "noItems": "Cart is empty",
+    "total": "Total:",
     "form": {
       "phone": {
         "label": "Phone Number",
-        "placeholder": "99 999-99-99",
-        "validation": "Phone number must be 13 characters long",
-        "validation_type": "Please select a payment type"
+        "placeholder": "Enter your phone number",
+        "validation": "Please enter a valid phone number",
+        "validation_type": "Please select payment method"
       },
       "paymentType": {
-        "label": "Payment Type",
-        "placeholder": "Select",
+        "label": "Payment Method",
+        "placeholder": "Select payment method",
         "options": {
           "cash": "Cash",
           "card": "Card",
-          "online": "Online"
+          "online": "Online Payment"
         }
       }
     },
-    "yourOrder": "Your Order",
     "buttons": {
       "cancel": "Cancel",
-      "confirm": "Confirm"
+      "confirm": "Confirm Order",
+      "creating": "Creating Order..."
+    },
+    "errors": {
+      "noItems": "Cart is empty",
+      "noItemsDesc": "Add items to cart before placing an order",
+      "invalidPhone": "Invalid phone number format",
+      "invalidProducts": "Error in product data",
+      "network": "Network error. Please check your internet connection."
+    },
+    "toast": {
+      "loading": {
+        "title": "Creating Order...",
+        "description": "Please wait while we process your order"
+      },
+      "success": {
+        "title": "Order Created!",
+        "description": "Your order has been successfully created. We will contact you shortly."
+      },
+      "error": {
+        "title": "Order Creation Failed"
+      }
+    },
+    "info": {
+      "title": "Information:",
+      "description": "After creating the order, our manager will contact you to clarify the details."
+    },
+    "success": {
+      "title": "Order Accepted!",
+      "message": "Your order has been successfully placed. Our manager will contact you shortly for confirmation.",
+      "orderSummary": "Order Details",
+      "contactInfo": "Contact Information:",
+      "contactDetails": "If you have any questions, call: +998 (71) 123-45-67",
+      "returnToMenu": "Return to Menu",
+      "continueShopping": "Continue Shopping"
     }
   },
   "product": {
@@ -286,6 +325,38 @@
       "previous": "Previous",
       "next": "Next"
     }
+  },
+  "profile": {
+    "error": "Error loading profile",
+    "member_since": "Member since",
+    "status": {
+      "active": "Active Account",
+      "inactive": "Inactive Account"
+    },
+    "sections": {
+      "personal_info": "Personal Information",
+      "account_info": "Account Information",
+      "order_history": "Order History",
+      "account_actions": "Account Actions"
+    },
+    "fields": {
+      "full_name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "registration_date": "Registration Date",
+      "last_login": "Last Login",
+      "last_updated": "Last Updated",
+      "user_id": "User ID"
+    },
+    "buttons": {
+      "edit": "Edit Profile",
+      "settings": "Settings",
+      "change_password": "Change Password",
+      "notifications": "Notification Settings",
+      "logout": "Logout",
+      "start_shopping": "Start Shopping"
+    },
+    "no_orders": "No orders found"
   },
   "footer": {
     "company": {

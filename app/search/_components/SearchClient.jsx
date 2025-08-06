@@ -5,6 +5,7 @@ import CustomImage from "@/components/shared/customImage";
 import { useTranslation } from "react-i18next";
 import { getTranslatedValue } from "@/lib/functions";
 import { useState, useEffect } from "react";
+import { imageUrl } from "@/lib/utils";
 
 export default function SearchClient() {
   const { i18n } = useTranslation();
@@ -48,7 +49,7 @@ export default function SearchClient() {
               <CustomImage
                 src={
                   item?.image?.length > 0
-                    ? `https://q-bit.uz${item.image[0]}`
+                    ? `${imageUrl}${item.image[0]}`
                     : "/placeholder.svg"
                 }
                 alt={item.name}

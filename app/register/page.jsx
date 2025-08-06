@@ -6,21 +6,21 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import CustomFormField, { FormFieldType } from "@/components/shared/customFormField";
-import { createClient } from "@/actions/post";
+import { registerUser } from "@/actions/post";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from '@/components/LanguageSwitcher';
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { t, ready } = useTranslation();
-
+  const router = useRouter()
   // Dynamic validation schema with translations
   const RegisterValidation = useMemo(() => {
     if (!ready) return z.object({}); // Return empty schema if translations not ready
-    
+
     return z.object({
       name: z.string().min(2, { message: t('register.form.name.validation.min') }).max(50, { message: t('register.form.name.validation.max') }),
       email: z.string().email({ message: t('register.form.email.validation.invalid') }),
@@ -59,12 +59,10 @@ export default function RegisterPage() {
       formData.append('email', values.email);
       formData.append('phone', values.phone);
       formData.append('password', values.password);
-      formData.append('image', ''); // Bo'sh yoki default qiymat
-      formData.append('url', '');   // Bo'sh yoki default qiymat
 
       // Server action chaqirish
-      const result = await createClient(formData);
-
+      const result = await registerUser(formData);
+      console.log("Registration result:", result);
       if (result.success) {
         console.log('Client created successfully:', result.data);
 
@@ -79,6 +77,7 @@ export default function RegisterPage() {
 
         // Formani tozalash
         form.reset();
+        router.push("/login")
 
       } else {
         throw new Error(result.error);
