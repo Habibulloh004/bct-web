@@ -10,10 +10,16 @@ const CustomImage = ({
   className,
   loading: loadingImg,
   property,
-  fill = true,
+  fill,
+  width,
+  height,
   ...props
 }) => {
   const [loading, setLoading] = useState(true);
+  
+  // Automatically determine if fill should be used
+  // If width and height are provided, use them instead of fill
+  const shouldUseFill = fill !== false && !width && !height;
 
   return (
     <div className="relative w-full h-full">
@@ -21,7 +27,7 @@ const CustomImage = ({
       <Image
         src={src}
         alt={alt}
-        fill={fill}
+        {...(shouldUseFill ? { fill: true } : { width, height })}
         loading={loadingImg ? loadingImg : "lazy"}
         quality={100}
         className={cn(

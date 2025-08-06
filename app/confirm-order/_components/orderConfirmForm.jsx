@@ -41,7 +41,7 @@ export default function OrderConfirmForm() {
   const onSubmit = async (values) => {
     console.log("✅ Order form values:", values);
     console.log("✅ Cart items:", items);
-
+    const userData = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null;
     // Validate that we have items in cart
     if (!items || items.length === 0) {
       toast.error(t('confirmOrder.errors.noItems') || 'Корзина пуста', {
@@ -74,7 +74,12 @@ export default function OrderConfirmForm() {
       formData.append("phone", values.phone.trim());
       formData.append("pay_type", values.paymentType);
       formData.append("products", JSON.stringify(products)); // Convert to JSON string
-      formData.append("client_id", ""); // Empty for guest orders
+      if (userData) {
+        formData.append("client_id", userData?.id); // Empty for guest orders
+      } else {
+        formData.append("client_id", ""); // Empty for guest orders
+
+      }
 
       console.log("✅ FormData contents:", {
         phone: values.phone.trim(),

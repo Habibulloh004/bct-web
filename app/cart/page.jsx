@@ -7,7 +7,6 @@ import {
   ResizablePanel,
   ResizableHandle,
 } from "@/components/ui/resizable";
-import Image from "next/image";
 import React, { useMemo } from "react";
 import Link from "next/link";
 import { useTranslation } from 'react-i18next';
@@ -33,8 +32,7 @@ export default function Cart() {
 
   const getTotalPrice = useCartStore((state) => state.getTotalPrice);
 
-  const total = useMemo(() => getTotalPrice(), [items]);
-
+  const total = useMemo(() => getTotalPrice(), [items, getTotalPrice]);
 
   return (
     <main className="pt-24 md:pt-32 w-11/12 2xl:w-9/12 mx-auto max-w-[1440px] space-y-4">
@@ -60,33 +58,37 @@ export default function Cart() {
                         <CustomImage
                           src={item?.image[0] ? `${imageUrl}${item?.image[0]}` : '/placeholder.svg'}
                           alt="Product"
-                          width={100}
-                          height={100}
-                          className="object-contain max-w-[100px] max-h-[100px]"
+                          fill={true}
+                          className="object-contain"
                         />
                       </div>
-                      <h3 className="text-sm font-semibold mb-1">{getTranslatedValue(item?.name, i18n.language)}</h3>
-                      <p className="text-red-500 font-bold text-sm mb-3">{formatNumber(item?.price)} {t('common.currency')}</p>
+                      <h3 className="text-sm font-semibold mb-1 mt-2">
+                        {getTranslatedValue(item?.name, i18n.language)}
+                      </h3>
+                      <p className="text-red-500 font-bold text-sm mb-3">
+                        {formatNumber(item?.price)} {t('common.currency')}
+                      </p>
                       <div className="w-full flex items-center justify-center gap-4 bg-black text-white px-4 py-2 rounded-xl">
                         <button
-                          variant="ghost"
-                          size="sm"
                           onClick={() => decrement(item?.id)}
                           className="w-full text-xl px-2 text-white hover:bg-transparent hover:text-white"
                         >
                           -
                         </button>
-                        <span className="min-w-4 text-center text-lg font-semibold">{item?.count}</span>
+                        <span className="min-w-4 text-center text-lg font-semibold">
+                          {item?.count}
+                        </span>
                         <button
-                          variant="ghost"
-                          size="sm"
                           onClick={() => increment(item?.id)}
                           className="w-full text-xl px-2 text-white hover:bg-transparent hover:text-white"
                         >
                           +
                         </button>
                       </div>
-                      <button onClick={() => removeItem(item?.id)} className="pt-2 cursor-pointer text-xs text-gray-500 hover:underline">
+                      <button
+                        onClick={() => removeItem(item?.id)}
+                        className="pt-2 cursor-pointer text-xs text-gray-500 hover:underline"
+                      >
                         {t('cart.buttons.remove')}
                       </button>
                     </div>
@@ -138,7 +140,6 @@ export default function Cart() {
           <ResizablePanel defaultSize={60} minSize={40} className="rounded-xl bg-[#F9F9F9] p-6">
             <h2 className="text-lg font-semibold mb-2">{t('cart.yourOrder')}</h2>
             <div className="scrollbar-custom overflow-y-auto max-h-[500px] space-y-4 pr-2">
-
               {items?.length > 0 ? (
                 <>
                   {items?.map((item, index) => (
@@ -147,22 +148,24 @@ export default function Cart() {
                       className="bg-white rounded-xl flex items-center justify-between p-4 shadow-sm"
                     >
                       <div className="space-y-2 max-w-[70%]">
-                        <h3 className="text-sm font-semibold">{getTranslatedValue(item?.name, i18n.language)}</h3>
-                        <p className="text-red-500 font-bold">{formatNumber(item?.price)} {t('common.currency')}</p>
+                        <h3 className="text-sm font-semibold">
+                          {getTranslatedValue(item?.name, i18n.language)}
+                        </h3>
+                        <p className="text-red-500 font-bold">
+                          {formatNumber(item?.price)} {t('common.currency')}
+                        </p>
 
                         <div className="flex items-center justify-center gap-4 bg-black text-white px-4 py-2 rounded-xl">
                           <button
-                            variant="ghost"
-                            size="sm"
                             onClick={() => decrement(item?.id)}
                             className="w-full text-xl px-2 text-white hover:bg-transparent hover:text-white"
                           >
                             -
                           </button>
-                          <span className="min-w-4 text-center text-lg font-semibold">{item?.count}</span>
+                          <span className="min-w-4 text-center text-lg font-semibold">
+                            {item?.count}
+                          </span>
                           <button
-                            variant="ghost"
-                            size="sm"
                             onClick={() => increment(item?.id)}
                             className="w-full text-xl px-2 text-white hover:bg-transparent hover:text-white"
                           >
@@ -170,23 +173,25 @@ export default function Cart() {
                           </button>
                         </div>
 
-                        <button onClick={() => removeItem(item?.id)} className=" cursor-pointer text-xs text-gray-500 hover:underline">
+                        <button
+                          onClick={() => removeItem(item?.id)}
+                          className="cursor-pointer text-xs text-gray-500 hover:underline"
+                        >
                           {t('cart.buttons.remove')}
                         </button>
                       </div>
                       <div className="relative w-32 h-32 shrink-0 rounded-md overflow-hidden">
-
                         <CustomImage
                           src={item?.image[0] ? `${imageUrl}${item?.image[0]}` : '/placeholder.svg'}
                           alt="Product"
-                          width={100}
-                          height={100}
-                          className="object-contain max-w-[100px] max-h-[100px]"
+                          fill={true}
+                          className="object-contain"
                         />
                       </div>
                     </div>
                   ))}
-                </>) : (
+                </>
+              ) : (
                 <div className="text-center text-sm text-gray-500">
                   {t('confirmOrder.noItems') || 'Корзина пуста'}
                 </div>
