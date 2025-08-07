@@ -345,7 +345,7 @@
   },
   "category": {
     "title": "Mobil Kompyuterlar",
-    "notFound":"Kategoriyalar mavjud emas!",
+    "notFound": "Kategoriyalar mavjud emas!",
     "sort": {
       "label": "Saralash:",
       "popularity": "Mashhurlik bo'yicha",
@@ -398,6 +398,51 @@
     "dialog_title": "Mahsulot qidirish",
     "input_placeholder": "Mahsulot nomini kiriting...",
     "no_results": "Hech narsa topilmadi."
+  },
+  "privacy": {
+    "title": "Maxfiylik siyosati",
+    "intro": "Biz foydalanuvchilar maxfiyligini hurmat qilamiz. Ushbu siyosatda sizning ma'lumotlaringiz qanday yig‘ilishi, ishlatilishi va himoya qilinishi tushuntiriladi.",
+    "sections": {
+      "dataCollection": "1. Ma'lumotlarni yig‘ish",
+      "usage": "2. Ma'lumotlardan foydalanish",
+      "sharing": "3. Uchinchi tomonlarga ulashish",
+      "security": "4. Ma'lumotlar xavfsizligi",
+      "rights": "5. Foydalanuvchi huquqlari"
+    },
+    "dataCollectionContent": "Biz sizdan ism, telefon raqami va email kabi shaxsiy ma'lumotlarni ro'yxatdan o'tganingizda yoki murojaat qilganingizda yig'amiz.",
+    "usageContent": "Yig‘ilgan ma'lumotlar aloqa, xizmatni yaxshilash va xavfsizlikni ta'minlash uchun ishlatiladi.",
+    "sharingContent": "Biz sizning ma'lumotlaringizni hech qachon sotmaymiz. Faqat qonuniy talab bo‘lsa yoki xavfsizlik talab qilinsa, ulashamiz.",
+    "securityContent": "Biz ma'lumotlaringizni himoya qilish uchun barcha zarur texnik va tashkiliy choralarni ko‘ramiz.",
+    "rightsContent": "Siz o'zingiz haqingizdagi ma'lumotlarni ko‘rish, o‘zgartirish yoki o‘chirishni so‘rash huquqiga egasiz."
+  },
+  "terms": {
+    "title": "Foydalanish shartlari",
+    "intro": "Bizning xizmatimizdan foydalanganingizda, quyidagi shartlarga rozilik bildirgan bo‘lasiz.",
+    "sections": {
+      "acceptance": "1. Shartlarga rozilik",
+      "changes": "2. O'zgarishlar kiritish",
+      "limitation": "3. Mas'uliyatni cheklash"
+    },
+    "acceptanceContent": "Agar siz shartlarga rozi bo‘lmasangiz, iltimos, xizmatimizdan foydalanmang.",
+    "changesContent": "Biz ushbu shartlarga istalgan vaqtda o‘zgartirish kiritish huquqiga egamiz. O‘zgarishlar saytga joylanadi.",
+    "limitationContent": "Biz xizmatdan foydalanish bilan bog‘liq har qanday yo‘qotishlar uchun javobgar emasmiz."
+  },
+  "contact": {
+    "title": "Bog‘lanish",
+    "description": "Savol, taklif yoki yordam kerak bo‘lsa, quyidagi formani to‘ldiring.",
+    "form": {
+      "name": "Ismingiz",
+      "phone": "Telefon raqami",
+      "message": "Xabaringiz"
+    },
+    "send": "Yuborish",
+    "success": "Xabaringiz muvaffaqiyatli yuborildi!",
+    "error": "Xabar yuborishda xatolik yuz berdi",
+    "validation": {
+      "name": "Ism kamida 2 ta belgidan iborat bo‘lishi kerak",
+      "phone": "Telefon raqami noto‘g‘ri formatda",
+      "message": "Xabaringiz kamida 5 ta belgidan iborat bo‘lishi kerak"
+    }
   },
   "common": {
     "loading": "Yuklanmoqda...",

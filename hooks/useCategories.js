@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getData } from '@/actions/get'; // sizning getData funksiyangiz
+import { getData } from '@/actions/get'; // sizning 5 funksiyangiz
 
 export function useCategories() {
   const [topCategories, setTopCategories] = useState([]);

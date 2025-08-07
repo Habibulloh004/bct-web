@@ -313,7 +313,7 @@
   },
   "category": {
     "title": "Mobile Computers",
-    "notFound":"Category not found",
+    "notFound": "Category not found",
     "sort": {
       "label": "Sort by:",
       "popularity": "By popularity",
@@ -398,6 +398,51 @@
     "dialog_title": "Search products",
     "input_placeholder": "Enter product name...",
     "no_results": "No results found."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "We respect users' privacy rights. This policy explains how we collect, use, and protect your personal data.",
+    "sections": {
+      "dataCollection": "1. Data Collection",
+      "usage": "2. Use of Data",
+      "sharing": "3. Sharing with Third Parties",
+      "security": "4. Data Security",
+      "rights": "5. User Rights"
+    },
+    "dataCollectionContent": "We collect personal data such as name, phone number, and email when you register or contact us.",
+    "usageContent": "Collected data is used for communication, service improvement, and security.",
+    "sharingContent": "We do not sell your data. It may be shared only under legal requests or for safety reasons.",
+    "securityContent": "We take all necessary technical and organizational measures to secure your data.",
+    "rightsContent": "You have the right to access, edit, or delete your data."
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "intro": "By using our service, you agree to the following terms.",
+    "sections": {
+      "acceptance": "1. Acceptance of Terms",
+      "changes": "2. Changes to Terms",
+      "limitation": "3. Limitation of Liability"
+    },
+    "acceptanceContent": "If you do not agree with the terms, please do not use our service.",
+    "changesContent": "We reserve the right to modify these terms at any time. Updates will be posted on the site.",
+    "limitationContent": "We are not responsible for any direct or indirect damages related to the use of our services."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "If you have any questions, suggestions, or need help — please fill out the form below.",
+    "form": {
+      "name": "Your Name",
+      "phone": "Phone Number",
+      "message": "Message"
+    },
+    "send": "Send",
+    "success": "Your message has been sent successfully!",
+    "error": "Failed to send your message",
+    "validation": {
+      "name": "Name must be at least 2 characters long",
+      "phone": "Invalid phone number format",
+      "message": "Message must be at least 5 characters long"
+    }
   },
   "common": {
     "loading": "Loading...",

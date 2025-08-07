@@ -7,8 +7,6 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'q-bit.uz',
-        port: '',
-        pathname: '/**',
       },
       // Development - localhost:8080 (ADD THIS)
       {
