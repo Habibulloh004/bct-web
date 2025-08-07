@@ -120,10 +120,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
-                  href="/faq"
+                  href="/warranty-check"
                   className='text-sm md:text-base text-gray-600 hover:text-blue-600 transition-colors duration-200'
                 >
-                  {t('footer.links.faq')}
+                  {t('header.warrantyCheck')}
                 </Link>
               </li>
             </ul>
