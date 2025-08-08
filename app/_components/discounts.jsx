@@ -9,7 +9,7 @@ import ProductItem from './productItem'
 import { useTranslation } from 'react-i18next'
 
 export default function Discounts({ products }) {
-  const productsData =products?.data?.filter((pr) => pr?.discount)
+  const productsData =products?.data
   const { t } = useTranslation();
   if (productsData?.length > 0) {
     return (

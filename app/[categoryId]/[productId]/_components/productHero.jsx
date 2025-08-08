@@ -35,7 +35,7 @@ export default function ProductHero({ item }) {
     <main className="bg-[#F0F0F0] pt-10">
       <div className="max-w-[1440px] w-11/12 mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
         {/* Left content */}
-        <div className="flex flex-col md:items-start gap-4">
+        <div className="w-full flex flex-col md:items-start gap-4">
           <div>
             <p className="text-sm text-gray-600">{getTranslatedValue(item?.category_name, i18n.language)}</p>
             <h1 className="text-2xl md:text-4xl font-bold">{getTranslatedValue(item?.name, i18n.language)}</h1>
@@ -53,7 +53,7 @@ export default function ProductHero({ item }) {
             }}
             className="md:hidden w-full text-secondary"
           >
-            <CarouselContent className="my-0 py-0 px-2 md:px-4 lg:px-8 lg:gap-8">
+            <CarouselContent className="w-full my-0 py-0 px-2 md:px-4 lg:px-8 lg:gap-8">
               {(item.image).map((item, i) => {
                 return (
                   <CarouselItem key={i} className="">

@@ -20,7 +20,7 @@ export default async function HomePage() {
   });
 
   let products = await getData({
-    endpoint: `/api/products?page=${1}&limit=10`,
+    endpoint: `/api/products?page=${1}&limit=20`,
     tag: ['categories', "products", "top-categories"],
     revalidate: 3600
   })
