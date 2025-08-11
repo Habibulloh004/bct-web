@@ -82,7 +82,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="drop-shadow-[0_0_6px_rgba(255,255,255,0.8)] z-[998] bg-white fixed top-0 left-0 w-screen h-20 flex justify-center items-center">
+      <header className="drop-shadow-[0_0_6px_rgba(0,0,0,0.7)]  z-[998] bg-white fixed top-0 left-0 w-screen h-20 flex justify-center items-center">
         <div className="w-full h-full relative">
           <Image
             src="/images/background1.jpg"
