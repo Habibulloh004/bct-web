@@ -9,7 +9,7 @@ export default function WarrantyCheck() {
   const { t } = useTranslation();
 
   return (
-    <div className="pt-24 md:pt-32 mx-auto max-w-5xl w-11/12 px-4">
+    <div className="pt-24 mx-auto max-w-5xl w-11/12 px-4">
       <div className="flex justify-center mb-6 md:mb-8">
         <h1 className="text-xl md:text-2xl font-bold">{t('warrantyCheck.title')}</h1>
       </div>

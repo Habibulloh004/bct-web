@@ -62,7 +62,7 @@ const mapSrc = `https://yandex.com/map-widget/v1/?um=constructor%3Aec2b7bd9dcb27
 
 
   return (
-    <div className="pt-24 md:pt-32 max-w-5xl mx-auto px-4 py-12 space-y-8">
+    <div className="pt-24 max-w-5xl mx-auto px-4 py-12 space-y-8">
       <div>
         <h1 className="text-3xl font-bold mb-4">{t("contact.title")}</h1>
         <p className="text-muted-foreground">{t("contact.description")}</p>

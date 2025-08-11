@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/pagination";
 import { cn } from "@/lib/utils";
 
-export default function PaginationComponent({ url, currentPage, totalPages, totalPagesCount }) {
+export default function PaginationComponent({limit, url, currentPage, totalPages, totalPagesCount }) {
   const router = useRouter();
 
   const handlePageChange = (newPage) => {
@@ -56,7 +56,7 @@ export default function PaginationComponent({ url, currentPage, totalPages, tota
   pages = pages.filter((p) => p === "..." || (p >= 1 && p <= totalPages));
 
   // Hide pagination if total items are too few
-  if (totalPagesCount <= 12) {
+  if (totalPagesCount <= limit) {
     return null;
   }
 

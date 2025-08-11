@@ -8,7 +8,7 @@ export default function TermsOfService() {
   const { t } = useTranslation();
 
   return (
-    <div className="pt-24 md:pt-32 max-w-5xl mx-auto px-4 py-12 space-y-6">
+    <div className="pt-24 max-w-5xl mx-auto px-4 py-12 space-y-6">
       <Card>
         <CardHeader>
           <CardTitle>{t("terms.title")}</CardTitle>

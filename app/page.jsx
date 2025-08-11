@@ -27,7 +27,7 @@ export default async function HomePage() {
   console.log({ banners, categories, products })
 
   return (
-    <main className='pt-24 md:pt-32 font-poppins'>
+    <main className='pt-24 font-poppins'>
       <Banner banners={banners?.data} />
       <Category categories={categories?.data} />
       <Discounts products={products} />

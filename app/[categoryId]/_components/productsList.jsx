@@ -14,7 +14,7 @@ import PaginationComponent from "./paginationComponent";
 import { getTranslatedValue } from "@/lib/functions";
 import { useTranslation } from "react-i18next";
 
-export default function ProductsList({ categoryData, page, products }) {
+export default function ProductsList({url, limit, categoryData, page, products }) {
   const { t, i18n } = useTranslation();
 
   const sortOptions = [
@@ -41,7 +41,7 @@ export default function ProductsList({ categoryData, page, products }) {
     setOpen(false);
   };
 
-  const totalPages = Math.ceil(products.total / products.limit);
+  const totalPages = Math.ceil(products.total / limit);
 
   const sortedProducts = useMemo(() => {
     if (!products?.data) return [];
@@ -109,9 +109,8 @@ export default function ProductsList({ categoryData, page, products }) {
                 <DropdownMenuItem
                   key={option.value}
                   onClick={() => handleSelect(option)}
-                  className={`cursor-pointer ${
-                    selected.value === option.value ? "bg-muted" : ""
-                  }`}
+                  className={`cursor-pointer ${selected.value === option.value ? "bg-muted" : ""
+                    }`}
                 >
                   {option.label}
                 </DropdownMenuItem>
@@ -124,7 +123,7 @@ export default function ProductsList({ categoryData, page, products }) {
       <Separator />
 
       {sortedProducts.length > 0 ? (
-        <div className="pt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="pt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4">
           {sortedProducts.map((item, index) => (
             <ProductItem item={item} key={index} />
           ))}
@@ -136,7 +135,8 @@ export default function ProductsList({ categoryData, page, products }) {
       )}
 
       <PaginationComponent
-        url="/products"
+        limit={limit}
+        url={url ? url : `/${categoryData?.id}`}
         currentPage={page}
         totalPages={totalPages}
         totalPagesCount={products.total}

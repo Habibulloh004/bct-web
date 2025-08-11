@@ -69,7 +69,7 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="pt-32 flex justify-center items-center min-h-screen">
+      <div className="pt-24 flex justify-center items-center min-h-screen">
         <div className="animate-pulse">
           <div className="text-lg">{t('common.loading') || 'Loading...'}</div>
         </div>
@@ -79,7 +79,7 @@ export default function ProfilePage() {
 
   if (!userData) {
     return (
-      <div className="pt-32 flex justify-center items-center min-h-screen">
+      <div className="pt-24 flex justify-center items-center min-h-screen">
         <div className="text-center">
           <div className="text-lg text-red-600">{t('profile.error') || 'Error loading profile'}</div>
           <Button 
@@ -94,7 +94,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="pt-24 md:pt-32 min-h-screen bg-gray-50">
+    <div className="pt-24 min-h-screen bg-gray-50">
       <div className="w-11/12 max-w-4xl mx-auto px-4 py-8">
 
         {/* Header */}

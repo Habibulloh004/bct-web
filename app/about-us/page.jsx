@@ -12,7 +12,7 @@ export default function AboutUs() {
   const { t } = useTranslation();
 
   return (
-    <main className='pt-32 md:pt-40 space-y-4'>
+    <main className='pt-24 md:pt-40 space-y-4'>
       <div className='flex flex-col lg:flex-row max-w-[1440px] mx-auto w-11/12 space-y-6 lg:space-y-0 lg:space-x-4'>
         <div className='w-full lg:w-1/3 flex flex-col items-center lg:items-start'>
           <Image 

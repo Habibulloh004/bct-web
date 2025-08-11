@@ -35,7 +35,7 @@ export default function Cart() {
   const total = useMemo(() => getTotalPrice(), [items, getTotalPrice]);
 
   return (
-    <main className="pt-24 md:pt-32 w-11/12 2xl:w-9/12 mx-auto max-w-[1440px] space-y-4">
+    <main className="pt-24 w-11/12 2xl:w-9/12 mx-auto max-w-[1440px] space-y-4">
       <div className="flex justify-center items-center">
         <h1 className="text-center font-bold text-xl md:text-2xl">{t('cart.title')}</h1>
       </div>

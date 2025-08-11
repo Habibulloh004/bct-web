@@ -102,7 +102,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="pt-24 md:pt-32 h-full w-11/12 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pt-24 h-full w-11/12 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
       {/* Language Switcher */}
       <div className="flex justify-end mb-4">
         <LanguageSwitcher />

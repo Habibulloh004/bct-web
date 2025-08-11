@@ -2,16 +2,24 @@
 
 import CustomImage from "@/components/shared/customImage";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import { getTranslatedValue } from "@/lib/functions";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useCartStore } from "@/store/useCartStore";
 import { formatNumber, imageUrl } from "@/lib/utils";
+import Autoplay from "embla-carousel-autoplay";
 
 export default function ProductItem({ item }) {
   const { i18n } = useTranslation();
   const router = useRouter();
+
+  const [isHovered, setIsHovered] = useState(false);
 
   const addProduct = (product) => {
     useCartStore.getState().addItem(product);
@@ -32,26 +40,47 @@ export default function ProductItem({ item }) {
     router.push(`/${item?.category_id}/${item?.id}`);
   };
 
+  // Autoplay plugin - only when hovered
+  const autoplayPlugin = React.useRef(
+    Autoplay({
+      delay: 2000,
+      stopOnInteraction: false,
+      stopOnMouseEnter: false
+    })
+  );
+
+  const handleMouseEnter = () => {
+    if (item?.image?.length > 1) {
+      setIsHovered(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const hasMultipleImages = item?.image?.length > 1;
+
   return (
     <div
       onClick={goToDetails}
-      className="cursor-pointer bg-[#EBEBEB99] rounded-2xl p-4 flex gap-4"
+      className="flex-col-reverse cursor-pointer bg-[#EBEBEB99] rounded-2xl p-4 flex gap-4 hover:shadow-lg transition-all duration-300 hover:bg-[#E5E5E599]"
     >
-      <div className="flex flex-col justify-between gap-2 w-full min-h-[200px] p-2">
+      <div className="flex flex-col justify-between gap-2 w-full h-full p-2">
         <div className="space-y-1">
           <h1 className="text-base font-semibold">
             {getTranslatedValue(item?.name || "", i18n.language)}
           </h1>
           <p className="text-sm text-red-500">{getTranslatedValue(item?.top_category_name || "POS система***POS система***POS система", i18n?.language)}</p>
           <p className="text-sm text-muted-foreground line-clamp-3">
-            {getTranslatedValue(item?.ads_title || "", i18n.language)}
+            {getTranslatedValue(item?.description || "", i18n.language)}
           </p>
         </div>
 
         {!cartItem ? (
           <Button
             variant="default"
-            className="h-10 rounded-xl w-full"
+            className="h-10 rounded-xl w-full transition-all duration-200 hover:scale-105"
             onClick={(e) => {
               e.stopPropagation();
               addProduct(item);
@@ -62,13 +91,13 @@ export default function ProductItem({ item }) {
         ) : (
           <div
             onClick={(e) => e.stopPropagation()}
-            className="h-10 flex items-center justify-between w-full bg-black text-white px-4 py-2 rounded-xl"
+            className="h-10 flex items-center justify-between w-full bg-black text-white px-4 py-2 rounded-xl transition-all duration-200"
           >
             <Button
               variant="ghost"
               size="sm"
               onClick={() => decrement(item.id)}
-              className="text-xl px-2 text-white hover:bg-transparent hover:text-white"
+              className="text-xl px-2 text-white hover:bg-white/20 hover:text-white transition-all duration-200 rounded-lg"
             >
               −
             </Button>
@@ -77,7 +106,7 @@ export default function ProductItem({ item }) {
               variant="ghost"
               size="sm"
               onClick={() => increment(item.id)}
-              className="text-xl px-2 text-white hover:bg-transparent hover:text-white"
+              className="text-xl px-2 text-white hover:bg-white/20 hover:text-white transition-all duration-200 rounded-lg"
             >
               +
             </Button>
@@ -85,19 +114,66 @@ export default function ProductItem({ item }) {
         )}
       </div>
 
-      <div className="relative w-full h-full rounded-lg overflow-hidden">
-        <CustomImage
-          src={
-            item?.image?.length > 0
-              ? `${imageUrl}${item?.image[0]}`
-              : "/placeholder.svg"
-          }
-          alt="banner-img"
-          fill
-          loading="eager"
-          className="object-contain w-full h-full"
-          property="true"
-        />
+      <div
+        className="relative w-full h-full rounded-lg group"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {hasMultipleImages ? (
+          <Carousel
+            plugins={isHovered ? [autoplayPlugin.current] : []}
+            className="w-full h-full"
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+          >
+            <CarouselContent className="w-full h-full">
+              {item.image.map((img, index) => (
+                <CarouselItem key={index} className="w-full h-full">
+                  <div className="relative w-full h-full overflow-hidden rounded-md">
+                    <CustomImage
+                      src={`${imageUrl}${img}`}
+                      alt={`Product image ${index + 1}`}
+                      width={100}
+                      height={100}
+                      loading="eager"
+                      className="h-full sm:h-[100px] md:h-[150px] object-contain w-full transition-transform duration-300 group-hover:scale-105"
+                      property="true"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        ) : (
+          <div className="relative w-full h-full overflow-hidden rounded-md">
+            <CustomImage
+              src={
+                item?.image?.length > 0
+                  ? `${imageUrl}${item?.image[0]}`
+                  : "/placeholder.svg"
+              }
+              alt="Product image"
+              width={100}
+              height={100}
+              loading="eager"
+              className="h-full sm:h-[100px] md:h-[150px] object-contain w-full transition-transform duration-300 group-hover:scale-105"
+              property="true"
+            />
+          </div>
+        )}
+
+        {/* Multiple images indicator */}
+        {hasMultipleImages && (
+          <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm rounded-full p-1.5 shadow-sm">
+            <div className="flex space-x-0.5">
+              <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+              <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+              <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
