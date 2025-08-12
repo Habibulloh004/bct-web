@@ -29,9 +29,9 @@ export default async function HomePage() {
   return (
     <main className='pt-24 font-poppins'>
       <Banner banners={banners?.data} />
+      <Manufacturer />
       <Category categories={categories?.data} />
       <Discounts products={products} />
-      <Manufacturer />
       <AboutUs />
     </main>
   )

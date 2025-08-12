@@ -15,7 +15,7 @@ export default function Category({ categories }) {
       <main className='max-w-[1440px] mx-auto w-11/12 space-y-4' >
         <h1 className='text-center font-bold text-2xl'>{t("homePage.manufacturerTitle")}</h1>
         <Separator className={""} />
-        <div className='pt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
+        <div className='pt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4'>
           {categories?.slice()?.reverse()?.map((item, index) => (
             <CategoryItem item={item} key={index} />
           ))}

@@ -9,7 +9,7 @@ import { imageUrl } from "@/lib/utils";
 const Banner = ({ banners }) => {
   if (banners?.length > 0) {
     return (
-      <main className={"mx-auto w-full pb-3"}>
+      <main className={"max-w-[1992px] mx-auto w-full pb-3"}>
         <section className="flex items-center w-full justify-center h-full">
           {/* Mobile View */}
           <div className="bg-transparent rounded-xl w-full">

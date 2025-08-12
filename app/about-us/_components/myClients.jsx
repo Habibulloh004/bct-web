@@ -12,9 +12,9 @@ export default function MyClients() {
       <div className='flex justify-center items-center pt-5'>
         <h1 className='text-base md:text-lg font-semibold'>{t('aboutUs.clients.title')}</h1>
       </div>
-      <InfinityCard 
-        className={"gap-6"} 
-        classNameImage={"mr-6 aspect-[4/3] object-cover rounded-md"} 
+      <InfinityCard
+        className={"gap-6"}
+        classNameImage={"h-24 mr-6 object-contain rounded-md"}
         data={[{
           image: "/myClients/safia.jpg"
         }, {
@@ -22,8 +22,14 @@ export default function MyClients() {
         }, {
           image: "/myClients/safia.jpg"
         }, {
-          image: "/myClients/cafelito.png"
-        }]} 
+          image: "/myClients/poster.jpg"
+        }, {
+          image: "/myClients/possible.png"
+        }, {
+          image: "/myClients/point.png"
+        }, {
+          image: "/myClients/sewoo.png"
+        }]}
       />
     </div>
   )

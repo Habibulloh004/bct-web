@@ -14,8 +14,6 @@ export default async function Product({ params }) {
   return (
     <main className='pt-20 md:pt-24 font-poppins'>
       <ProductHero item={productData} />
-
-
       <ProductFeatures productData={productData} />
     </main>
   )

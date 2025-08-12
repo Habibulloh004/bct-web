@@ -5,16 +5,23 @@ import { useRouter } from "next/navigation";
 import { Marquee } from "../magicui/marquee";
 import { cn } from "@/lib/utils";
 
-export default function InfinityCard({ data, reverse = false, className, classNameImage, classNameImageContainer }) {
+export default function InfinityCard({
+  data,
+  reverse = false,
+  className,
+  classNameImage,
+  classNameImageContainer,
+  colorOnHover = false,
+}) {
   const router = useRouter();
+
   return (
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
       <Marquee reverse={reverse} pauseOnHover className={cn("[--duration:40s] gap-3", className)}>
         {data?.map((card, index) => (
           <div
-            onClick={() => router.push(`/brand/${card?.id}`)}
             key={index}
-            className={cn("relative w-full h-full", classNameImageContainer)}
+            className={cn("relative h-full", classNameImageContainer)}
           >
             <Image
               src={card?.image}
@@ -22,7 +29,15 @@ export default function InfinityCard({ data, reverse = false, className, classNa
               loading="eager"
               width={100}
               height={100}
-              className={cn("cursor-pointer w-full h-32 mr-4 object-contain", classNameImage)}
+              draggable={false}
+              className={cn(
+                // hamma rasm bir xil balandlikda, eni o'zidan kelib chiqadi
+                "cursor-pointer w-auto max-w-32 h-14 mr-4 object-contain",
+                colorOnHover
+                  ? "grayscale hover:grayscale-0 transition-[filter] duration-300 hover:scale-[1.1]"
+                  : "",
+                classNameImage
+              )}
             />
           </div>
         ))}

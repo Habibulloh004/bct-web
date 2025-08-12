@@ -83,23 +83,22 @@ export default function ProductHero({ item }) {
                 {t("product.checkWarranty")}
               </Button>
             </Link>
-            {cartItem && (
-              <div className="max-md:w-full bg-white rounded-md flex items-center px-4 py-2 gap-4 min-w-[200px] justify-between">
-                <button
-                  onClick={() => decrement(item?.id)}
-                  className="text-xl font-bold w-full"
-                >
-                  −
-                </button>
-                <span className="text-lg font-semibold">{cartItem.count}</span>
-                <button
-                  onClick={() => increment(item?.id)}
-                  className="w-full text-xl font-bold"
-                >
-                  +
-                </button>
-              </div>
-            )}
+            <div className="max-md:w-full bg-white rounded-md flex items-center px-4 py-2 gap-4 min-w-[200px] justify-between">
+              <button
+                disabled={!cartItem?.count}
+                onClick={() => decrement(item?.id)}
+                className="text-xl font-bold w-full"
+              >
+                −
+              </button>
+              <span className="text-lg font-semibold">{cartItem?.count || 0}</span>
+              <button
+                onClick={() => cartItem?.count ? increment(item?.id) : addProduct(item)}
+                className="w-full text-xl font-bold"
+              >
+                +
+              </button>
+            </div>
             <Button
               className="max-md:w-full bg-black text-white rounded-md h-11 px-4 py-2 gap-4 min-w-[200px]"
               onClick={() => addProduct(item)}
@@ -113,14 +112,9 @@ export default function ProductHero({ item }) {
         </div>
 
         {/* Center check warranty button (desktop only) */}
-        <Link href="/warranty-check" className="hidden lg:block">
-          <Button className="bg-white text-black px-6 py-2 rounded-md border h-11 hover:bg-transparent cursor-pointer">
-            {t("product.checkWarranty")}
-          </Button>
-        </Link>
 
         {/* Right images */}
-        <div className="hidden md:flex gap-2">
+        <div className="w-full hidden md:flex gap-2">
           {(item.image)?.slice(0, 2)?.map(
             (src, index) => (
               <div
