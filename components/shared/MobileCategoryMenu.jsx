@@ -1,108 +1,95 @@
 // components/MobileCategoryMenu.jsx
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { ChevronDown } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import { useCategories } from '@/hooks/useCategories';
-import { getTranslatedValue } from '@/lib/functions';
+import { useState } from "react";
+import Link from "next/link";
+import { ChevronDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { useCategories } from "@/hooks/useCategories";
+import { getTranslatedValue } from "@/lib/functions";
+import { imageUrl } from "@/lib/utils";
+import Image from "next/image";
 
 export default function MobileCategoryMenu({ onLinkClick }) {
-  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
-  const [expandedTopCategory, setExpandedTopCategory] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const { t, i18n } = useTranslation();
-  const { topCategories, getCategoriesByTopCategory, loading } = useCategories();
+  const { categories, loading, hasProducts } = useCategories();
 
-  const toggleCategories = () => {
-    setIsCategoriesOpen(!isCategoriesOpen);
-    if (!isCategoriesOpen) {
-      setExpandedTopCategory(null);
-    }
-  };
-
-  const toggleTopCategory = (topCategoryId) => {
-    setExpandedTopCategory(
-      expandedTopCategory === topCategoryId ? null : topCategoryId
-    );
-  };
+  const toggle = () => setIsOpen((v) => !v);
 
   return (
     <div className="border-b">
-      {/* Categories Header - Trigger */}
+      {/* Trigger */}
       <button
-        onClick={toggleCategories}
+        onClick={toggle}
         className="w-full flex items-center justify-between px-4 py-4 text-left hover:bg-gray-50 transition-colors"
       >
-        <span className="font-medium text-gray-900">{t('header.categories')}</span>
+        <span className="font-medium text-gray-900">{t("header.categories")}</span>
         <ChevronDown
-          className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${isCategoriesOpen ? 'rotate-180' : ''
-            }`}
+          className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
         />
       </button>
 
-      {/* Categories Content */}
-      {isCategoriesOpen && (
+      {/* Content (desktopga mos — flat ro'yxat, rasm + nom, 'скоро' disabled) */}
+      {isOpen && (
         <div className="bg-gray-50">
           {loading ? (
             <div className="p-6 text-center">
-              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-300 mx-auto"></div>
-              <p className="mt-2 text-gray-500 text-sm">{t('common.loading')}</p>
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-300 mx-auto" />
+              <p className="mt-2 text-gray-500 text-sm">{t("common.loading")}</p>
             </div>
-          ) : topCategories.length === 0 ? (
-            <div className="p-4 text-center text-gray-500">
-              {t('category.notFound')}
-            </div>
+          ) : categories.length === 0 ? (
+            <div className="p-4 text-center text-gray-500">Категории не найдены</div>
           ) : (
-            <>
-              {topCategories.map((topCategory) => {
-                const subCategories = getCategoriesByTopCategory(topCategory.id);
-                const hasSubCategories = subCategories.length > 0;
-                const isExpanded = expandedTopCategory === topCategory.id;
+            <div className="py-2 max-h-[60vh] overflow-y-auto">
+              {categories
+                ?.slice()
+                ?.reverse()
+                ?.map((category) => {
+                  const enabled = hasProducts(category.id);
+                  const label = getTranslatedValue(category.name, i18n.language);
+                  const imgSrc =
+                    category?.image ? `${imageUrl}${category.image}` : "/placeholder.svg";
 
-                return (
-                  <div key={topCategory.id} className="border-b border-gray-200 last:border-b-0">
-                    {hasSubCategories ? (
-                      <>
-                        {/* Top Category with Subcategories - Clickable */}
-                        <button
-                          onClick={() => toggleTopCategory(topCategory.id)}
-                          className="w-full flex items-center justify-between px-4 py-3 text-left text-gray-700 hover:bg-gray-100 transition-colors"
-                        >
-                          <span className="font-medium">{getTranslatedValue(topCategory.name,i18n.language)}</span>
-                          <ChevronDown
-                            className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''
-                              }`}
-                          />
-                        </button>
-
-                        {/* Subcategories */}
-                        {isExpanded && (
-                          <div className="bg-white border-l-4 border-gray-300 ml-4">
-                            {subCategories.map((category) => (
-                              <Link
-                                key={category.id}
-                                href={`/${category.id}`}
-                                onClick={onLinkClick}
-                                className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-800 transition-colors border-b border-gray-100 last:border-b-0"
-                              >
-                                {getTranslatedValue(category.name, i18n.language)}
-                              </Link>
-                            ))}
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      /* Top Category without Subcategories - Disabled */
-                      <div className="flex items-center justify-between px-4 py-3 text-gray-400">
-                        <span>{getTranslatedValue(topCategory.name,i18n.language)}</span>
-                        <span className="text-xs">(скоро)</span>
+                  return enabled ? (
+                    <Link
+                      key={category.id}
+                      href={`/${category.id}`}
+                      onClick={onLinkClick}
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-100 transition-colors"
+                    >
+                      <Image
+                        src={imgSrc}
+                        width={30}
+                        height={30}
+                        alt={label || "image"}
+                        className="w-[30px] h-[30px] object-contain"
+                      />
+                      <span className="font-medium">{label}</span>
+                    </Link>
+                  ) : (
+                    <div
+                      key={category.id}
+                      className="flex items-center justify-between px-4 py-3 text-gray-400 cursor-not-allowed select-none"
+                      title="Скоро"
+                    >
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src={imgSrc}
+                          width={30}
+                          height={30}
+                          alt={label || "image"}
+                          className="w-[30px] h-[30px] object-contain"
+                        />
+                        <span className="font-medium">{label}</span>
                       </div>
-                    )}
-                  </div>
-                );
-              })}
-            </>
+                      <span className="text-xs">(скоро)</span>
+                    </div>
+                  );
+                })}
+            </div>
           )}
         </div>
       )}
