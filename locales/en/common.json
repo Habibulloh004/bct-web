@@ -444,6 +444,14 @@
       "message": "Message must be at least 5 characters long"
     }
   },
+   "error": {
+    "badge": "Error",
+    "title": "An error occurred while loading the page",
+    "description": "Please try again or return to the home page.",
+    "retry": "Try again",
+    "home": "Home",
+    "details": "Details"
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error",

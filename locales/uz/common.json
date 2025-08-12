@@ -444,6 +444,14 @@
       "message": "Xabaringiz kamida 5 ta belgidan iborat bo‘lishi kerak"
     }
   },
+  "error": {
+    "badge": "Xatolik",
+    "title": "Sahifa yuklanayotganda xatolik yuz berdi",
+    "description": "Iltimos, qayta urinib ko‘ring yoki bosh sahifaga qayting.",
+    "retry": "Qayta urinish",
+    "home": "Bosh sahifa",
+    "details": "Tafsilotlar"
+  },
   "common": {
     "loading": "Yuklanmoqda...",
     "error": "Xatolik",
