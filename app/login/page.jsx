@@ -13,11 +13,13 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 import Link from 'next/link';
 import { loginUser } from "@/actions/post";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "@/store/useUserStore";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const router = useRouter();
+  const { setUser } = useUserStore();
   
   // Dynamic validation schema with translations
   const LoginValidation = z.object({
@@ -60,10 +62,8 @@ export default function LoginPage() {
       if (result.success) {
         console.log('User logged in successfully:', JSON.stringify(result.data));
         
-        // Safe localStorage access
-        if (typeof window !== "undefined") {
-          localStorage.setItem("userData", JSON.stringify(result.data));
-        }
+        // ✅ Zustand store'ga saqlash (localStorage o'rniga)
+        setUser(result.data);
         
         // Dismiss loading toast
         toast.dismiss(loadingToast);

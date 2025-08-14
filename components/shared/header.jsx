@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
-import { Menu, ShoppingCart, UserRound } from "lucide-react";
+import React, { useState } from "react";
+import { Menu, ShoppingCart } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import {
   Sheet,
@@ -18,16 +18,16 @@ import DesktopCategoryDropdown from "./DesktopCategoryDropdown";
 import MobileLanguageSwitcher from "../MobileLanguageSwitcher";
 import LanguageSwitcher from "../LanguageSwitcher";
 import { useCartStore } from "@/store/useCartStore";
+import { useUserStore } from "@/store/useUserStore";
 import SearchPopover from "./searchComponent";
 import ChatWidget from "../chat/ChatWidget";
 import BackToTop from "./BackToTop";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [userData, setUserData] = useState(null);
-  const [isClient, setIsClient] = useState(false);
   const { t, i18n } = useTranslation();
   const { items } = useCartStore();
+  const { user, isAuthenticated } = useUserStore();
 
   const languages = [
     { code: "ru", name: t("language.ru"), flag: "🇷🇺" },
@@ -37,22 +37,7 @@ export default function Header() {
 
   const currentLanguage = languages.find((lang) => lang.code === i18n.language) || languages[0];
 
-  useEffect(() => {
-    setIsClient(true);
-    if (typeof window !== "undefined") {
-      const storedUserData = localStorage.getItem("userData");
-      if (storedUserData) {
-        try {
-          setUserData(JSON.parse(storedUserData));
-        } catch (error) {
-          console.error("Error parsing userData:", error);
-        }
-      }
-    }
-  }, []);
-
   const handleMobileMenuClose = () => setMobileMenuOpen(false);
-  const handleLanguageChange = (langCode) => i18n.changeLanguage(langCode);
 
   return (
     <>
@@ -143,7 +128,6 @@ export default function Header() {
 
             {/* Cart */}
             <Link href="/cart" className="relative">
-
               <ShoppingCart size={24} className="text-[#464646] h-10 w-10 rounded-md p-2 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out" />
               {items.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
@@ -153,33 +137,31 @@ export default function Header() {
             </Link>
 
             {/* User */}
-            {isClient && (
-              userData?.id ? (
-                <Link href="/profile">
-                  <Button
-                    variant="none"
-                    className="h-10 w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
-                  >
-                    <Image
-                      loading="eager"
-                      src="/icons/user.svg"
-                      alt="User Icon"
-                      width={18}
-                      height={18}
-                      className="w-6 h-6"
-                    />
-                  </Button>
-                </Link>
-              ) : (
-                <Link href="/login">
-                  <Button
-                    variant="none"
-                    className="h-10 w-auto p-2 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
-                  >
-                    {t("login.buttons.submit")}
-                  </Button>
-                </Link>
-              )
+            {isAuthenticated && user?.id ? (
+              <Link href="/profile">
+                <Button
+                  variant="none"
+                  className="h-10 w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
+                >
+                  <Image
+                    loading="eager"
+                    src="/icons/user.svg"
+                    alt="User Icon"
+                    width={18}
+                    height={18}
+                    className="w-6 h-6"
+                  />
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/login">
+                <Button
+                  variant="none"
+                  className="h-10 w-auto p-2 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
+                >
+                  {t("login.buttons.submit")}
+                </Button>
+              </Link>
             )}
 
             {/* Language (desktop) */}

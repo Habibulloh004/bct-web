@@ -1,54 +1,35 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import {
   User,
   Mail,
   Phone,
-  Calendar,
-  Clock,
-  Edit2,
-  Shield,
   CheckCircle2,
-  Settings,
+  Shield,
   LogOut
 } from 'lucide-react';
 import { useOrderStore } from '@/store/useOrderStore';
+import { useUserStore } from '@/store/useUserStore';
 import OrderHistorySection from './_components/orderHistory';
 import { useRouter } from 'next/navigation';
 
 export default function ProfilePage() {
   const { t } = useTranslation();
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const orders = useOrderStore((state) => state.orders);
   const router = useRouter();
+  const orders = useOrderStore((state) => state.orders);
+  
+  // ✅ Zustand store'dan user ma'lumotlarini olish
+  const { user, isAuthenticated, clearUser } = useUserStore();
 
+  // ✅ Agar user login qilmagan bo'lsa, login sahifasiga yo'naltirish
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        // Safe localStorage access
-        if (typeof window !== "undefined") {
-          const storedData = localStorage.getItem("userData");
-          if (storedData) {
-            setUserData(JSON.parse(storedData));
-          } else {
-            // Redirect to login if no user data
-            router.push('/login');
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-        router.push('/login');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, [router]);
+    if (!isAuthenticated || !user) {
+      router.push('/login');
+    }
+  }, [isAuthenticated, user, router]);
 
   const getInitials = (name) => {
     if (!name) return '';
@@ -61,33 +42,17 @@ export default function ProfilePage() {
   };
 
   const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("userData");
-      router.push('/login');
-    }
+    // ✅ Zustand store'dan user ma'lumotlarini tozalash
+    clearUser();
+    router.push('/login');
   };
 
-  if (loading) {
+  // ✅ Loading holatini tekshirish
+  if (!isAuthenticated || !user) {
     return (
       <div className="pt-24 flex justify-center items-center min-h-screen">
         <div className="animate-pulse">
           <div className="text-lg">{t('common.loading') || 'Loading...'}</div>
-        </div>
-      </div>
-    );
-  }
-
-  if (!userData) {
-    return (
-      <div className="pt-24 flex justify-center items-center min-h-screen">
-        <div className="text-center">
-          <div className="text-lg text-red-600">{t('profile.error') || 'Error loading profile'}</div>
-          <Button 
-            className="mt-4"
-            onClick={() => router.push('/login')}
-          >
-            Go to Login
-          </Button>
         </div>
       </div>
     );
@@ -104,18 +69,18 @@ export default function ProfilePage() {
             {/* Avatar */}
             <div className="flex-shrink-0">
               <div className="w-24 h-24 bg-black text-white rounded-full flex items-center justify-center text-2xl font-semibold">
-                {getInitials(userData.name)}
+                {getInitials(user.name)}
               </div>
             </div>
 
             {/* User Info */}
             <div className="flex-1 text-center md:text-left">
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                {userData.name}
+                {user.name}
               </h1>
               {/* Status Badge */}
               <div className="flex justify-center md:justify-start">
-                {userData.is_active ? (
+                {user.is_active ? (
                   <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
                     <CheckCircle2 className="w-4 h-4" />
                     {t('profile.status.active') || 'Active Account'}
@@ -131,14 +96,14 @@ export default function ProfilePage() {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-3">
-              <Button
+              {/* <Button
                 variant="outline"
                 className="flex items-center gap-2"
-                onClick={() => {/* Handle edit profile */ }}
-              >
+                onClick={() => {/* Handle edit profile */}
+              {/* >
                 <Edit2 className="w-4 h-4" />
                 {t('profile.buttons.edit') || 'Edit Profile'}
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>
@@ -158,7 +123,7 @@ export default function ProfilePage() {
                 <User className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div className="flex-1">
                   <label className="text-sm text-gray-500">{t('profile.fields.full_name') || 'Full Name'}</label>
-                  <p className="font-medium">{userData.name}</p>
+                  <p className="font-medium">{user.name}</p>
                 </div>
               </div>
 
@@ -166,7 +131,7 @@ export default function ProfilePage() {
                 <Mail className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div className="flex-1">
                   <label className="text-sm text-gray-500">{t('profile.fields.email') || 'Email Address'}</label>
-                  <p className="font-medium">{userData.email}</p>
+                  <p className="font-medium">{user.email}</p>
                 </div>
               </div>
 
@@ -174,7 +139,7 @@ export default function ProfilePage() {
                 <Phone className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div className="flex-1">
                   <label className="text-sm text-gray-500">{t('profile.fields.phone') || 'Phone Number'}</label>
-                  <p className="font-medium">{userData.phone}</p>
+                  <p className="font-medium">{user.phone}</p>
                 </div>
               </div>
             </div>

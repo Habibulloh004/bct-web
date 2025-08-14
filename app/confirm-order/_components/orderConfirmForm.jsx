@@ -9,6 +9,7 @@ import CustomFormField, { FormFieldType } from "@/components/shared/customFormFi
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
 import { useCartStore } from "@/store/useCartStore";
+import { useUserStore } from "@/store/useUserStore";
 import { getTranslatedValue } from "@/lib/functions";
 import { formatNumber, getInitialsFromName } from "@/lib/utils";
 import { createOrder } from "@/actions/post";
@@ -20,9 +21,10 @@ import { useOrderStore } from "@/store/useOrderStore";
 export default function OrderConfirmForm() {
   const { t, i18n } = useTranslation();
   const { items, clearCart } = useCartStore();
+  const { user, isAuthenticated } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
-  const [orderSuccess, setOrderSuccess] = useState(false); // New state for success
-  const [orderData, setOrderData] = useState(null); // Store order data
+  const [orderSuccess, setOrderSuccess] = useState(false);
+  const [orderData, setOrderData] = useState(null);
   const router = useRouter();
 
   const OrderValidation = z.object({
@@ -41,7 +43,7 @@ export default function OrderConfirmForm() {
   const onSubmit = async (values) => {
     console.log("✅ Order form values:", values);
     console.log("✅ Cart items:", items);
-    const userData = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null;
+    
     // Validate that we have items in cart
     if (!items || items.length === 0) {
       toast.error(t('confirmOrder.errors.noItems') || 'Корзина пуста', {
@@ -63,7 +65,7 @@ export default function OrderConfirmForm() {
     try {
       // Prepare products array in the format expected by backend
       const products = items.map((item) => ({
-        product_id: item.id, // Make sure this matches your item structure
+        product_id: item.id,
         count: item.count || 1
       }));
 
@@ -73,19 +75,20 @@ export default function OrderConfirmForm() {
       const formData = new FormData();
       formData.append("phone", values.phone.trim());
       formData.append("pay_type", values.paymentType);
-      formData.append("products", JSON.stringify(products)); // Convert to JSON string
-      if (userData) {
-        formData.append("client_id", userData?.id); // Empty for guest orders
+      formData.append("products", JSON.stringify(products));
+      
+      // ✅ Zustand store'dan user ID olish (localStorage o'rniga)
+      if (isAuthenticated && user?.id) {
+        formData.append("client_id", user.id.toString());
       } else {
         formData.append("client_id", ""); // Empty for guest orders
-
       }
 
       console.log("✅ FormData contents:", {
         phone: values.phone.trim(),
         pay_type: values.paymentType,
         products: JSON.stringify(products),
-        client_id: ""
+        client_id: isAuthenticated && user?.id ? user.id.toString() : ""
       });
 
       const response = await createOrder(formData);
@@ -101,7 +104,7 @@ export default function OrderConfirmForm() {
           paymentType: values.paymentType,
           items: [...items],
           totalAmount: items.reduce((total, item) => total + (item.price * item.count), 0),
-          created_at: new Date().toISOString() // ixtiyoriy vaqt belgilash
+          created_at: new Date().toISOString()
         });
 
         // Show success toast
@@ -131,7 +134,6 @@ export default function OrderConfirmForm() {
       } else {
         const errorMessage = response?.error || 'Не удалось создать заказ. Попробуйте еще раз.';
         console.error('❌ Order creation failed:', errorMessage);
-
         throw new Error(errorMessage);
       }
 
@@ -174,7 +176,7 @@ export default function OrderConfirmForm() {
   const handleReturnToMenu = () => {
     setOrderSuccess(false);
     setOrderData(null);
-    router.push('/'); // Navigate to home page
+    router.push('/');
   };
 
   const paymentOptions = [
@@ -263,14 +265,6 @@ export default function OrderConfirmForm() {
               <Home className="w-4 h-4" />
               {t('confirmOrder.success.returnToMenu') || 'Вернуться в меню'}
             </Button>
-
-            {/* <Button
-              onClick={() => router.push('/catalog')}
-              variant="outline"
-              className="h-12 px-8 border-gray-300 hover:bg-gray-50"
-            >
-              {t('confirmOrder.success.continueShopping') || 'Продолжить покупки'}
-            </Button> */}
           </div>
         </div>
       </div>

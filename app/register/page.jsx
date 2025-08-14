@@ -12,11 +12,14 @@ import { Loader2 } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "@/store/useUserStore";
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { t, ready } = useTranslation();
-  const router = useRouter()
+  const router = useRouter();
+  const { setUser } = useUserStore();
+  
   // Dynamic validation schema with translations
   const RegisterValidation = useMemo(() => {
     if (!ready) return z.object({}); // Return empty schema if translations not ready
@@ -63,8 +66,14 @@ export default function RegisterPage() {
       // Server action chaqirish
       const result = await registerUser(formData);
       console.log("Registration result:", result);
+      
       if (result.success) {
         console.log('Client created successfully:', result.data);
+
+        // ✅ Zustand store'ga saqlash (localStorage o'rniga)
+        if (result.data) {
+          setUser(result.data);
+        }
 
         // Loading toast'ni dismiss qilish
         toast.dismiss(loadingToast);
@@ -77,7 +86,9 @@ export default function RegisterPage() {
 
         // Formani tozalash
         form.reset();
-        router.push("/login")
+        
+        // Profile sahifasiga yo'naltirish (login o'rniga)
+        router.push("/profile");
 
       } else {
         throw new Error(result.error);
