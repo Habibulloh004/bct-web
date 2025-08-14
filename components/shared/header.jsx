@@ -95,15 +95,21 @@ export default function Header() {
             </div>
 
             {/* Logo */}
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center shrink-0">
               <Image
                 src="/logo.png"
-                className="w-[100px] max-md:w-[75px] p-1 sm:p-2 rounded-md bg-white"
                 alt="Logo"
                 width={100}
-                height={100}
+                height={60}
+                priority
+                className="w-[100px] h-[60px] max-md:w-[75px] max-md:h-[45px] p-1 sm:p-2 rounded-md bg-white object-contain"
+                style={{
+                  maxWidth: '100px',
+                  maxHeight: '60px'
+                }}
               />
             </Link>
+
 
             <div className="hidden lg:flex items-center gap-8">
               <DesktopCategoryDropdown />
