@@ -17,7 +17,7 @@ export default function SearchComponent() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  
+
   const { i18n, t } = useTranslation();
   const router = useRouter();
   const wrapperRef = useRef(null);
@@ -49,7 +49,7 @@ export default function SearchComponent() {
 
     if (query.trim().length >= 2) {
       setLoading(true);
-      
+
       debounceRef.current = setTimeout(async () => {
         try {
           const data = await getData({
@@ -121,13 +121,11 @@ export default function SearchComponent() {
 
   // Search trigger button
   const SearchTrigger = () => (
-    <button
+
+    <Search
       onClick={handleOpen}
-      className="h-8 w-8 sm:h-10 sm:w-10 p-1 bg-white hover:bg-white/90 rounded-md border flex justify-center items-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      aria-label="Open search"
-    >
-      <Search className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
-    </button>
+
+      size={24} className="text-[#464646] h-10 w-10 rounded-md p-2 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out" />
   );
 
   // Loading skeleton
@@ -194,13 +192,13 @@ export default function SearchComponent() {
   return (
     <div className="relative" ref={wrapperRef}>
       <SearchTrigger />
-      
+
       {isOpen && (
         <>
           {/* Desktop Dropdown */}
-          <div className="hidden md:block absolute right-0 top-full mt-2 w-96 max-w-[90vw] bg-white border border-gray-200 rounded-lg shadow-xl z-50 overflow-hidden">
+          <div className="hidden md:block absolute right-11 -top-0 w-80 md:w-96 max-w-[90vw] bg-white border border-gray-200 rounded-lg shadow-xl z-50 overflow-hidden">
             {/* Header */}
-            <div className="flex items-center gap-2 p-3 border-b bg-gray-50">
+            <div className="cursor-pointer flex items-center gap-2 px-3 py-2 h-10 border-b bg-gray-50">
               <Search className="w-4 h-4 text-gray-400 shrink-0" />
               <input
                 ref={inputRef}
@@ -238,7 +236,7 @@ export default function SearchComponent() {
               >
                 <X className="w-5 h-5 text-gray-600" />
               </button>
-              
+
               <div className="flex items-center gap-2 flex-1 bg-gray-50 rounded-lg px-3 py-2">
                 <Search className="w-4 h-4 text-gray-400 shrink-0" />
                 <input

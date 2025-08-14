@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { Menu } from "lucide-react";
+import { Menu, ShoppingCart } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import {
   Sheet,
@@ -143,19 +143,8 @@ export default function Header() {
 
             {/* Cart */}
             <Link href="/cart" className="relative">
-              <Button
-                variant="none"
-                className="h-8 w-8 sm:h-10 sm:w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
-              >
-                <Image
-                  loading="eager"
-                  src="/icons/shop.png"
-                  alt="Cart Icon"
-                  width={18}
-                  height={18}
-                  className="sm:w-6 sm:h-6"
-                />
-              </Button>
+
+              <ShoppingCart size={24} className="text-[#464646] h-10 w-10 rounded-md p-2 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out" />
               {items.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
                   {items.length}
@@ -185,7 +174,7 @@ export default function Header() {
                 <Link href="/login">
                   <Button
                     variant="none"
-                    className="h-8 w-auto sm:h-10 sm:w-auto p-2 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
+                    className="h-10 w-auto p-2 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
                   >
                     {t("login.buttons.submit")}
                   </Button>
