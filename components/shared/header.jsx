@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { Menu, ShoppingCart } from "lucide-react";
+import { Menu, ShoppingCart, UserRound } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import {
   Sheet,
@@ -158,15 +158,15 @@ export default function Header() {
                 <Link href="/profile">
                   <Button
                     variant="none"
-                    className="h-8 w-8 sm:h-10 sm:w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
+                    className="h-10 w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
                   >
                     <Image
                       loading="eager"
-                      src="/icons/user.png"
+                      src="/icons/user.svg"
                       alt="User Icon"
                       width={18}
                       height={18}
-                      className="sm:w-6 sm:h-6"
+                      className="w-6 h-6"
                     />
                   </Button>
                 </Link>
