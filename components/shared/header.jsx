@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, ShoppingCart } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import {
@@ -19,15 +19,23 @@ import MobileLanguageSwitcher from "../MobileLanguageSwitcher";
 import LanguageSwitcher from "../LanguageSwitcher";
 import { useCartStore } from "@/store/useCartStore";
 import { useUserStore } from "@/store/useUserStore";
+import { initializeUserStore } from "@/lib/userMigration";
 import SearchPopover from "./searchComponent";
 import ChatWidget from "../chat/ChatWidget";
 import BackToTop from "./BackToTop";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const { t, i18n } = useTranslation();
   const { items } = useCartStore();
   const { user, isAuthenticated } = useUserStore();
+
+  // ✅ Client-side hydration tracking
+  useEffect(() => {
+    setIsClient(true);
+    initializeUserStore();
+  }, []);
 
   const languages = [
     { code: "ru", name: t("language.ru"), flag: "🇷🇺" },
@@ -94,22 +102,18 @@ export default function Header() {
               </Sheet>
             </div>
 
-            {/* Logo */}
+            {/* ✅ Stable Logo - no jumping */}
             <Link href="/" className="flex items-center shrink-0">
-              <Image
-                src="/logo.png"
-                alt="Logo"
-                width={100}
-                height={60}
-                priority
-                className="w-[100px] h-[60px] max-md:w-[75px] max-md:h-[45px] p-1 sm:p-2 rounded-md bg-white object-contain"
-                style={{
-                  maxWidth: '100px',
-                  maxHeight: '60px'
-                }}
-              />
+              <div className="header-logo">
+                <Image
+                  src="/logo.png"
+                  alt="Logo"
+                  width={100}
+                  height={60}
+                  priority
+                />
+              </div>
             </Link>
-
 
             <div className="hidden lg:flex items-center gap-8">
               <DesktopCategoryDropdown />
@@ -142,32 +146,36 @@ export default function Header() {
               )}
             </Link>
 
-            {/* User */}
-            {isAuthenticated && user?.id ? (
-              <Link href="/profile">
-                <Button
-                  variant="none"
-                  className="h-10 w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
-                >
-                  <Image
-                    loading="eager"
-                    src="/icons/user.svg"
-                    alt="User Icon"
-                    width={18}
-                    height={18}
-                    className="w-6 h-6"
-                  />
-                </Button>
-              </Link>
-            ) : (
-              <Link href="/login">
-                <Button
-                  variant="none"
-                  className="h-10 w-auto p-2 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
-                >
-                  {t("login.buttons.submit")}
-                </Button>
-              </Link>
+            {/* User - Only render after hydration */}
+            {isClient && (
+              <>
+                {isAuthenticated && user?.id ? (
+                  <Link href="/profile">
+                    <Button
+                      variant="none"
+                      className="h-10 w-10 p-1 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
+                    >
+                      <Image
+                        loading="eager"
+                        src="/icons/user.svg"
+                        alt="User Icon"
+                        width={18}
+                        height={18}
+                        className="w-6 h-6"
+                      />
+                    </Button>
+                  </Link>
+                ) : (
+                  <Link href="/login">
+                    <Button
+                      variant="none"
+                      className="h-10 w-auto p-2 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out"
+                    >
+                      {t("login.buttons.submit")}
+                    </Button>
+                  </Link>
+                )}
+              </>
             )}
 
             {/* Language (desktop) */}

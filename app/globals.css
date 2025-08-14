@@ -237,6 +237,66 @@ body {
   }
 }
 
+/* app/globals.css - Logo jumping'ni to'liq hal qilish */
+
+/* Hydration paytida layout shift'ni oldini olish */
+.header-logo {
+  width: 100px;
+  height: 60px;
+  min-width: 100px;
+  min-height: 60px;
+  max-width: 100px;
+  max-height: 60px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* Hydration jumps'ni oldini olish */
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .header-logo {
+    width: 75px;
+    height: 45px;
+    min-width: 75px;
+    min-height: 45px;
+    max-width: 75px;
+    max-height: 45px;
+  }
+}
+
+/* Logo image */
+.header-logo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  /* Image jumping'ni oldini olish */
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+/* Next.js Image component fix */
+.header-logo [data-nimg] {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+/* Hydration stability */
+.header-logo * {
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+}
 
 .input-phone>*::placeholder {
   color: #9ca3af;
