@@ -9,8 +9,14 @@ import { imageUrl } from "@/lib/utils";
 const Banner = ({ banners }) => {
   if (banners?.length > 0) {
     return (
-      <main className={"max-w-[1992px] mx-auto w-full pb-3"}>
-        <section className="flex items-center w-full justify-center h-full">
+      <main className={"max-w-[1440px] mx-auto w-full pb-3"}>
+        <section className="flex items-center w-full justify-center h-full relative">
+          {/* Chap oq shadow */}
+          <div className="max-md:hidden pointer-events-none absolute left-0 top-0 h-full w-6 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
+
+          {/* O‘ng oq shadow */}
+          <div className="max-md:hidden pointer-events-none absolute right-0 top-0 h-full w-6 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
+
           {/* Mobile View */}
           <div className="bg-transparent rounded-xl w-full">
             <Carousel

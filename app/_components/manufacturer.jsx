@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 export default function Manufacturer() {
   const { t } = useTranslation();
   return (
-    <div className='pb-4'>
+    <div className='pb-4 max-w-[1440px] mx-auto w-full'>
       <InfinityCard colorOnHover data={[{
         image: "/myClients/point.png"
       }, {
