@@ -19,7 +19,7 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="relative group">
-      <button className="h-10 bg-white flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-300 hover:bg-white/90 cursor-pointer transition-colors">
+      <button className="h-10 bg-primary text-white flex items-center gap-2 px-3 py-2 rounded-full border border-primary hover:bg-primary/90 cursor-pointer transition-colors">
         <Globe className="w-4 h-4" />
         <span className="text-sm font-medium">
           {languages.find(lang => lang.code === i18n.language)?.flag || '🌐'}

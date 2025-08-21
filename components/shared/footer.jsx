@@ -37,8 +37,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer className='w-full bg-[#F5F5F5] border-t border-gray-200 mt-16 md:mt-24'>
-      <div className='w-11/12 max-w-[1440px] mx-auto py-8 md:py-12'>
+    <footer className='w-full bg-[#F5F5F5] border-t border-gray-200'>
+      <div className='w-11/12 max-w-[1440px] mx-auto py-4'>
         
         {/* Main Content */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-8'>
@@ -52,20 +52,6 @@ export default function Footer() {
               <p className='text-sm md:text-base text-gray-600 leading-relaxed'>
                 {t('footer.company.address')}
               </p>
-              <div className='space-y-2'>
-                <p className='text-sm md:text-base text-gray-600'>
-                  <span className='font-medium'>{t('footer.company.phone')}:</span>{' '}
-                  <a href="tel:+998712345678" className='hover:text-blue-600 transition-colors'>
-                    +998 (71) 234-56-78
-                  </a>
-                </p>
-                <p className='text-sm md:text-base text-gray-600'>
-                  <span className='font-medium'>{t('footer.company.email')}:</span>{' '}
-                  <a href="mailto:info@bctechnologies.uz" className='hover:text-blue-600 transition-colors'>
-                    info@bctechnologies.uz
-                  </a>
-                </p>
-              </div>
             </div>
             
             {/* Social Links */}
@@ -156,10 +142,10 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className='border-t border-gray-300 pt-6'>
+        <div className=' border-gray-300'>
           {/* Copyright */}
-          <div className='flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left'>
-            <p className='text-sm text-gray-500'>
+          <div className='w-full flex justify-center items-center'>
+            <p className='text-md text-gray-500'>
               © {currentYear} {t('footer.company.name')}. {t('footer.copyright.text')}
             </p>
           </div>

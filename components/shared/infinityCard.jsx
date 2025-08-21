@@ -18,10 +18,10 @@ export default function InfinityCard({
   return (
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
       {/* Chapdagi gradient shadow */}
-      <div className="max-md:hidden pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
+      {/* <div className="max-md:hidden pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white via-white/80 to-transparent z-10" /> */}
       
       {/* O‘ngdagi gradient shadow */}
-      <div className="max-md:hidden pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
+      {/* <div className="max-md:hidden pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white via-white/80 to-transparent z-10" /> */}
 
       <Marquee reverse={reverse} pauseOnHover className={cn("[--duration:40s] gap-3", className)}>
         {data?.map((card, index) => (

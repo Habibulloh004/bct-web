@@ -125,7 +125,7 @@ export default function SearchComponent() {
     <Search
       onClick={handleOpen}
 
-      size={24} className="text-[#464646] h-10 w-10 rounded-md p-2 bg-white hover:bg-white/90 transition-all duration-150 cursor-pointer ease-in-out" />
+      size={24} className="text-white h-10 w-10 rounded-full p-2 bg-primary hover:bg-primary/90 transition-all duration-150 cursor-pointer ease-in-out" />
   );
 
   // Loading skeleton

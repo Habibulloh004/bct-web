@@ -444,6 +444,23 @@
       "message": "Xabaringiz kamida 5 ta belgidan iborat bo‘lishi kerak"
     }
   },
+  "banner": {
+    "company": {
+      "name": "BarCodeTechnologies",
+      "description": "\"Bar Code Technologies\" kompaniyasi 2006 yilda tashkil etilgan. Horeca va Retail sohasidagi yetakchi kompaniyalar bilan muvaffaqiyatli hamkorlik qiladi"
+    },
+    "buttons": {
+      "catalog": "Mahsulotlar katalogi",
+      "aboutUs": "Biz haqimizda batafsil"
+    },
+    "partners": {
+      "title": "Bizning hamkorlarimiz"
+    },
+    "promotion": {
+      "title": "3v1 Do'kon uchun to'plam",
+      "description": "Biznesingizni boshlash uchun kerak bo'lgan hamma narsa"
+    }
+  },
   "error": {
     "badge": "Xatolik",
     "title": "Sahifa yuklanayotganda xatolik yuz berdi",

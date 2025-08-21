@@ -444,7 +444,24 @@
       "message": "Message must be at least 5 characters long"
     }
   },
-   "error": {
+  "banner": {
+    "company": {
+      "name": "BarCodeTechnologies",
+      "description": "Bar Code Technologies company was founded in 2006. Successfully works with leading companies in the Horeca and Retail sectors"
+    },
+    "buttons": {
+      "catalog": "Product Catalog",
+      "aboutUs": "More about us"
+    },
+    "partners": {
+      "title": "Our Partners"
+    },
+    "promotion": {
+      "title": "3-in-1 Store Kit",
+      "description": "Everything you need to start your business"
+    }
+  },
+  "error": {
     "badge": "Error",
     "title": "An error occurred while loading the page",
     "description": "Please try again or return to the home page.",

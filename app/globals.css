@@ -66,6 +66,19 @@
   }
 }
 
+
+.font-poppins-regular {
+  font-family: var(--font-poppins-regular), sans-serif;
+  font-style: normal;
+}
+
+.font-poppins-italic {
+  font-family: var(--font-poppins-italic), sans-serif;
+  font-style: italic;
+}
+
+
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -74,7 +87,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.3852 0.0334 271.11);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -140,14 +153,37 @@
 }
 
 body {
-  font-family: var(--font-poppins);
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  background-color: white;
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  /* doim ekranga yopishib turadi */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/backgroundNoise.png');
+  background-repeat: repeat;
+  background-size: auto;
+  /* yoki cover xohlasa */
+  background-position: center;
+  opacity: 0.06;
+  /* 🔥 faqat image uchun */
+  z-index: -1;
+  /* kontent ustida turmasligi uchun */
+}
+
 
 /* src/app/globals.css yoki styles/globals.css */
 
 .scrollbar-custom {
   scrollbar-width: thin;
-  scrollbar-color: #FF0000 #f1f1f1;
+  scrollbar-color: #ec7676 #f1f1f1;
   /* thumb color, track color */
 }
 
@@ -208,7 +244,7 @@ body {
   /* dark:bg-input/30 */
   border: 1px solid #d1d5db;
   /* border-input, gray-300 */
-  height:  2.5rem;
+  height: 2.5rem;
   min-width: 0;
   border-radius: 0.375rem;
   /* rounded-md */
@@ -225,14 +261,14 @@ body {
 
 @media (min-width: 640px) {
   .input-phone>* {
-    height: 2.75rem!important;
+    height: 2.75rem !important;
     /* sm:h-11 = 44px */
   }
 }
 
 @media (min-width: 768px) {
   .input-phone>* {
-    height: 3rem!important;
+    height: 3rem !important;
     /* md:h-12 = 48px */
   }
 }
@@ -247,9 +283,7 @@ body {
   min-height: 60px;
   max-width: 100px;
   max-height: 60px;
-  padding: 4px 8px;
   border-radius: 6px;
-  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;

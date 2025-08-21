@@ -33,11 +33,15 @@ function Carousel({
   }, plugins)
   const [canScrollPrev, setCanScrollPrev] = React.useState(false)
   const [canScrollNext, setCanScrollNext] = React.useState(false)
+  const [current, setCurrent] = React.useState(0)
+  const [count, setCount] = React.useState(0)
 
   const onSelect = React.useCallback((api) => {
     if (!api) return
     setCanScrollPrev(api.canScrollPrev())
     setCanScrollNext(api.canScrollNext())
+    setCurrent(api.selectedScrollSnap())
+    setCount(api.scrollSnapList().length)
   }, [])
 
   const scrollPrev = React.useCallback(() => {
@@ -46,6 +50,10 @@ function Carousel({
 
   const scrollNext = React.useCallback(() => {
     api?.scrollNext()
+  }, [api])
+
+  const scrollTo = React.useCallback((index) => {
+    api?.scrollTo(index)
   }, [api])
 
   const handleKeyDown = React.useCallback((event) => {
@@ -84,8 +92,11 @@ function Carousel({
           orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
         scrollPrev,
         scrollNext,
+        scrollTo,
         canScrollPrev,
         canScrollNext,
+        current,
+        count,
       }}>
       <div
         onKeyDownCapture={handleKeyDown}
@@ -192,4 +203,200 @@ function CarouselNext({
   );
 }
 
-export { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext };
+// 1. Oddiy Dots - Active bo'lgani kattaroq
+function CarouselDots({
+  className,
+  dotClassName,
+  activeDotClassName,
+  ...props
+}) {
+  const { current, count, scrollTo } = useCarousel()
+
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-center gap-2 mt-4",
+        className
+      )}
+      data-slot="carousel-dots"
+      {...props}
+    >
+      {Array.from({ length: count }).map((_, index) => (
+        <button
+          key={index}
+          type="button"
+          className={cn(
+            "w-2 h-2 rounded-full transition-all duration-300 ease-in-out",
+            current === index
+              ? cn(
+                  "w-3 h-3 bg-primary scale-125 shadow-lg",
+                  activeDotClassName
+                )
+              : cn(
+                  "bg-muted-foreground/30 hover:bg-muted-foreground/50",
+                  dotClassName
+                ),
+          )}
+          onClick={() => scrollTo(index)}
+          aria-label={`Go to slide ${index + 1}`}
+        />
+      ))}
+    </div>
+  )
+}
+
+// 2. Long Dots - Active bo'lgani uzunroq
+function CarouselLongDots({
+  className,
+  dotClassName,
+  activeDotClassName,
+  ...props
+}) {
+  const { current, count, scrollTo } = useCarousel()
+
+  return (
+    <div
+      className={cn(
+        "absolute left-[40%] bottom-2 flex items-center justify-center gap-2 mt-4",
+        className
+      )}
+      data-slot="carousel-long-dots"
+      {...props}
+    >
+      {Array.from({ length: count }).map((_, index) => (
+        <button
+          key={index}
+          type="button"
+          className={cn(
+            "h-3 xl:h-2 rounded-full transition-all duration-500 ease-in-out",
+            current === index
+              ? cn(
+                  "w-8 bg-white shadow-md",
+                  activeDotClassName
+                )
+              : cn(
+                  "w-3 xl:w-2 bg-[#B8B8B8] hover:bg-muted-foreground/50 hover:w-4",
+                  dotClassName
+                ),
+          )}
+          onClick={() => scrollTo(index)}
+          aria-label={`Go to slide ${index + 1}`}
+        />
+      ))}
+    </div>
+  )
+}
+
+// 3. Progress Bar - Current slide progress
+function CarouselProgressBar({
+  className,
+  progressClassName,
+  trackClassName,
+  showNumbers = false,
+  ...props
+}) {
+  const { current, count } = useCarousel()
+  const progress = count > 0 ? ((current + 1) / count) * 100 : 0
+
+  return (
+    <div
+      className={cn(
+        "w-11/12 mx-auto mt-4 absolute z-10 bottom-1 md:bottom-5 px-2 ",
+        className
+      )}
+      data-slot="carousel-progress"
+      {...props}
+    >
+      {showNumbers && (
+        <div className="flex justify-between items-center mb-2 text-sm text-muted-foreground">
+          <span>{current + 1} / {count}</span>
+          <span>{Math.round(progress)}%</span>
+        </div>
+      )}
+      <div
+        className={cn(
+          "w-full h-1 md:h-2 bg-[#D9D9D9] rounded-full overflow-hidden",
+          trackClassName
+        )}
+      >
+        <div
+          className={cn(
+            "h-full bg-primary transition-all duration-500 ease-out rounded-full",
+            progressClassName
+          )}
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+    </div>
+  )
+}
+
+// Thumbnail Dots - Kichik rasmlar bilan
+function CarouselThumbnails({
+  className,
+  thumbnailClassName,
+  activeThumbnailClassName,
+  images = [],
+  renderThumbnail,
+  ...props
+}) {
+  const { current, count, scrollTo } = useCarousel()
+
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-center gap-2 mt-4",
+        className
+      )}
+      data-slot="carousel-thumbnails"
+      {...props}
+    >
+      {Array.from({ length: count }).map((_, index) => (
+        <button
+          key={index}
+          type="button"
+          className={cn(
+            "relative w-12 h-8 rounded overflow-hidden border-2 transition-all duration-300",
+            current === index
+              ? cn(
+                  "border-primary shadow-lg scale-110",
+                  activeThumbnailClassName
+                )
+              : cn(
+                  "border-muted-foreground/20 hover:border-muted-foreground/40 opacity-70 hover:opacity-90",
+                  thumbnailClassName
+                ),
+          )}
+          onClick={() => scrollTo(index)}
+          aria-label={`Go to slide ${index + 1}`}
+        >
+          {renderThumbnail ? (
+            renderThumbnail(index)
+          ) : images[index] ? (
+            <img
+              src={images[index]}
+              alt={`Thumbnail ${index + 1}`}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-muted flex items-center justify-center text-xs text-muted-foreground">
+              {index + 1}
+            </div>
+          )}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+export { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselPrevious, 
+  CarouselNext,
+  CarouselDots,
+  CarouselLongDots,
+  CarouselProgressBar,
+  CarouselThumbnails
+};

@@ -47,13 +47,13 @@ export default function DesktopCategoryDropdown() {
     <div className="relative" ref={dropdownRef}>
       {/* Trigger */}
       <Link href="/all-products"
-        className="flex items-center cursor-pointer text-white text-lg font-[400] hover:text-white/80 transition-colors"
+        className="flex items-center cursor-pointer text-primary text-lg font-[400] hover:text-primary/80 transition-colors"
         onMouseEnter={handleMainHoverEnter}
         onMouseLeave={handleMainHoverLeave}
       >
         {t('header.categories')}
         <ChevronDown
-          className={`ml-2 size-4 text-white transition-transform duration-200 ${isOpen ? 'rotate-180' : ''
+          className={`ml-2 size-4 text-primary transition-transform duration-200 ${isOpen ? 'rotate-180' : ''
             }`}
         />
       </Link>
