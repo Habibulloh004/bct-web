@@ -72,8 +72,12 @@ export default function ProductItem({ item }) {
             {getTranslatedValue(item?.name || "", i18n.language)}
           </h1>
           <p className="text-sm text-white/50 line-clamp-2">
-            {getTranslatedValue(item?.description || "", i18n.language)}
+            {getTranslatedValue(item?.ads_title || "", i18n.language)}
           </p>
+          {/* <div
+            className="w-full pt-4 text-white uppercase"
+            dangerouslySetInnerHTML={{ __html: getTranslatedValue(productData?.description, i18n.language) }}
+          /> */}
         </div>
 
         {!cartItem ? (
