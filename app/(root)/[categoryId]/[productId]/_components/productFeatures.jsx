@@ -13,7 +13,7 @@ export default function ProductFeatures({ productData }) {
         <p className='w-full md:w-2/3 text-center text-white pt-3'>{getTranslatedValue(productData?.ads_title, i18n.language)}</p>
         <div
           className="w-full pt-4 text-white uppercase"
-          dangerouslySetInnerHTML={{ __html: getTranslatedValue(productData?.description) }}
+          dangerouslySetInnerHTML={{ __html: getTranslatedValue(productData?.description, i18n.language) }}
         />
       </div>
     </div>

@@ -75,7 +75,7 @@ export default function Header() {
           <section className="max-w-[1440px] w-11/12 mx-auto grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-4">
             <div className="w-auto flex flex-col text-[11px] py-2 text-white">
               <h1>info@bctechnologies.uz</h1>
-              <p>Режим работы: ПН, ВТ, СР, ЧТ, СБ, ВС с 10:00 - 20:00 Выходной: ПТ</p>
+              <p>Режим работы: ПН, ВТ, СР, ЧТ с 09:00 - 18:00 Выходной: ПТ</p>
             </div>
             <div className="hidden md:flex justify-center items-center gap-1">
               <Button className="bg-white text-black hover:bg-white/90 h-auto p-0 px-3 py-1 text-[11px] rounded-full">

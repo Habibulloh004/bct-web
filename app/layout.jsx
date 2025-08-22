@@ -47,7 +47,7 @@ export default function RootLayout({ children }) {
           <UserMigrationProvider>
             <Header />
             <Toaster closeButton />
-            <div className="min-h-[calc(100vh-242px)]">{children}</div>
+            <div className="min-h-[calc(100vh-242px)] pb-4">{children}</div>
             <Footer />
           </UserMigrationProvider>
         </LanguageProvider>

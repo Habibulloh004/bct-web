@@ -19,8 +19,8 @@ export default function AboutUs() {
             loading="eager" 
             src="/logo.svg" 
             alt="About Us Logo" 
-            width={300} 
-            height={300} 
+            width={1000} 
+            height={1000} 
             className="mx-auto lg:mx-0 w-[200px] md:w-[250px] lg:w-[300px] h-auto" 
           />
           <Image 
