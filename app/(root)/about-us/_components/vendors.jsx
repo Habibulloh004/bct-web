@@ -1,5 +1,6 @@
 "use client";
 
+import { imageUrl } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -21,7 +22,7 @@ const VENDOR_LOGOS = [
   "/myClients/epg.jpg",
 ];
 
-export default function Vendors() {
+export default function Vendors({ vendors }) {
   const { t } = useTranslation();
 
   return (
@@ -34,13 +35,13 @@ export default function Vendors() {
 
       {/* GRID: centered last row items with responsive columns */}
       <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-        {VENDOR_LOGOS.map((src, i) => (
+        {vendors?.slice()?.reverse()?.map((src, i) => (
           <div
             key={i}
             className="flex items-center justify-center rounded-xl border bg-white/50 p-4 md:p-6 hover:shadow-md transition w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.67rem)] md:w-[calc(25%-0.75rem)] lg:w-[calc(20%-0.8rem)] xl:w-[calc(16.666%-1rem)]"
           >
             <Image
-              src={src}
+              src={src?`${imageUrl}${src?.image}`:"/placeholder.svg"}
               alt="vendor logo"
               width={240}
               height={80}

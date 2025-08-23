@@ -1,5 +1,6 @@
 "use client";
 
+import { imageUrl } from "@/lib/utils";
 import Image from "next/image";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,7 +16,7 @@ const PROJECT_IMAGES = [
   "/myProjects/2.jpg",
 ];
 
-export default function MyProjects() {
+export default function MyProjects({ projects }) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
@@ -73,7 +74,7 @@ export default function MyProjects() {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        {PROJECT_IMAGES.map((src, i) => (
+        {projects?.map((src, i) => (
           <button
             key={i}
             onClick={() => openAt(i)}
@@ -81,12 +82,13 @@ export default function MyProjects() {
           >
             <div className="relative w-full aspect-[16/9]">
               <Image
-                src={src}
+                src={src?.image ? `${imageUrl}${src?.image}` : "/placeholder.svg"}
                 alt={`project ${i + 1}`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 priority={i < 4}
+                loading="eager"
               />
             </div>
           </button>
@@ -129,6 +131,7 @@ export default function MyProjects() {
                 fill
                 className="object-contain"
                 sizes="90vw"
+                loading="eager"
                 priority
               />
 

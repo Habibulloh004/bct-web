@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Marquee } from "../magicui/marquee";
-import { cn } from "@/lib/utils";
+import { cn, imageUrl } from "@/lib/utils";
 
 export default function InfinityCard({
   data,
@@ -12,14 +12,15 @@ export default function InfinityCard({
   classNameImage,
   classNameImageContainer,
   colorOnHover = false,
+  type
 }) {
   const router = useRouter();
-
+  console.log({ data })
   return (
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
       {/* Chapdagi gradient shadow */}
       {/* <div className="max-md:hidden pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white via-white/80 to-transparent z-10" /> */}
-      
+
       {/* O‘ngdagi gradient shadow */}
       {/* <div className="max-md:hidden pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white via-white/80 to-transparent z-10" /> */}
 
@@ -30,7 +31,7 @@ export default function InfinityCard({
             className={cn("relative h-full", classNameImageContainer)}
           >
             <Image
-              src={card?.image}
+              src={type = "online" ? `${imageUrl}${card?.image}` : card?.image}
               alt="image"
               loading="eager"
               width={100}

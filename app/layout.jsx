@@ -5,6 +5,7 @@ import Footer from "@/components/shared/footer";
 import { Toaster } from "sonner";
 import LanguageProvider from "@/components/providers/LanguageProvider";
 import UserMigrationProvider from "@/components/providers/UserMigrationProvider";
+import { getData } from "@/actions/get";
 
 // Montserrat normal (umumiy)
 const poppins = Montserrat({
@@ -36,7 +37,14 @@ export const metadata = {
     "BCT Market – надежный онлайн-магазин мобильных телефонов, POS-терминалов, аксессуаров и другой современной техники. Быстрая доставка и гарантия качества!",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  let contact = await getData({
+    endpoint: `/api/contacts?page=1&limit=12`,
+    tag: ["contacts"],
+    revalidate: 3600
+  })
+  const contactInfo = contact?.data[0]
+  console.log(contactInfo)
   return (
     <html suppressHydrationWarning lang="en">
       <head>
@@ -45,10 +53,10 @@ export default function RootLayout({ children }) {
       <body className={`${poppins.variable} ${poppinsItalic.variable} ${poppinsRegular.variable} antialiased`}>
         <LanguageProvider>
           <UserMigrationProvider>
-            <Header />
+            <Header contactInfo={contactInfo} />
             <Toaster closeButton />
             <div className="min-h-[calc(100vh-242px)] pb-4">{children}</div>
-            <Footer />
+            <Footer contactInfo={contactInfo} />
           </UserMigrationProvider>
         </LanguageProvider>
       </body>

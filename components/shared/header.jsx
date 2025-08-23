@@ -23,8 +23,9 @@ import { initializeUserStore } from "@/lib/userMigration";
 import SearchPopover from "./searchComponent";
 import ChatWidget from "../chat/ChatWidget";
 import BackToTop from "./BackToTop";
+import { getTranslatedValue } from "@/lib/functions";
 
-export default function Header() {
+export default function Header({ contactInfo }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
@@ -37,7 +38,7 @@ export default function Header() {
   const topBarRef = useRef(null);
   const navRef = useRef(null);
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { items } = useCartStore();
   const { user, isAuthenticated } = useUserStore();
 
@@ -74,8 +75,8 @@ export default function Header() {
         <div ref={topBarRef} className="w-full bg-primary">
           <section className="max-w-[1440px] w-11/12 mx-auto grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-4">
             <div className="w-auto flex flex-col text-[11px] py-2 text-white">
-              <h1>info@bctechnologies.uz</h1>
-              <p>Режим работы: ПН, ВТ, СР, ЧТ с 09:00 - 18:00 Выходной: ПТ</p>
+              <h1>{contactInfo?.email ? contactInfo?.email : "info@bctechnologies.uz"}</h1>
+              <p>{contactInfo?.work_hours ? getTranslatedValue(contactInfo?.work_hours, i18n.language) : "Режим работы: ПН, ВТ, СР, ЧТ с 09:00 - 18:00 Выходной: ПТ"}</p>
             </div>
             <div className="hidden md:flex justify-center items-center gap-1">
               <Button className="bg-white text-black hover:bg-white/90 h-auto p-0 px-3 py-1 text-[11px] rounded-full">
@@ -92,10 +93,10 @@ export default function Header() {
               <Image src="/icons/Symbol.svg" alt="img" width={100} height={100} className="w-6 h-6" />
               <div className="flex flex-col">
                 <h1>Горячая линия 24/7</h1>
-                <p>+998 (71) 234-56-78</p>
+                <p>{contactInfo?.phone1 ? contactInfo?.phone1 : "+998 (71) 234-56-78"}</p>
               </div>
             </div>
-             <div className="hidden col-span-2 justify-center items-center gap-1">
+            <div className="hidden col-span-2 justify-center items-center gap-1">
               <Button className="bg-white text-black hover:bg-white/90 h-auto p-0 px-3 py-1 text-[11px] rounded-full">
                 Акция
               </Button>

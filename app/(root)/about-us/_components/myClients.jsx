@@ -4,7 +4,7 @@ import InfinityCard from '@/components/shared/infinityCard'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-export default function MyClients() {
+export default function MyClients({ partners }) {
   const { t } = useTranslation();
 
   return (
@@ -15,21 +15,8 @@ export default function MyClients() {
       <InfinityCard
         className={"gap-6"}
         classNameImage={"h-24 mr-6 object-contain rounded-md"}
-        data={[{
-          image: "/myClients/safia.jpg"
-        }, {
-          image: "/myClients/cafelito.png"
-        }, {
-          image: "/myClients/safia.jpg"
-        }, {
-          image: "/myClients/poster.jpg"
-        }, {
-          image: "/myClients/possible.png"
-        }, {
-          image: "/myClients/point.png"
-        }, {
-          image: "/myClients/sewoo.png"
-        }]}
+        data={partners}
+        type={'online'}
       />
     </div>
   )

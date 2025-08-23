@@ -11,9 +11,10 @@ import InfinityCard from "@/components/shared/infinityCard";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { Separator } from "@/components/ui/separator";
+import { getTranslatedValue } from "@/lib/functions";
 
-const Banner = ({ banners }) => {
-  const { t } = useTranslation();
+const Banner = ({ partners, banners, contact }) => {
+  const { t, i18n } = useTranslation();
   const bannerI = [...banners, ...banners]
 
   const stats = t('aboutUs.stats.items', { returnObjects: true });
@@ -29,7 +30,7 @@ const Banner = ({ banners }) => {
             {/* Company Section */}
             <section className="z-[100] space-y-1 md:space-y-4 lg:space-y-6">
               <h1 className="text-[20px] md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-poppins-regular text-black leading-tight">
-                {t('banner.company.name')}
+                {contact?.company_name ? contact?.company_name : "BarCodeTechnologies"}
               </h1>
               <p className="text-primary text-xs md:text-lg lg:text-xl max-w-full xl:max-w-[80%] leading-relaxed">
                 {t('banner.company.description')}
@@ -50,16 +51,9 @@ const Banner = ({ banners }) => {
               <h1 className="font-bold text-xl">{t('banner.partners.title')}</h1>
               <div className="max-w-11/12 xl:max-w-full">
                 <InfinityCard
+                  type="online"
                   classNameImage={""}
-                  data={[
-                    { image: "/myClients/point.png" },
-                    { image: "/myClients/biamp.png" },
-                    { image: "/myClients/sewoo.png" },
-                    { image: "/myClients/zebra.png" },
-                    { image: "/myClients/sewoo.png" },
-                    { image: "/myClients/possible.png" },
-                    { image: "/myClients/sewoo.png" }
-                  ]}
+                  data={partners}
                 />
               </div>
             </section>
