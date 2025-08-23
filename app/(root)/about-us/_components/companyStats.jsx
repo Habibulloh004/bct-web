@@ -15,7 +15,7 @@ const CompanyStats = () => {
     <div
       className="bg-primary py-12 md:py-16 text-white"
     >
-      <div className="max-w-7xl w-11/12 mx-auto space-y-8 md:space-y-12">
+      <div className="max-w-[1440px] w-11/12 mx-auto space-y-8 md:space-y-12">
         <h2 className="text-center text-xl md:text-2xl lg:text-3xl font-semibold px-4">
           {t('aboutUs.stats.title')}
         </h2>
