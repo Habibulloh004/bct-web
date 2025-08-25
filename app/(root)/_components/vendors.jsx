@@ -25,7 +25,7 @@ export default function Vendors({ vendors }) {
 
   return (
     <div className="space-y-5">
-      <h1 className="ml-4 md:ml-12 text-start font-bold text-4xl">
+      <h1 className="ml-4 md:ml-12 text-start font-bold text-2xl md:text-4xl">
         {t("aboutUs.vendors.title")}
       </h1>
       <div className="flex flex-wrap justify-center gap-4 md:gap-6">

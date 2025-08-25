@@ -11,7 +11,7 @@ export default function Manufacture({ categories }) {
 
   return (
     <main className="space-y-4">
-      <h1 className="ml-4 md:ml-12 text-start font-bold text-4xl">
+      <h1 className="ml-4 md:ml-12 text-start font-bold text-2xl md:text-4xl">
         {t("homePage.manufacturerTitle")}
       </h1>
 

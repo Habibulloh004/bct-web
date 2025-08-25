@@ -12,7 +12,7 @@ export default function Category({ categories }) {
   if (categories?.length > 0) {
     return (
       <main className="space-y-4">
-        <h1 className="ml-4 md:ml-12 text-start font-bold text-2xl">
+        <h1 className="ml-4 md:ml-12 text-start font-bold text-2xl md:text-4xl">
           {t("homePage.manufacturerTitle")}
         </h1>
 
