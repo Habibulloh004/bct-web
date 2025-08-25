@@ -14,7 +14,7 @@ import PaginationComponent from "./paginationComponent";
 import { getTranslatedValue } from "@/lib/functions";
 import { useTranslation } from "react-i18next";
 
-export default function ProductsList({url, limit, categoryData, page, products }) {
+export default function ProductsList({ url, limit, categoryData, page, products }) {
   const { t, i18n } = useTranslation();
 
   const sortOptions = [
@@ -121,11 +121,17 @@ export default function ProductsList({url, limit, categoryData, page, products }
       </div>
 
       <Separator />
-
-      {sortedProducts.length > 0 ? (
-        <div className="pt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
+      {/* <div className="pt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 justify-items-center">
           {sortedProducts.map((item, index) => (
             <ProductItem item={item} key={index} />
+          ))}
+        </div> */}
+      {sortedProducts.length > 0 ? (
+        <div className="pt-5 flex flex-wrap justify-center gap-4">
+          {sortedProducts.map((item, index) => (
+            <div key={index} className="w-[calc(100%/2-1rem)] sm:w-[calc(100%/3-1rem)] md:w-[calc(100%/4-1rem)] xl:w-[calc(100%/5-1rem)] 2xl:w-[calc(100%/6-1rem)]">
+              <ProductItem item={item} />
+            </div>
           ))}
         </div>
       ) : (
