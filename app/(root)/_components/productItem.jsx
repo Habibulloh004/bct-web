@@ -127,7 +127,7 @@ export default function ProductItem({ item }) {
             plugins={isHovered ? [autoplayPlugin.current] : []}
             className="w-full h-full"
             opts={{
-              align: "start",
+              align: "center",
               loop: true,
             }}
           >
@@ -141,7 +141,7 @@ export default function ProductItem({ item }) {
                       width={100}
                       height={100}
                       loading="eager"
-                      className="aspect-video object-contain w-full transition-transform duration-300 group-hover:scale-105"
+                      className="max-sm:aspect-square max-sm:h-[100px] aspect-video object-contain w-full transition-transform duration-300 group-hover:scale-105"
                       property="true"
                     />
                   </div>
