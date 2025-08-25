@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import LanguageProvider from "@/components/providers/LanguageProvider";
 import UserMigrationProvider from "@/components/providers/UserMigrationProvider";
 import { getData } from "@/actions/get";
+import NextTopLoader from "nextjs-toploader";
 
 // Montserrat normal (umumiy)
 const poppins = Montserrat({
@@ -43,6 +44,11 @@ export default async function RootLayout({ children }) {
     tag: ["contacts"],
     revalidate: 3600
   })
+  let products = await getData({
+    endpoint: `/api/products`,
+    tag: ["products"],
+    revalidate: 3600
+  })
   const contactInfo = contact?.data[0]
   console.log(contactInfo)
   return (
@@ -53,7 +59,18 @@ export default async function RootLayout({ children }) {
       <body className={`${poppins.variable} ${poppinsItalic.variable} ${poppinsRegular.variable} antialiased`}>
         <LanguageProvider>
           <UserMigrationProvider>
-            <Header contactInfo={contactInfo} />
+            <NextTopLoader
+              color="#495058"              // rang
+              initialPosition={0.08}    // boshlang‘ich progress
+              crawlSpeed={200}
+              height={3}                // chiziq balandligi (px)
+              crawl                     // sekin “yurish” effekti
+              showSpinner={false}       // spinnerni o‘chirib qo‘yish
+              easing="ease"
+              speed={200}
+              shadow="0 0 10px #29D, 0 0 5px #29D" // ixtiyoriy soyalar
+            />
+            <Header products={products} contactInfo={contactInfo} />
             <Toaster closeButton />
             <div className="min-h-[calc(100vh-242px)] pb-4">{children}</div>
             <Footer contactInfo={contactInfo} />

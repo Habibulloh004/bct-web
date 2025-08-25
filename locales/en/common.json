@@ -479,7 +479,11 @@
     "edit": "Edit",
     "close": "Close",
     "currency": "sum",
-    "noProductsFound": "No products found"
+    "noProductsFound": "No products found",
+    "promotion": "Save {{discount}}% on {{name}}",
+    "promo_title": "Promotion",
+    "buy_now": "Buy now",
+    "support":"Support line 24/7"
   },
   "language": {
     "ru": "Русский",

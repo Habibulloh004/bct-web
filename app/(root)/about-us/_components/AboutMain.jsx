@@ -11,7 +11,7 @@ export default function AboutMain() {
       <div className='w-full h-full lg:w-1/3 flex flex-col items-center lg:items-start pt-10'>
         <Image
           loading="eager"
-          src="/logo.svg"
+          src="/logo.png"
           alt="About Us Logo"
           width={1000}
           height={1000}

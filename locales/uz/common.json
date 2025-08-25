@@ -479,7 +479,11 @@
     "edit": "Tahrirlash",
     "close": "Yopish",
     "currency": "so'm",
-    "noProductsFound": "Mahsulotlar topilmadi"
+    "noProductsFound": "Mahsulotlar topilmadi",
+    "promotion": "{{name}} mahsulotida {{discount}}% chegirma!",
+    "promo_title": "Chegirma",
+    "buy_now":"Hozir xarid qiling",
+    "support":"Qo‘llab-quvvatlash markazi 24/7"
   },
   "language": {
     "ru": "Русский",

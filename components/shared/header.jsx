@@ -24,10 +24,21 @@ import SearchPopover from "./searchComponent";
 import ChatWidget from "../chat/ChatWidget";
 import BackToTop from "./BackToTop";
 import { getTranslatedValue } from "@/lib/functions";
+import Marquee from "../ui/marquee";
 
-export default function Header({ contactInfo }) {
+export default function Header({ products, contactInfo }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const filterProducts = products?.data?.filter(pr => Number(pr?.discount) > 0);
+
+  let randomProduct = null;
+
+  if (filterProducts?.length > 0) {
+    const randomIndex = Math.floor(Math.random() * filterProducts.length);
+    randomProduct = filterProducts[randomIndex];
+  }
+
+  console.log({ randomProduct });
 
   // Threshold holati: top bar balandligidan o‘tildimi?
   const [passedTopBar, setPassedTopBar] = useState(false);
@@ -70,45 +81,63 @@ export default function Header({ contactInfo }) {
 
   return (
     <>
-      <header className="w-full z-[998] flex flex-col items-center">
+      <header className="w-full z-[998] flex flex-col items-center max-md:overflow-hidden">
         {/* Top info bar */}
         <div ref={topBarRef} className="w-full bg-primary">
-          <section className="max-w-[1440px] w-11/12 mx-auto grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-4">
+          <section className="grid max-w-[1440px] w-11/12 mx-auto grid-cols-2 md:grid-cols-3 gap-1 md:gap-4">
             <div className="w-auto flex flex-col text-[11px] py-2 text-white">
               <h1>{contactInfo?.email ? contactInfo?.email : "info@bctechnologies.uz"}</h1>
               <p>{contactInfo?.work_hours ? getTranslatedValue(contactInfo?.work_hours, i18n.language) : "Режим работы: ПН, ВТ, СР, ЧТ с 09:00 - 18:00 Выходной: ПТ"}</p>
             </div>
-            <div className="hidden md:flex justify-center items-center gap-1">
-              <Button className="bg-white text-black hover:bg-white/90 h-auto p-0 px-3 py-1 text-[11px] rounded-full">
-                Акция
-              </Button>
-              <h1 className="text-white text-[11px]">
-                Сэкономьте 10% с набором <strong>3В1</strong> для вашего магазина
-              </h1>
-              <Link href="" className="text-white text-[14px] font-poppins-italic underline">
-                Купить сейчас
-              </Link>
-            </div>
+            {randomProduct ? (
+              <div className="hidden md:flex justify-center items-center gap-1">
+                <Button className="bg-white text-black hover:bg-white/90 h-auto p-0 px-3 py-1 text-[11px] rounded-full">
+                  {t("common.promo_title")}
+                </Button>
+                <h1 className="text-white text-[11px] line-clamp-1">
+                  {t("common.promotion", {
+                    discount: randomProduct?.discount,
+                    name: getTranslatedValue(randomProduct?.name, i18n.language),
+                  })}
+
+                </h1>
+                <Link href={`/${randomProduct?.category_id}/${randomProduct?.id}`} className="text-white text-[12px] xl:text-[14px] font-poppins-italic underline">
+                  {t("common.buy_now")}
+                </Link>
+              </div>
+            ) : (<div></div>)}
             <div className="w-auto flex justify-end items-center gap-1 text-white text-[11px]">
               <Image src="/icons/Symbol.svg" alt="img" width={100} height={100} className="w-6 h-6" />
               <div className="flex flex-col">
-                <h1>Горячая линия 24/7</h1>
+                <h1>{t("common.support")}</h1>
                 <p>{contactInfo?.phone1 ? contactInfo?.phone1 : "+998 (71) 234-56-78"}</p>
               </div>
             </div>
-            <div className="hidden col-span-2 justify-center items-center gap-1">
-              <Button className="bg-white text-black hover:bg-white/90 h-auto p-0 px-3 py-1 text-[11px] rounded-full">
-                Акция
-              </Button>
-              <h1 className="text-white text-[11px]">
-                Сэкономьте 10% с набором <strong>3В1</strong> для вашего магазина
-              </h1>
-              <Link href="" className="text-white text-[14px] font-poppins-italic underline">
-                Купить сейчас
-              </Link>
-            </div>
           </section>
+
         </div>
+        {randomProduct ? (
+          <div className="bg-primary/15 max-md:block hidden max-sm:text-xs overflow-hidden">
+            <Marquee pauseOnHover className="[--duration:20s]">
+              <div className="w-full mx-auto hidden max-md:flex justify-center items-center gap-1">
+                <Button className="bg-white text-black hover:bg-white/90 h-auto p-0 px-3 py-1 text-[11px] rounded-full">
+                  {t("common.promo_title")}
+                </Button>
+                <h1 className="text-black text-[11px]">
+                  {t("common.promotion", {
+                    discount: randomProduct?.discount,
+                    name: getTranslatedValue(randomProduct?.name, i18n.language),
+                  })}
+
+                </h1>
+                <Link href={`/${randomProduct?.category_id}/${randomProduct?.id}`} className="text-primary text-[14px] font-poppins-italic underline">
+                  {t("common.buy_now")}
+                </Link>
+              </div>
+            </Marquee>
+          </div>
+
+        ) : (<div></div>)}
 
         {/* HYBRID NAV: threshold'gacha sticky, undan keyin fixed */}
         <div
@@ -160,7 +189,7 @@ export default function Header({ contactInfo }) {
               {/* Logo */}
               <Link href="/" className="flex items-center shrink-0">
                 <div className="header-logo">
-                  <Image src="/logo.svg" alt="Logo" width={100} height={60} priority={100} />
+                  <Image src="/logo.png" alt="Logo" width={100} height={60} priority={100} />
                 </div>
               </Link>
 
@@ -179,7 +208,7 @@ export default function Header({ contactInfo }) {
             <div className="flex items-center gap-2 sm:gap-3">
               <Link href="/warranty-check">
                 <Button className={"max-sm:hidden h-10 bg-transparent hover:bg-white/10 text-primary border-primary rounded-full px-3 py-2 border-2"}>
-                  Проверить гарантию
+                  {t("product.checkWarranty")}
                 </Button>
               </Link>
               <SearchPopover />

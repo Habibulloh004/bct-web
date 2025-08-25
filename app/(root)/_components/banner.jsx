@@ -35,11 +35,13 @@ const Banner = ({ partners, banners, contact }) => {
                 {t('banner.company.description')}
               </p>
               <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center gap-4 lg:gap-5 mt-6">
-                <Button className="w-auto text-lg lg:text-xl px-6 py-3 h-auto flex justify-center items-center gap-2 rounded-full">
-                  <h1>{t('banner.buttons.catalog')}</h1>
-                  <ArrowRight className="mt-1" />
-                </Button>
-                <Link href="/" className="font-medium underline text-lg lg:text-xl">
+                <Link href="all-products">
+                  <Button className="w-auto text-lg lg:text-xl px-6 py-3 h-auto flex justify-center items-center gap-2 rounded-full">
+                    <h1>{t('banner.buttons.catalog')}</h1>
+                    <ArrowRight className="mt-1" />
+                  </Button>
+                </Link>
+                <Link href="/about-us" className="font-medium underline text-lg lg:text-xl">
                   {t('banner.buttons.aboutUs')}
                 </Link>
               </div>
