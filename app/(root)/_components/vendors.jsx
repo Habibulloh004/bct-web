@@ -28,11 +28,11 @@ export default function Vendors({ vendors }) {
       <h1 className="ml-4 md:ml-12 text-start font-bold text-4xl">
         {t("aboutUs.vendors.title")}
       </h1>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
+      <div className="flex flex-wrap justify-center gap-4 md:gap-6">
         {vendors?.slice()?.reverse()?.map((src, i) => (
           <div
             key={i}
-            className="flex items-center justify-center rounded-xl border bg-white/50 p-4 md:p-6 hover:shadow-md transition"
+            className="flex items-center justify-center rounded-xl border bg-white/50 p-4 md:p-6 hover:shadow-md transition w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.67rem)] md:w-[calc(25%-0.75rem)] lg:w-[calc(20%-0.8rem)] xl:w-[calc(16.666%-1rem)]"
           >
             <Image
               src={src ? `${imageUrl}${src?.image}` : "/placeholder.svg"}

@@ -15,7 +15,6 @@ import { getTranslatedValue } from "@/lib/functions";
 
 const Banner = ({ partners, banners, contact }) => {
   const { t, i18n } = useTranslation();
-  const bannerI = [...banners, ...banners]
 
   const stats = t('aboutUs.stats.items', { returnObjects: true });
 
@@ -151,20 +150,20 @@ const Banner = ({ partners, banners, contact }) => {
                   className="text-secondary"
                 >
                   <CarouselContent className="w-full">
-                    {bannerI.map((item, i) => {
+                    {banners?.map((item, i) => {
                       return (
                         <CarouselItem key={i} className={`basis-full rounded-md`}>
                           <Link
                             className="mt-1 relative flex flex-row p-4 gap-4 bg-primary rounded-md"
-                            href={``}
+                            href={`/${item?.category_id}/${item?.product_id}`}
                           >
                             <div className="w-full lg:w-[300px] flex flex-col justify-center">
                               <div className="flex justify-start items-center gap-2 mb-4">
                                 <div className="w-10 h-[1px] bg-white" />
-                                <h1 className="font-medium text-sm lg:text-base">{t('banner.promotion.title')}</h1>
+                                <h1 className="font-medium text-sm lg:text-base">{getTranslatedValue(item?.title, i18n?.language)}</h1>
                               </div>
-                              <p className="text-2xl xl:text-3xl font-bold leading-tight">
-                                {t('banner.promotion.description')}
+                              <p className="line-clamp-3 text-2xl xl:text-3xl font-bold leading-tight">
+                                {getTranslatedValue(item?.description, i18n?.language)}
                               </p>
                             </div>
                             <div className="w-[250px] xl:w-[300px] h-[150px] rounded-2xl overflow-hidden flex-shrink-0">
@@ -192,16 +191,9 @@ const Banner = ({ partners, banners, contact }) => {
           <h1 className="font-bold text-xl">{t('banner.partners.title')}</h1>
           <div className="">
             <InfinityCard
+              type="online"
               classNameImage={""}
-              data={[
-                { image: "/myClients/point.png" },
-                { image: "/myClients/biamp.png" },
-                { image: "/myClients/sewoo.png" },
-                { image: "/myClients/zebra.png" },
-                { image: "/myClients/sewoo.png" },
-                { image: "/myClients/possible.png" },
-                { image: "/myClients/sewoo.png" }
-              ]}
+              data={partners}
             />
           </div>
         </section>
@@ -221,20 +213,20 @@ const Banner = ({ partners, banners, contact }) => {
             className="text-secondary"
           >
             <CarouselContent className="w-full">
-              {bannerI.map((item, i) => {
+              {banners?.map((item, i) => {
                 return (
                   <CarouselItem key={i} className={`basis-full`}>
                     <Link
                       className="w-full mt-1 relative flex flex-row p-4 gap-4 bg-primary rounded-md"
-                      href={``}
+                      href={`/${item?.category_id}/${item?.product_id}`}
                     >
                       <div className="w-full flex flex-col justify-center">
                         <div className="flex justify-start items-center gap-2 mb-4">
                           <div className="w-10 h-[1px] bg-white" />
-                          <h1 className="font-medium text-sm lg:text-base line-clamp-1">{t('banner.promotion.title')}</h1>
+                          <h1 className="font-medium text-sm lg:text-base line-clamp-1">{getTranslatedValue(item?.title, i18n?.language)}</h1>
                         </div>
                         <p className="line-clamp-3 text-2xl xl:text-3xl font-bold leading-tight">
-                          {t('banner.promotion.description')}
+                          {getTranslatedValue(item?.description, i18n?.language)}
                         </p>
                       </div>
                       <div className="w-[150px] sm:w-[250px] xl:w-[300px] h-[150px] rounded-2xl overflow-hidden flex-shrink-0">
