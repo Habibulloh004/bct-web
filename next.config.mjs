@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    unoptimized: true, // Image optimization o'chirildi
     domains: ["q-bit.uz"],
     remotePatterns: [
       // Production domain (your existing config)
