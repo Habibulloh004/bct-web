@@ -15,7 +15,7 @@ export default function LanguageSwitcher() {
   return (
     <div className="relative group">
       {/* Active language button */}
-      <button className="h-10 w-10 flex items-center justify-center rounded-full border border-primary bg-white hover:bg-gray-100 transition-colors">
+      <button className="h-10 w-10 flex items-center justify-center rounded-full border border-primary bg-primary hover:bg-primary/90 transition-colors">
         <Image
           src={
             lngItems.find((lang) => lang.locale === i18n.language)?.icon ||
@@ -24,7 +24,7 @@ export default function LanguageSwitcher() {
           alt="lang"
           width={24}
           height={24}
-          className="rounded-full"
+          className=""
         />
       </button>
 

@@ -52,8 +52,9 @@ const Banner = ({ partners, banners, contact }) => {
               <h1 className="font-bold text-xl">{t('banner.partners.title')}</h1>
               <div className="max-w-11/12 xl:max-w-full">
                 <InfinityCard
+                
                   type="online"
-                  classNameImage={""}
+                  classNameImage={"h-14 md:h-18 rounded-md p-1"}
                   data={partners}
                 />
               </div>
