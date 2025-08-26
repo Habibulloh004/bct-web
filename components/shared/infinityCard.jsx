@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { Marquee } from "../magicui/marquee";
 import { cn, imageUrl } from "@/lib/utils";
 
@@ -14,8 +13,6 @@ export default function InfinityCard({
   colorOnHover = false,
   type
 }) {
-  const router = useRouter();
-  console.log({ data })
   return (
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
       {/* Chapdagi gradient shadow */}

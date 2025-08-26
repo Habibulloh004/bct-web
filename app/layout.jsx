@@ -50,7 +50,6 @@ export default async function RootLayout({ children }) {
     revalidate: 3600
   })
   const contactInfo = contact?.data[0]
-  console.log(contactInfo)
   return (
     <html suppressHydrationWarning lang="en">
       <head>

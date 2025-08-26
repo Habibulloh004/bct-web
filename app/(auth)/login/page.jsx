@@ -42,7 +42,6 @@ export default function LoginPage() {
   });
 
   const onSubmit = async (values) => {
-    console.log("Form submitted:", values);
     setIsLoading(true);
 
     // Loading toast
@@ -60,8 +59,6 @@ export default function LoginPage() {
       const result = await loginUser(formData);
 
       if (result.success) {
-        console.log('User logged in successfully:', JSON.stringify(result.data));
-        
         // ✅ Zustand store'ga saqlash (localStorage o'rniga)
         setUser(result.data);
         
