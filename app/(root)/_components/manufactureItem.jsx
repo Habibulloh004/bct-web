@@ -10,8 +10,8 @@ export default function ManufactureItem({ item }) {
   const { i18n } = useTranslation();
   return (
     <div className='bg-primary rounded-2xl p-4 '>
-      <Link href={`/${item?.id}`} className='space-y-2'>
-        <div className="relative mx-auto aspect-[4/3] rounded-[4px] overflow-hidden">
+      <div href={`/${item?.id}`} className='space-y-2'>
+        <div className="relative mx-auto aspect-video rounded-[4px] overflow-hidden">
           <CustomImage
             src={item?.image ? `${imageUrl}${item?.image}` : "/placeholder.svg"}
             alt={`banner-img`}
@@ -22,10 +22,10 @@ export default function ManufactureItem({ item }) {
           />
         </div>
         <div className='flex justify-start flex-col items-start gap-2 w-full'>
-          <h1 className='text-xl text-white font-medium text-start'>{getTranslatedValue(item?.name, i18n?.language)}</h1>
+          <h1 className='text-xl text-white font-medium text-start'>{item?.name}</h1>
           <p className='text-xs line-clamp-3 text-white/50'>Ведущий области интегрированных платформ управления магазинами, специализирующийся на производстве KIOSK и POS оборудования.</p>
         </div>
-      </Link>
+      </div>
     </div>
   )
 }

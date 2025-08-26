@@ -35,13 +35,14 @@ export default function Vendors({ vendors }) {
 
       {/* GRID: centered last row items with responsive columns */}
       <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-        {vendors?.slice()?.reverse()?.map((src, i) => (
+        {VENDOR_LOGOS?.slice()?.reverse()?.map((src, i) => (
           <div
             key={i}
             className="flex items-center justify-center rounded-xl border bg-white/50 p-4 md:p-6 hover:shadow-md transition w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.67rem)] md:w-[calc(25%-0.75rem)] lg:w-[calc(20%-0.8rem)] xl:w-[calc(16.666%-1rem)]"
           >
             <Image
-              src={src?`${imageUrl}${src?.image}`:"/placeholder.svg"}
+              // src={src?`${imageUrl}${src?.image}`:"/placeholder.svg"}
+              src={src}
               alt="vendor logo"
               width={240}
               height={80}

@@ -5,6 +5,7 @@ import AboutUs from './_components/aboutUs'
 import { getData } from '@/actions/get'
 import Manufacture from './_components/manufacturer'
 import Vendors from './_components/vendors'
+import VendorsC from './_components/vendorsC'
 
 export default async function HomePage() {
   const categories = await getData({
@@ -40,12 +41,12 @@ export default async function HomePage() {
     tag: ["contacts"],
     revalidate: 3600
   })
-  console.log({ banners, categories, products, partners, vendors })
+  // console.log({ banners, categories, products, partners, vendors })
 
   return (
     <main className='max-w-[1440px] w-11/12 mx-auto font-poppins space-y-2 md:space-y-5'>
       <Banner contact={contact?.data[0]} partners={partners?.data} banners={banners?.data} />
-      <Manufacture categories={categories?.data} />
+      <VendorsC vendors={vendors?.data} />
       <Discounts products={products} />
       {/* <Vendors vendors={vendors?.data} /> */}
     </main>

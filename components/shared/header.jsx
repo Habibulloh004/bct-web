@@ -38,7 +38,7 @@ export default function Header({ products, contactInfo }) {
     randomProduct = filterProducts[randomIndex];
   }
 
-  console.log({ randomProduct });
+  // console.log({ randomProduct });
 
   // Threshold holati: top bar balandligidan o‘tildimi?
   const [passedTopBar, setPassedTopBar] = useState(false);
