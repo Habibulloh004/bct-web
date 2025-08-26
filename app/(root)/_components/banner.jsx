@@ -15,8 +15,21 @@ import { getTranslatedValue } from "@/lib/functions";
 
 const Banner = ({ partners, banners, contact }) => {
   const { t, i18n } = useTranslation();
+  // hozirgi yilni olish
+  const currentYear = new Date().getFullYear();
 
-  const stats = t('aboutUs.stats.items', { returnObjects: true });
+  // kompaniya tashkil topgan yil (2006)
+  const foundedYear = 2006;
+
+  // necha yil bo‘lganini hisoblash
+  const years = currentYear - foundedYear;
+
+  // endi i18next ga yuboramiz
+  const stats = t("aboutUs.stats.items", {
+    returnObjects: true,
+    year: years, // {{year}} shu qiymat bilan to'ldiriladi
+  });
+
 
   return (
     <main className="w-full py-6">
@@ -52,7 +65,7 @@ const Banner = ({ partners, banners, contact }) => {
               <h1 className="font-bold text-xl">{t('banner.partners.title')}</h1>
               <div className="max-w-11/12 xl:max-w-full">
                 <InfinityCard
-                
+
                   type="online"
                   classNameImage={"h-14 md:h-18 rounded-md p-1"}
                   data={partners}

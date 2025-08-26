@@ -168,7 +168,7 @@
       "soldTitle": "Barcha vaqt davomida sotilgan",
       "items": [
         {
-          "value": "14",
+          "value": "{{year}}",
           "label": "yil O'zbekiston bozorida"
         },
         {

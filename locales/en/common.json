@@ -168,7 +168,7 @@
       "soldTitle": "Sold over all time",
       "items": [
         {
-          "value": "14",
+          "value": "{{year}}",
           "label": "years in the Uzbekistan market"
         },
         {
