@@ -47,7 +47,7 @@ export default async function HomePage() {
       <Banner contact={contact?.data[0]} partners={partners?.data} banners={banners?.data} />
       <Manufacture categories={categories?.data} />
       <Discounts products={products} />
-      <Vendors vendors={vendors?.data} />
+      {/* <Vendors vendors={vendors?.data} /> */}
     </main>
   )
 }

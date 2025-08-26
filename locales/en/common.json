@@ -78,7 +78,8 @@
       "smartphones": "Smartphones",
       "laptops": "Laptops",
       "accessories": "Accessories"
-    }
+    },
+    "zebra": "Official partner"
   },
   "login": {
     "title": "Login to Account",
@@ -483,7 +484,7 @@
     "promotion": "Save {{discount}}% on {{name}}",
     "promo_title": "Promotion",
     "buy_now": "Buy now",
-    "support":"Support line 24/7"
+    "support": "Support line 24/7"
   },
   "language": {
     "ru": "Русский",

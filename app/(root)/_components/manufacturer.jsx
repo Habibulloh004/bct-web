@@ -12,33 +12,30 @@ export default function Manufacture({ categories }) {
   return (
     <main className="space-y-4">
       <h1 className="ml-4 md:ml-12 text-start font-bold text-2xl md:text-4xl">
-        {t("homePage.manufacturerTitle")}
+        {t("aboutUs.vendors.title")}
       </h1>
 
       {/* GRID: responsive ustunlar soni + markazlash */}
-      {/* <div
-        className="
-          pt-5 grid gap-4 justify-items-center
-          grid-cols-2
-          md:grid-cols-3
-          lg:grid-cols-4
-          xl:grid-cols-5
-          2xl:grid-cols-6
-        "
-      >
-        {categories.slice().reverse().map((item, index) => (
-          <ManufactureItem key={index} item={item} />
-        ))}
-      </div> */}
+      <div className="pt-5 flex flex-wrap justify-center gap-4">
+        {categories
+          .slice()
+          .reverse()
+          .map((item, index) => (
+            <div
+              key={index}
+              className="w-[calc(100%/2-1rem)] sm:w-[calc(100%/3-1rem)] md:w-[calc(100%/4-1rem)] xl:w-[calc(100%/5-1rem)] 2xl:w-[calc(100%/6-1rem)]"
+            >
+              <ManufactureItem item={item} />
+            </div>
+          ))}
+      </div>
+
+
       {/* Carousel version */}
-      <Carousel className="relative w-full text-foreground mt-5">
+      {/* <Carousel className="relative w-full text-foreground mt-5">
         <div className="max-md:hidden pointer-events-none absolute left-0 top-0 h-full w-3 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
         <div className="max-md:hidden pointer-events-none absolute right-0 top-0 h-full w-3 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
         <CarouselContent className="relative">
-          {/* Chapdagi gradient shadow */}
-
-          {/* O‘ngdagi gradient shadow */}
-
           {categories?.slice()?.reverse()?.map((item, i) => {
             return (
               <CarouselItem
@@ -52,7 +49,7 @@ export default function Manufacture({ categories }) {
             );
           })}
         </CarouselContent>
-      </Carousel>
+      </Carousel> */}
     </main>
   );
 }
