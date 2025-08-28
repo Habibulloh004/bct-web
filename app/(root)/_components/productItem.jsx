@@ -64,14 +64,14 @@ export default function ProductItem({ item }) {
   return (
     <div
       onClick={goToDetails}
-      className="flex-col-reverse cursor-pointer bg-[#3D4356] rounded-2xl p-2 flex gap-4 hover:shadow-lg transition-all duration-300 hover:bg-primary/95"
+      className="flex-col-reverse cursor-pointer bg-[#cccbca] rounded-2xl p-2 flex gap-4 hover:shadow-lg transition-all duration-300 hover:bg-[#cccbca]"
     >
       <div className="flex flex-col justify-between gap-2 w-full h-full p-2">
         <div className="space-y-1">
-          <h1 className="text-base font-semibold text-white">
+          <h1 className="text-base font-semibold text-primary">
             {getTranslatedValue(item?.name || "", i18n.language)}
           </h1>
-          <p className="text-sm text-white/50 line-clamp-2">
+          <p className="text-sm text-primary/50 line-clamp-2">
             {getTranslatedValue(item?.ads_title || "", i18n.language)}
           </p>
           {/* <div
