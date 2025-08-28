@@ -46,8 +46,8 @@ export default async function HomePage() {
   return (
     <main className='max-w-[1440px] w-11/12 mx-auto font-poppins space-y-2 md:space-y-5'>
       <Banner contact={contact?.data[0]} partners={partners?.data} banners={banners?.data} />
-      <VendorsC vendors={vendors?.data} />
       <Discounts products={products} />
+      <VendorsC vendors={vendors?.data} />
       {/* <Vendors vendors={vendors?.data} /> */}
     </main>
   )

@@ -16,7 +16,7 @@ export default function VendorsC({ vendors }) {
       </h1>
 
       {/* GRID: responsive ustunlar soni + markazlash */}
-      <div className="pt-5 flex flex-wrap justify-center gap-4">
+      {/* <div className="pt-5 flex flex-wrap justify-center gap-4">
         {vendors
           .map((item, index) => (
             <div
@@ -26,28 +26,27 @@ export default function VendorsC({ vendors }) {
               <ManufactureItem item={item} index={index} />
             </div>
           ))}
-      </div>
+      </div> */}
 
 
       {/* Carousel version */}
-      {/* <Carousel className="relative w-full text-foreground mt-5">
+      <Carousel className="relative w-full text-foreground mt-5">
         <div className="max-md:hidden pointer-events-none absolute left-0 top-0 h-full w-3 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
         <div className="max-md:hidden pointer-events-none absolute right-0 top-0 h-full w-3 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
         <CarouselContent className="relative">
-          {categories?.slice()?.reverse()?.map((item, i) => {
+          {vendors?.slice()?.reverse()?.map((item, i) => {
             return (
               <CarouselItem
                 key={i}
                 className={`basis-[60%] sm:basis-[30%] md:basis-[25%] lg:basis-[15%] p-0 mx-2 ${i === 0 && "max-sm:ml-8 max-md:ml-12 ml-8"
                   }`}
               >
-                <ManufactureItem key={i} item={item} />
-
+                <ManufactureItem item={item} index={i} />
               </CarouselItem>
             );
           })}
         </CarouselContent>
-      </Carousel> */}
+      </Carousel>
     </main>
   );
 }
