@@ -68,10 +68,10 @@ export default function ProductItem({ item }) {
     >
       <div className="flex flex-col justify-between gap-2 w-full h-full p-2">
         <div className="space-y-1">
-          <h1 className="text-base font-semibold text-primary">
+          <h1 className="text-base font-bold text-primary">
             {getTranslatedValue(item?.name || "", i18n.language)}
           </h1>
-          <p className="text-sm text-primary/50 line-clamp-2">
+          <p className="text-sm text-primary font-semibold line-clamp-2">
             {getTranslatedValue(item?.ads_title || "", i18n.language)}
           </p>
           {/* <div
