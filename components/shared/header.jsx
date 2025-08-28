@@ -78,7 +78,7 @@ export default function Header({ products, contactInfo }) {
   }, []);
 
   const handleMobileMenuClose = () => setMobileMenuOpen(false);
-
+  console.log({ randomProduct, products })
   return (
     <>
       <header className="w-full z-[998] flex flex-col items-center max-md:overflow-hidden">
@@ -125,7 +125,6 @@ export default function Header({ products, contactInfo }) {
                 </Button>
                 <h1 className="text-black text-[11px]">
                   {t("common.promotion", {
-                    discount: randomProduct?.discount,
                     name: getTranslatedValue(randomProduct?.name, i18n.language),
                   })}
 
@@ -207,7 +206,7 @@ export default function Header({ products, contactInfo }) {
             {/* O'ng: Qidiruv, Cart, User, Language */}
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="hidden md:flex justify-end items-center gap-2">
-                <Image src="/myClients/zebraH.png" alt="img" width={100} height={100} className="h-[27px] w-[83px]"/>
+                <Image src="/myClients/zebraH.png" alt="img" width={100} height={100} className="h-[27px] w-[83px]" />
                 <h1 className="text-end w-2/7 text-[10px]">{t("header.zebra")}</h1>
               </div>
               <Link href="/warranty-check">

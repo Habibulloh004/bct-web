@@ -481,7 +481,7 @@
     "close": "Закрыть",
     "currency": "сум",
     "noProductsFound": "Товары не найдены",
-    "promotion": "Сэкономьте {{discount}}% на {{name}}",
+    "promotion": "Сэкономьте на {{name}}",
     "promo_title": "Акция",
     "buy_now": "Купить сейчас",
     "support":"Горячая линия 24/7"

@@ -44,12 +44,11 @@ export default async function RootLayout({ children }) {
     tag: ["contacts"],
     revalidate: 3600
   })
-  // let products = await getData({
-  //   endpoint: `/api/products?page=1&limit=100`,
-  //   tag: ["products"],
-  //   revalidate: 3600
-  // })
-  let products = { data: [] }
+  let products = await getData({
+    endpoint: `/api/products?page=1&limit=100`,
+    tag: ["products"],
+    revalidate: 3600
+  })
   const contactInfo = contact?.data[0]
   return (
     <html suppressHydrationWarning lang="en">
