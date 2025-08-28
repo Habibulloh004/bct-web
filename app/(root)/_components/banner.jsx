@@ -41,7 +41,7 @@ const Banner = ({ partners, banners, contact }) => {
 
             {/* Company Section */}
             <section className="z-[100] space-y-1 md:space-y-4 lg:space-y-6">
-              <h1 className="text-[20px] md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-poppins-regular text-black leading-tight">
+              <h1 className="md:-translate-y-[16px] text-[20px] md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-poppins-regular text-black leading-tight">
                 {contact?.company_name ? contact?.company_name : "BarCodeTechnologies"}
               </h1>
               <p className="text-primary text-xs md:text-lg lg:text-xl max-w-full xl:max-w-[80%] leading-relaxed">
@@ -49,12 +49,12 @@ const Banner = ({ partners, banners, contact }) => {
               </p>
               <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center gap-4 lg:gap-5 mt-6">
                 <Link href="all-products">
-                  <Button className="w-auto text-lg lg:text-xl px-6 py-3 h-auto flex justify-center items-center gap-2 rounded-full">
+                  <Button className="w-auto text-md md:text-lg lg:text-xl px-4 py-2 md:px-6 md:py-3 h-auto flex justify-center items-center gap-2 rounded-full">
                     <h1>{t('banner.buttons.catalog')}</h1>
                     <ArrowRight className="mt-1" />
                   </Button>
                 </Link>
-                <Link href="/about-us" className="font-medium underline text-lg lg:text-xl">
+                <Link href="/about-us" className="font-medium underline text-md md:text-lg lg:text-xl">
                   {t('banner.buttons.aboutUs')}
                 </Link>
               </div>

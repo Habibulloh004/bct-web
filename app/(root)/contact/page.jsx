@@ -11,23 +11,21 @@ import CustomFormField, { FormFieldType } from "@/components/shared/customFormFi
 import { toast } from "sonner";
 
 export default function Contact() {
-  const { t,i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const ContactSchema = useMemo(() =>
-    z.object({
-      name: z.string().min(2, { message: t("contact.validation.name") }),
-      phone: z.string().min(9, { message: t("contact.validation.phone") }),
-      message: z.string().min(5, { message: t("contact.validation.message") }),
-    }), [t]
+  const ContactSchema = useMemo(
+    () =>
+      z.object({
+        name: z.string().min(2, { message: t("contact.validation.name") }),
+        phone: z.string().min(9, { message: t("contact.validation.phone") }),
+        message: z.string().min(5, { message: t("contact.validation.message") }),
+      }),
+    [t]
   );
 
   const form = useForm({
     resolver: zodResolver(ContactSchema),
-    defaultValues: {
-      name: "",
-      phone: "",
-      message: "",
-    },
+    defaultValues: { name: "", phone: "", message: "" },
   });
 
   const onSubmit = async (values) => {
@@ -45,24 +43,24 @@ export default function Contact() {
     }
   };
 
-  
-const mapLang = useMemo(() => {
-  switch (i18n.language) {
-    case "uz":
-      return "uz_UZ";
-    case "ru":
-      return "ru_RU";
-    case "en":
-    default:
-      return "en_US";
-  }
-}, [i18n.language]);
+  // Google Maps til parametri
+  const gmLang = useMemo(() => {
+    switch (i18n.language) {
+      case "uz":
+        return "uz";
+      case "ru":
+        return "ru";
+      case "en":
+      default:
+        return "en";
+    }
+  }, [i18n.language]);
 
-const mapSrc = `https://yandex.com/map-widget/v1/?um=constructor%3Aec2b7bd9dcb27e82e92ec58d77cb617e23b497bd2c4473453cd1b1c12f0de3e3&source=constructor&lang=${mapLang}`;
-
+  // 41.298993 (lat), 69.272349 (lng)
+  const mapSrc = `https://www.google.com/maps?q=41.298993,69.272349&hl=${gmLang}&z=16&output=embed`;
 
   return (
-    <div className=" max-w-5xl mx-auto px-4 py-12 space-y-8">
+    <div className="bg-white rounded-xl max-w-5xl mx-auto px-4 py-12 space-y-8">
       <div>
         <h1 className="text-3xl font-bold mb-4">{t("contact.title")}</h1>
         <p className="text-muted-foreground">{t("contact.description")}</p>
@@ -75,8 +73,8 @@ const mapSrc = `https://yandex.com/map-widget/v1/?um=constructor%3Aec2b7bd9dcb27
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="name"
-              placeholder={t('register.form.name.placeholder')}
-              label={t('register.form.name.label')}
+              placeholder={t("register.form.name.placeholder")}
+              label={t("register.form.name.label")}
               inputClass="rounded-md border-[1px] h-10 sm:h-11 md:h-12 text-foreground w-full px-3 sm:px-4"
             />
             <CustomFormField
@@ -105,7 +103,10 @@ const mapSrc = `https://yandex.com/map-widget/v1/?um=constructor%3Aec2b7bd9dcb27
           src={mapSrc}
           width="100%"
           height="400"
-          frameBorder="0"
+          style={{ border: 0 }}
+          loading="lazy"
+          allowFullScreen
+          referrerPolicy="no-referrer-when-downgrade"
           title="Map"
         />
       </div>

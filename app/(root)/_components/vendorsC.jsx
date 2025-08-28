@@ -23,7 +23,7 @@ export default function VendorsC({ vendors }) {
               key={index}
               className="w-[calc(100%/2-1rem)] sm:w-[calc(100%/3-1rem)] md:w-[calc(100%/4-1rem)] xl:w-[calc(100%/5-1rem)] 2xl:w-[calc(100%/6-1rem)]"
             >
-              <ManufactureItem item={item} />
+              <ManufactureItem item={item} index={index} />
             </div>
           ))}
       </div>
