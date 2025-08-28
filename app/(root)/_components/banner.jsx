@@ -41,7 +41,7 @@ const Banner = ({ partners, banners, contact }) => {
 
             {/* Company Section */}
             <section className="z-[100] space-y-1 md:space-y-4 lg:space-y-6">
-              <h1 className="md:-translate-y-[16px] text-[20px] md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-poppins-regular text-black leading-tight">
+              <h1 className=" font-bold md:-translate-y-[16px] text-[20px] md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-poppins-regular text-black leading-tight">
                 {contact?.company_name ? contact?.company_name : "BarCodeTechnologies"}
               </h1>
               <p className="text-primary text-xs md:text-lg lg:text-xl max-w-full xl:max-w-[80%] leading-relaxed">

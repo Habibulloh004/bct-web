@@ -6,7 +6,7 @@ import Link from 'next/link';
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 
-export default function ManufactureItem({ item,index }) {
+export default function ManufactureItem({ item, index }) {
   const { i18n } = useTranslation();
   return (
     <div className='bg-primary rounded-2xl p-4 '>
@@ -22,8 +22,8 @@ export default function ManufactureItem({ item,index }) {
           />
         </div>
         <div className='flex justify-start flex-col items-start gap-1 w-full'>
-          <h1 className='text-md text-white font-medium text-start'>{item?.name}</h1>
-          <p className='text-xs line-clamp-3 text-white/50'>Ведущий области интегрированных платформ управления магазинами, специализирующийся на производстве KIOSK и POS оборудования.</p>
+          <h1 className='text-md text-white font-medium text-start'>{item?.name?getTranslatedValue(item?.name):"Godex"}</h1>
+          <p className='text-xs line-clamp-3 text-white/50'>{item?.description ? getTranslatedValue(item?.description) : "Ведущий области интегрированных платформ управления магазинами, специализирующийся на производстве KIOSK и POS оборудования"}</p>
         </div>
       </div>
     </div>

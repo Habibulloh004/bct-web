@@ -141,7 +141,7 @@ export default function ProductItem({ item }) {
                       width={100}
                       height={100}
                       loading="eager"
-                      className="max-sm:aspect-square max-sm:h-[100px] aspect-video object-contain w-full transition-transform duration-300 group-hover:scale-105"
+                      className="max-sm:aspect-square max-sm:h-[100px] h-28 md:h-34 xl:h-36 aspect-video object-contain w-full transition-transform duration-300 group-hover:scale-105"
                       property="true"
                     />
                   </div>
@@ -150,21 +150,32 @@ export default function ProductItem({ item }) {
             </CarouselContent>
           </Carousel>
         ) : (
-          <div className="relative w-full h-full overflow-hidden rounded-md">
-            <CustomImage
-              src={
-                item?.image?.length > 0
-                  ? `${imageUrl}${item?.image[0]}`
-                  : "/placeholder.svg"
-              }
-              alt="Product image"
-              width={100}
-              height={100}
-              loading="eager"
-              className="aspect-video object-contain w-full transition-transform duration-300 group-hover:scale-105"
-              property="true"
-            />
-          </div>
+          <Carousel
+            plugins={isHovered ? [autoplayPlugin.current] : []}
+            className="w-full h-full"
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+          >
+            <CarouselContent className="w-full h-full">
+              {item.image.map((img, index) => (
+                <CarouselItem key={index} className="w-full h-full">
+                  <div className="relative w-full h-full overflow-hidden rounded-md">
+                    <CustomImage
+                      src={`${imageUrl}${img}`}
+                      alt={`Product image ${index + 1}`}
+                      width={100}
+                      height={100}
+                      loading="eager"
+                      className="max-sm:aspect-square max-sm:h-[100px] h-28 md:h-34 xl:h-36 aspect-video object-contain w-full transition-transform duration-300 group-hover:scale-105"
+                      property="true"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         )}
 
         {/* Multiple images indicator */}
