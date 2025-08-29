@@ -22,11 +22,16 @@ export default async function AboutUs() {
     tag: ["sertificates"],
     revalidate: 3600
   })
+  let vendorsAbout = await getData({
+    endpoint: `/api/vendors-about`,
+    tag: ["vendors-about"],
+    revalidate: 3600
+  })
   return (
     <main className='pt-8 space-y-4'>
       <AboutMain />
       <Service />
-      <Vendors vendors={vendors?.data} />
+      <Vendors vendors={vendorsAbout?.data} />
       <MyProjects projects={projects?.data} />
       <MyClients partners={partners?.data} />
     </main>
