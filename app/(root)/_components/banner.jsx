@@ -44,12 +44,12 @@ const Banner = ({ partners, banners, contact }) => {
               <h1 className=" font-bold md:-translate-y-[16px] text-[20px] md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-poppins-regular text-black leading-tight">
                 {contact?.company_name ? contact?.company_name : "BarCodeTechnologies"}
               </h1>
-              <p className="text-primary text-xs md:text-lg lg:text-xl max-w-full xl:max-w-[80%] leading-relaxed">
+              <p className="text-[var(--banner-primary)] text-xs md:text-lg lg:text-xl max-w-full xl:max-w-[80%] leading-relaxed">
                 {t('banner.company.description')}
               </p>
               <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center gap-4 lg:gap-5 mt-6">
                 <Link href="all-products">
-                  <Button className="w-auto text-md md:text-lg lg:text-xl px-4 py-2 md:px-6 md:py-3 h-auto flex justify-center items-center gap-2 rounded-full">
+                  <Button className="bg-[var(--banner-primary)] hover:bg-[var(--banner-primary)] hover:opacity-95 w-auto text-md md:text-lg lg:text-xl px-4 py-2 md:px-6 md:py-3 h-auto flex justify-center items-center gap-2 rounded-full">
                     <h1>{t('banner.buttons.catalog')}</h1>
                     <ArrowRight className="mt-1" />
                   </Button>
@@ -132,7 +132,7 @@ const Banner = ({ partners, banners, contact }) => {
                                   className="w-7 h-7 md:w-10 md:h-10 lg:w-[75px] lg:h-[75px] mb-1 md:mb-4"
                                 />
                                 <div className="text-center">
-                                  <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-7xl font-bold text-primary  md:mb-2">{item?.value}</h3>
+                                  <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-7xl font-bold text-[var(--banner-primary)]  md:mb-2">{item?.value}</h3>
                                   <p className="text-[10px] sm:text-xs md:text-sm">{item?.label}</p>
                                 </div>
                               </div>
@@ -141,7 +141,7 @@ const Banner = ({ partners, banners, contact }) => {
                         })}
                       </CarouselContent>
                       <CarouselProgressBar
-                        progressClassName="bg-primary bottom"
+                        progressClassName="bg-[var(--banner-primary)] bottom"
                       />
                     </Carousel>
                   </div>
@@ -170,7 +170,7 @@ const Banner = ({ partners, banners, contact }) => {
                       return (
                         <CarouselItem key={i} className={`basis-full rounded-md`}>
                           <Link
-                            className="mt-1 relative flex flex-row p-4 gap-4 bg-primary rounded-md"
+                            className="mt-1 relative flex flex-row p-4 gap-4 bg-[var(--banner-primary)] rounded-md"
                             href={`/${item?.category_id}/${item?.product_id}`}
                           >
                             <div className="w-full lg:w-[300px] flex flex-col justify-center">
@@ -233,7 +233,7 @@ const Banner = ({ partners, banners, contact }) => {
                 return (
                   <CarouselItem key={i} className={`basis-full`}>
                     <Link
-                      className="w-full mt-1 relative flex flex-row p-4 gap-4 bg-primary rounded-md"
+                      className="w-full mt-1 relative flex flex-row p-4 gap-4 bg-[var(--banner-primary)] rounded-md"
                       href={`/${item?.category_id}/${item?.product_id}`}
                     >
                       <div className="w-full flex flex-col justify-center">
