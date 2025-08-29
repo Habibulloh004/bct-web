@@ -42,7 +42,6 @@ export default async function HomePage() {
     revalidate: 3600
   })
   // console.log({ banners, categories, products, partners, vendors })
-
   return (
     <main className='max-w-[1440px] w-11/12 mx-auto font-poppins space-y-2 md:space-y-5'>
       <Banner contact={contact?.data[0]} partners={partners?.data} banners={banners?.data} />

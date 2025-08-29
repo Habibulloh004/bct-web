@@ -7,6 +7,8 @@ import LanguageProvider from "@/components/providers/LanguageProvider";
 import UserMigrationProvider from "@/components/providers/UserMigrationProvider";
 import { getData } from "@/actions/get";
 import NextTopLoader from "nextjs-toploader";
+import { ColorsProvider } from "@/components/providers/ColorsContext";
+import { colorsToCSSVars } from "@/lib/getColors";
 
 // Montserrat normal (umumiy)
 const poppins = Montserrat({
@@ -49,11 +51,24 @@ export default async function RootLayout({ children }) {
     tag: ["products"],
     revalidate: 3600
   })
+  const colors = await getData({
+    endpoint: `/api/select-reviews?page=1&limit=40`,
+    tag: ["select-reviews"],
+    revalidate: 3600
+  })
+  const colorData = colors?.data?.map((cl) => ({
+    color: cl?.message,
+    key: cl?.email
+  }))
+
+  const cssVars = colorsToCSSVars(colorData);     // :root { --pr-card: ... }
+
   const contactInfo = contact?.data[0]
   return (
     <html suppressHydrationWarning lang="en">
       <head>
         <link rel="icon" href="/logo.svg" />
+        <style id="theme-colors" dangerouslySetInnerHTML={{ __html: cssVars }} />
       </head>
       <body className={`${poppins.variable} ${poppinsItalic.variable} ${poppinsRegular.variable} antialiased`}>
         <LanguageProvider>
@@ -71,7 +86,9 @@ export default async function RootLayout({ children }) {
             />
             <Header products={products} contactInfo={contactInfo} />
             <Toaster closeButton />
-            <div className="min-h-[calc(100vh-242px)] pb-4">{children}</div>
+            <ColorsProvider >
+              <div className="min-h-[calc(100vh-242px)] pb-4">{children}</div>
+            </ColorsProvider>
             <Footer contactInfo={contactInfo} />
           </UserMigrationProvider>
         </LanguageProvider>
