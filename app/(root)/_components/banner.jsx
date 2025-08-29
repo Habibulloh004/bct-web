@@ -61,7 +61,7 @@ const Banner = ({ partners, banners, contact }) => {
             </section>
 
             {/* Partners Section */}
-            <section className="max-sm:hidden space-y-3 lg:space-y-4">
+            <section className="max-sm:hidden space-y-3 lg:space-y-4 lg:pt-10">
               <h1 className="font-bold text-xl">{t('banner.partners.title')}</h1>
               <div className="max-w-11/12 xl:max-w-full">
                 <InfinityCard

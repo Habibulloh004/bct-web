@@ -133,7 +133,7 @@ export default function ProductItem({ item }) {
           >
             <CarouselContent className="w-full h-full">
               {item.image.map((img, index) => (
-                <CarouselItem key={index} className="w-full h-full">
+                <CarouselItem key={index} className={`${index==0 ?"pl-8":"pl-4"} basis-full w-full h-full`}>
                   <div className="relative w-full h-full overflow-hidden rounded-md">
                     <CustomImage
                       src={`${imageUrl}${img}`}
@@ -160,7 +160,7 @@ export default function ProductItem({ item }) {
           >
             <CarouselContent className="w-full h-full">
               {item.image.map((img, index) => (
-                <CarouselItem key={index} className="w-full h-full">
+                <CarouselItem key={index} className="basis-full w-full h-full">
                   <div className="relative w-full h-full overflow-hidden rounded-md">
                     <CustomImage
                       src={`${imageUrl}${img}`}
