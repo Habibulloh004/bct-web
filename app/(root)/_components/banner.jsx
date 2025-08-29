@@ -83,7 +83,7 @@ const Banner = ({ partners, banners, contact }) => {
                 <div className="relative flex flex-col-reverse lg:flex-row justify-end items-end lg:items-center gap-4">
                   {/* Decorative Background */}
                   <div className="relative w-[150px] md:w-[200px] lg:w-[250px] h-[150px] md:h-[200px] lg:h-[250px] xl:w-[300px] xl:h-[300px] flex-shrink-0">
-                    <div className="w-full h-full aspect-square bg-[#3B4154] rounded-tl-[100%] rounded-tr-[8px] rounded-bl-[8px]" />
+                    <div className="w-full h-full aspect-square bg-[var(--banner-primary)] rounded-tl-[100%] rounded-tr-[8px] rounded-bl-[8px]" />
                     <Image
                       className="w-[100px] md:w-[125px] lg:w-[160px] xl:w-[200px] absolute top-8 md:top-10 -right-4 md:-right-6"
                       src="/images/banner1.png"
