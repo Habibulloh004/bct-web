@@ -42,7 +42,7 @@ export default function VendorsC({ vendors }) {
             return (
               <CarouselItem
                 key={i}
-                className={`basis-[60%] sm:basis-[30%] md:basis-[25%] lg:basis-[15%] p-0 mx-2 ${i === 0 && "max-sm:ml-8 max-md:ml-12 ml-8"
+                className={`basis-[60%] sm:basis-[25%] md:basis-[20%] lg:basis-[15%] xl:basis-[10%] p-0 mx-2 ${i === 0 && "max-sm:ml-8 max-md:ml-12 ml-8"
                   }`}
               >
                 <ManufactureItem item={item} index={i} />
