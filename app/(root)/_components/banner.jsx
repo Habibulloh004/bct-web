@@ -175,7 +175,6 @@ const Banner = ({ partners, banners, contact }) => {
                           >
                             <div className="w-full lg:w-[250px] flex flex-col justify-center">
                               <div className="flex justify-start items-center gap-2 mb-4">
-                                <div className="w-10 h-[1px] bg-white" />
                                 <h1 className="font-medium text-sm lg:text-base">{getTranslatedValue(item?.description, i18n?.language)}</h1>
                               </div>
                               <p className="line-clamp-3 text-2xl xl:text-3xl font-bold leading-tight">
@@ -188,7 +187,7 @@ const Banner = ({ partners, banners, contact }) => {
                                 alt={`banner-img`}
                                 fill
                                 loading="eager"
-                                className="w-full mx-auto aspect-video object-contain"
+                                className="w-full mx-auto aspect-video object-cover"
                                 property={"true"}
                               />
                             </div>
@@ -238,7 +237,6 @@ const Banner = ({ partners, banners, contact }) => {
                     >
                       <div className="w-full sm:w-1/3 flex flex-col justify-center max-sm:items-center">
                         <div className="flex justify-start items-center gap-2 mb-4">
-                          <div className="w-10 h-[1px] bg-white" />
                           <h1 className="font-medium text-sm lg:text-base line-clamp-1">{getTranslatedValue(item?.description, i18n?.language)}</h1>
                         </div>
                         <p className="line-clamp-3 text-2xl xl:text-3xl font-bold leading-tight">
