@@ -44,12 +44,12 @@ const Banner = ({ partners, banners, contact }) => {
               <h1 className=" font-bold md:-translate-y-[16px] text-[20px] md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-poppins-regular text-black leading-tight">
                 {contact?.company_name ? contact?.company_name : "BarCodeTechnologies"}
               </h1>
-              <p className="text-[var(--banner-primary)] text-xs md:text-lg lg:text-xl max-w-full xl:max-w-[80%] leading-relaxed">
+              <p className="text-primary text-xs md:text-lg lg:text-xl max-w-full xl:max-w-[80%] leading-relaxed">
                 {t('banner.company.description')}
               </p>
               <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center gap-4 lg:gap-5 mt-6">
                 <Link href="all-products">
-                  <Button className="bg-[var(--banner-primary)] hover:bg-[var(--banner-primary)] hover:opacity-95 w-auto text-md md:text-lg lg:text-xl px-4 py-2 md:px-6 md:py-3 h-auto flex justify-center items-center gap-2 rounded-full">
+                  <Button className="bg-primary hover:bg-primary hover:opacity-95 w-auto text-md md:text-lg lg:text-xl px-4 py-2 md:px-6 md:py-3 h-auto flex justify-center items-center gap-2 rounded-full">
                     <h1>{t('banner.buttons.catalog')}</h1>
                     <ArrowRight className="mt-1" />
                   </Button>
@@ -83,7 +83,7 @@ const Banner = ({ partners, banners, contact }) => {
                 <div className="relative flex flex-col-reverse lg:flex-row justify-end items-end lg:items-center gap-4">
                   {/* Decorative Background */}
                   <div className="relative w-[150px] md:w-[200px] lg:w-[250px] h-[150px] md:h-[200px] lg:h-[250px] xl:w-[300px] xl:h-[300px] flex-shrink-0">
-                    <div className="w-full h-full aspect-square bg-[var(--banner-primary)] rounded-tl-[100%] rounded-tr-[8px] rounded-bl-[8px]" />
+                    <div className="w-full h-full aspect-square bg-primary rounded-tl-[100%] rounded-tr-[8px] rounded-bl-[8px]" />
                     <Image
                       className="w-[100px] md:w-[125px] lg:w-[160px] xl:w-[200px] absolute top-8 md:top-10 -right-4 md:-right-6"
                       src="/images/banner1.png"
@@ -132,7 +132,7 @@ const Banner = ({ partners, banners, contact }) => {
                                   className="w-7 h-7 md:w-10 md:h-10 lg:w-[75px] lg:h-[75px] mb-1 md:mb-4"
                                 />
                                 <div className="text-center">
-                                  <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-7xl font-bold text-[var(--banner-primary)]  md:mb-2">{item?.value}</h3>
+                                  <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-7xl font-bold text-primary  md:mb-2">{item?.value}</h3>
                                   <p className="text-[10px] sm:text-xs md:text-sm">{item?.label}</p>
                                 </div>
                               </div>
@@ -141,7 +141,7 @@ const Banner = ({ partners, banners, contact }) => {
                         })}
                       </CarouselContent>
                       <CarouselProgressBar
-                        progressClassName="bg-[var(--banner-primary)] bottom"
+                        progressClassName="bg-primary bottom"
                       />
                     </Carousel>
                   </div>
@@ -150,7 +150,7 @@ const Banner = ({ partners, banners, contact }) => {
             </section>
 
             {/* Banner Carousel Section */}
-            <section className="hidden w-full lg:flex justify-end items-end ">
+            <section className="lg:ml-4 hidden w-full lg:flex justify-end items-end ">
               <div className="w-[530px] xl:w-[640px]">
                 <Carousel
                   paginate={"false"}
@@ -173,16 +173,16 @@ const Banner = ({ partners, banners, contact }) => {
                             className="mt-1 relative flex flex-row p-4 gap-4 bg-[var(--banner-primary)] rounded-md"
                             href={`/${item?.category_id}/${item?.product_id}`}
                           >
-                            <div className="w-full lg:w-[300px] flex flex-col justify-center">
+                            <div className="w-full lg:w-[250px] flex flex-col justify-center">
                               <div className="flex justify-start items-center gap-2 mb-4">
                                 <div className="w-10 h-[1px] bg-white" />
-                                <h1 className="font-medium text-sm lg:text-base">{getTranslatedValue(item?.title, i18n?.language)}</h1>
+                                <h1 className="font-medium text-sm lg:text-base">{getTranslatedValue(item?.description, i18n?.language)}</h1>
                               </div>
                               <p className="line-clamp-3 text-2xl xl:text-3xl font-bold leading-tight">
-                                {getTranslatedValue(item?.description, i18n?.language)}
+                                {getTranslatedValue(item?.title, i18n?.language)}
                               </p>
                             </div>
-                            <div className="w-[250px] xl:w-[300px] h-[150px] rounded-2xl overflow-hidden flex-shrink-0">
+                            <div className="w-[250px] xl:w-[350px] h-[170px] rounded-2xl overflow-hidden flex-shrink-0">
                               <CustomImage
                                 src={`${imageUrl}${item?.image}`}
                                 alt={`banner-img`}
@@ -233,25 +233,25 @@ const Banner = ({ partners, banners, contact }) => {
                 return (
                   <CarouselItem key={i} className={`basis-full`}>
                     <Link
-                      className="w-full mt-1 relative flex flex-row p-4 gap-4 bg-[var(--banner-primary)] rounded-md"
+                      className="w-full mt-1 relative flex flex-col sm:flex-row p-4 pb-6 gap-4 bg-[var(--banner-primary)] rounded-md"
                       href={`/${item?.category_id}/${item?.product_id}`}
                     >
-                      <div className="w-full flex flex-col justify-center">
+                      <div className="w-full sm:w-1/3 flex flex-col justify-center max-sm:items-center">
                         <div className="flex justify-start items-center gap-2 mb-4">
                           <div className="w-10 h-[1px] bg-white" />
-                          <h1 className="font-medium text-sm lg:text-base line-clamp-1">{getTranslatedValue(item?.title, i18n?.language)}</h1>
+                          <h1 className="font-medium text-sm lg:text-base line-clamp-1">{getTranslatedValue(item?.description, i18n?.language)}</h1>
                         </div>
                         <p className="line-clamp-3 text-2xl xl:text-3xl font-bold leading-tight">
-                          {getTranslatedValue(item?.description, i18n?.language)}
+                          {getTranslatedValue(item?.title, i18n?.language)}
                         </p>
                       </div>
-                      <div className="w-[150px] sm:w-[250px] xl:w-[300px] h-[150px] rounded-2xl overflow-hidden flex-shrink-0">
+                      <div className="w-full sm:w-2/3 h-[150px] sm:h-[200px] rounded-2xl overflow-hidden flex-shrink-0">
                         <CustomImage
                           src={`${imageUrl}${item?.image}`}
                           alt={`banner-img`}
                           fill
                           loading="eager"
-                          className="w-full mx-auto aspect-video object-contain"
+                          className="w-full mx-auto aspect-[15/6] object-contain object-start"
                           property={"true"}
                         />
                       </div>
