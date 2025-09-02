@@ -251,7 +251,7 @@ const Banner = ({ partners, banners, contact }) => {
                           alt={`banner-img`}
                           fill
                           loading="eager"
-                          className="w-full mx-auto aspect-[15/6] object-contain object-start"
+                          className="bg-top w-full mx-auto aspect-[15/6] object-cover"
                           property={"true"}
                         />
                       </div>
