@@ -307,6 +307,8 @@
   },
   "product": {
     "addToCart": "Добавить в корзину",
+    "showMore": "Показать больше",
+    "showLess": "Показать меньше",
     "checkWarranty": "Проверить гарантию",
     "characteristics": "Характеристика",
     "features": "Особенности",

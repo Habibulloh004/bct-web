@@ -307,6 +307,8 @@
   },
   "product": {
     "addToCart": "Add to Cart",
+    "showMore": "Show More",
+    "showLess": "Show Less",
     "checkWarranty": "Check Warranty",
     "characteristics": "Characteristics",
     "features": "Features",

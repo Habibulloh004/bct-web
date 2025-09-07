@@ -307,6 +307,8 @@
   },
   "product": {
     "addToCart": "Savatchaga qo'shish",
+    "showMore": "Ko‘proq ko‘rsatish",
+    "showLess": "Yopish",
     "checkWarranty": "Kafolat tekshiruvi",
     "characteristics": "Xususiyatlar",
     "features": "Imkoniyatlar",
