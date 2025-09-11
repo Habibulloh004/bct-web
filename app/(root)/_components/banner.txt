@@ -12,9 +12,8 @@ import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { Separator } from "@/components/ui/separator";
 import { getTranslatedValue } from "@/lib/functions";
-import StatsQuadFlip from "./StatsQuadCarousel";
 
-const Banner = ({companyStats, partners, banners, contact }) => {
+const Banner = ({ partners, banners, contact }) => {
   const { t, i18n } = useTranslation();
   // hozirgi yilni olish
   const currentYear = new Date().getFullYear();
@@ -66,6 +65,7 @@ const Banner = ({companyStats, partners, banners, contact }) => {
               <h1 className="font-bold text-xl">{t('banner.partners.title')}</h1>
               <div className="max-w-11/12 xl:max-w-full">
                 <InfinityCard
+
                   type="online"
                   classNameImage={"h-14 md:h-18 rounded-md p-1"}
                   data={partners}
@@ -104,10 +104,47 @@ const Banner = ({companyStats, partners, banners, contact }) => {
                     />
                   </div>
                   {/* Stats Carousel */}
-                  <StatsQuadFlip
-                    stats={companyStats?.data}
-                  />
-
+                  <div className="w-full max-w-[120px] md:max-w-[200px] lg:max-w-[250px] xl:max-w-[300px] flex-shrink-0">
+                    <Carousel
+                      paginate={"false"}
+                      plugins={[
+                        emblaCarouselAutoplay({
+                          delay: 3000,
+                        }),
+                      ]}
+                      opts={{
+                        align: "center",
+                        loop: true
+                      }}
+                      className="w-full text-secondary"
+                    >
+                      <CarouselContent className="w-full">
+                        {stats?.map((item, i) => {
+                          return (
+                            <CarouselItem key={i} className="">
+                              <div className="w-[120px] md:w-[200px] lg:w-[250px] xl:w-[300px] bg-[#F0F0F0] text-black p-2 sm:p-3 md:p-4 lg:p-5 rounded-xl shadow flex flex-col h-[120px] md:h-[200px] lg:h-[250px] xl:h-[300px] justify-center items-center">
+                                <Image
+                                  src={`/stats/${i + 1}.png`}
+                                  alt={item?.label}
+                                  width={75}
+                                  height={75}
+                                  loading="eager"
+                                  className="w-7 h-7 md:w-10 md:h-10 lg:w-[75px] lg:h-[75px] mb-1 md:mb-4"
+                                />
+                                <div className="text-center">
+                                  <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-7xl font-bold text-primary  md:mb-2">{item?.value}</h3>
+                                  <p className="text-[10px] sm:text-xs md:text-sm">{item?.label}</p>
+                                </div>
+                              </div>
+                            </CarouselItem>
+                          );
+                        })}
+                      </CarouselContent>
+                      <CarouselProgressBar
+                        progressClassName="bg-primary bottom"
+                      />
+                    </Carousel>
+                  </div>
                 </div>
               </div>
             </section>

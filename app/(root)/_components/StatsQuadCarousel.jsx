@@ -14,8 +14,8 @@ import { useTranslation } from "react-i18next";
  */
 export default function StatsQuadFlip({
   stats = [],
-  delays = [2000, 3000, 4000, 5000],
-  flipDurationMs = 2000,
+  delays = [4000, 4500, 5000, 5500], // Increased delays for slower rotation
+  flipDurationMs = 3500, // Slower flip animation
 }) {
   // 4 ta slotga taqsimlash (i % 4)
   const indexed = useMemo(() => stats.map((item, idx) => ({ item, idx })), [stats]);
@@ -34,7 +34,7 @@ export default function StatsQuadFlip({
       <div className="block md:hidden w-full">
         <FlipSlotBook
           items={indexed}
-          delay={2000}
+          delay={4000} // Slower mobile delay
           flipDurationMs={flipDurationMs}
           startOffset={200}
           isMobile={true}
@@ -47,9 +47,9 @@ export default function StatsQuadFlip({
           <FlipSlotBook
             key={slotIdx}
             items={items}
-            delay={delays[slotIdx] ?? 2000}
+            delay={delays[slotIdx] ?? 4000}
             flipDurationMs={flipDurationMs}
-            startOffset={slotIdx * 1500} // ketma-ket aylanish
+            startOffset={slotIdx * 2000} // Increased offset for staggered effect
             isMobile={false}
           />
         ))}
@@ -60,8 +60,8 @@ export default function StatsQuadFlip({
 
 function FlipSlotBook({
   items = [],
-  delay = 3000,
-  flipDurationMs = 1200,
+  delay = 4000, // Slower default delay
+  flipDurationMs = 3000, // Slower flip animation
   startOffset = 0,
   isMobile = false,
 }) {
@@ -108,7 +108,7 @@ function FlipSlotBook({
   }, [queue.length, delay, flipDurationMs, startOffset]);
 
   const current = queue[0];
-  const next = queue[1] ?? queue[0];
+  const next = queue[1];
 
   return (
     <div className={`relative w-full ${isMobile ? "h-[150px]" : "h-full"}`}>
@@ -175,7 +175,7 @@ function FlipSlotBook({
 }
 
 function SlotContent({ item, imgIndex, isMobile = false }) {
-  const [i18n] = useTranslation();
+  const {i18n} = useTranslation();
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center text-gray-800 p-2">
