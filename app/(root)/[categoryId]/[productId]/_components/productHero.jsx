@@ -60,10 +60,8 @@ export default function ProductHero({ item, showInlineFeatures }) {
 
   return (
     <>
-      <section className="pb-4">
-        {/* Desktop: rasm CHAP | ma'lumot O‘NG. Mobile: avvalgidek */}
-        <div className="max-w-[1440px] w-11/12 md:w-10/12 mx-auto flex flex-col lg:flex-row lg:items-start justify-between gap-8">
-          {/* === IMAGE GALLERY === */}
+      <section className="pb-2">
+        <div className="max-w-[1440px] w-11/12 md:w-10/12 mx-auto flex flex-col lg:flex-row lg:items-start justify-between gap-4">
           <div className="order-1 w-full lg:w-1/2 flex flex-col gap-3">
             <div className="relative">
               {images.length > 1 && (
@@ -106,16 +104,16 @@ export default function ProductHero({ item, showInlineFeatures }) {
               )}
             </div>
 
-            {/* Thumbnails */}
             <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin">
               {images.map((img, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveImageIndex(index)}
-                  className={`relative min-w-[56px] w-[56px] h-[56px] rounded-md overflow-hidden border-2 transition-all flex-shrink-0 ${index === activeImageIndex
+                  className={`relative min-w-[56px] w-[56px] h-[56px] rounded-md overflow-hidden border-2 transition-all flex-shrink-0 ${
+                    index === activeImageIndex
                       ? "border-primary ring-2 ring-primary/20 shadow-md"
                       : "border-gray-200 hover:border-gray-400 hover:shadow-sm opacity-80 hover:opacity-100"
-                    }`}
+                  }`}
                 >
                   <Image
                     src={img ? `${imageUrl}${img}` : "/placeholder.svg"}
@@ -126,7 +124,7 @@ export default function ProductHero({ item, showInlineFeatures }) {
                 </button>
               ))}
             </div>
-            {/* === MOBILE/TABLET CONTROLS: rasmlar ostida === */}
+
             <div className="lg:hidden flex flex-wrap items-center gap-3 pt-3">
               <div className="max-sm:w-full inline-flex items-center gap-1">
                 <Button
@@ -169,7 +167,6 @@ export default function ProductHero({ item, showInlineFeatures }) {
             </div>
           </div>
 
-          {/* === DETAILS + CONTROLS + (DESKTOP) INLINE FEATURES === */}
           <div className="order-2 w-full lg:w-1/2 flex flex-col gap-4 lg:sticky lg:top-24">
             <div className="max-md:hidden">
               <p className="text-sm text-muted-foreground">
@@ -180,7 +177,6 @@ export default function ProductHero({ item, showInlineFeatures }) {
               </h1>
             </div>
 
-            {/* DESKTOP controls */}
             <div className="hidden lg:inline-flex gap-3 flex-wrap items-center">
               <div className="inline-flex items-center gap-1">
                 <Button
@@ -239,7 +235,10 @@ export default function ProductHero({ item, showInlineFeatures }) {
       </section>
 
       {isFullscreen && (
-        <div className="z-[999] fixed inset-0 bg-black/95 flex items-center justify-center" onClick={closeFullscreen}>
+        <div
+          className="z-[999] fixed inset-0 bg-black/95 flex items-center justify-center"
+          onClick={closeFullscreen}
+        >
           <button
             onClick={closeFullscreen}
             className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-all"

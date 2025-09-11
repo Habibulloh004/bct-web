@@ -16,9 +16,7 @@ export default async function Product({ params }) {
       {/* Desktopda tavsifni Hero ichida yon panelga joylaymiz */}
       <ProductHero item={productData} showInlineFeatures />
       {/* Mobil uchun eski (to‘liq) tavsif bloki qoladi */}
-      <div className="lg:hidden">
-        <ProductFeatures productData={productData} variant="full" />
-      </div>
+      <ProductFeatures productData={productData} variant="full" />
     </main>
   );
 }

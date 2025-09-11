@@ -1,88 +1,93 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
+import React from "react";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "@/components/ui/table";
 import { getTranslatedValue } from "@/lib/functions";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 export default function ProductFeatures({ productData, variant = "full", className }) {
   const { i18n, t } = useTranslation();
-  const name = getTranslatedValue(productData?.name, i18n.language);
-  const lead = getTranslatedValue(productData?.ads_title, i18n.language);
-  const desc = getTranslatedValue(productData?.description, i18n.language);
+  const currentLanguage = i18n?.language || "en";
+  const name = getTranslatedValue(productData?.name, currentLanguage);
+  const lead = getTranslatedValue(productData?.ads_title, currentLanguage);
 
-  // --- Yangi: inline (desktop) varianti uchun "show more/less"
-  const contentRef = useRef(null);
-  const [expanded, setExpanded] = useState(false);
-  const [isOverflowing, setIsOverflowing] = useState(false);
+  let descriptionData = { columns: [], rows: [] };
+  try {
+    const parsed = JSON.parse(productData?.description || "{}");
+    if (parsed && Array.isArray(parsed.columns) && Array.isArray(parsed.rows)) {
+      descriptionData = parsed;
+    }
+  } catch (error) {
+    console.error("Failed to parse description JSON:", error);
+  }
 
-  useEffect(() => {
-    if (!contentRef.current) return;
-    const el = contentRef.current;
-    const check = () => {
-      // scrollHeight > clientHeight bo‘lsa tugma ko‘rsatiladi
-      setIsOverflowing(el.scrollHeight - 2 > el.clientHeight);
-    };
+  const { columns, rows } = descriptionData;
 
-    check();
-
-    // resize observer bilan dinamik tekshirish
-    const ro = new ResizeObserver(check);
-    ro.observe(el);
-    if (el.parentElement) ro.observe(el.parentElement);
-    return () => ro.disconnect();
-  }, [desc, variant]);
+  const renderTable = () => (
+    <Table className="bg-white text-primary w-full text-sm border-collapse">
+      <TableHeader>
+        <TableRow className="bg-gray-100">
+          {columns.map((col) => (
+            <TableHead
+              key={col.id}
+              className="border border-gray-200 p-2 text-left font-semibold"
+            >
+              {getTranslatedValue(col.label, currentLanguage) || "-"}
+            </TableHead>
+          ))}
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {rows.map((row, index) => (
+          <TableRow key={index} className="even:bg-gray-50">
+            {columns.map((col) => (
+              <TableCell key={col.id} className="border border-gray-200 p-2">
+                {getTranslatedValue(row[col.id], currentLanguage) || "-"}
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
 
   if (variant === "inline") {
     return (
-      <aside
-        className={cn(
-          "w-full bg-white border rounded-xl p-2 shadow-sm",
-          className
-        )}
-      >
+      <aside className={cn("w-full bg-white border rounded-xl p-2 shadow-sm", className)}>
         <h2 className="text-xl font-semibold mb-1">{name}</h2>
-        {lead ? <p className="text-sm text-muted-foreground mb-3">{lead}</p> : null}
-
-        {/* Ko‘rinadigan zona: collapsed = ekranga sig‘adigancha, expanded = to‘liq */}
-        <div className="relative">
-          <div
-            ref={contentRef}
-            className={cn(
-              "prose prose-sm max-w-none transition-[max-height] duration-200 ease-out overflow-hidden",
-              // Ekranga sig‘sin: sticky panelda taxminiy bo‘shliqni hisobga olib  (100vh - ~240px)
-              expanded ? "h-full" : "max-h-[calc(100vh-550px)]"
-            )}
-            // content HTML
-            dangerouslySetInnerHTML={{ __html: desc || "" }}
+        {lead ? (
+          <p
+            className="text-sm text-muted-foreground mb-3"
+            dangerouslySetInnerHTML={{ __html: lead }}
           />
-
-          {/* Pastdan fade — faqat overflow bo‘lsa va collapsed holatda */}
-          {!expanded && isOverflowing && (
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent rounded-b-xl" />
-          )}
-        </div>
-        <div
-          className="h-9 cursor-pointer text-blue-500 underline"
-          onClick={() => setExpanded((v) => !v)}
-        >
-          {expanded ? (t("product.showLess") || "Yopish") : (t("product.showMore") || "Ko‘proq ko‘rsatish")}
-        </div>
+        ) : null}
       </aside>
     );
   }
 
-  // FULL (mobil) varianti — o‘zgarmagan
   return (
-    <div className={cn("bg-primary w-full py-4 h-full", className)}>
+    <div className={cn("w-full py-4 h-full", className)}>
       <div className="w-11/12 md:w-10/12 max-w-[1440px] mx-auto flex flex-col items-start">
-        <h1 className="text-white text-2xl font-bold">{name}</h1>
-        {lead ? <p className="w-full md:w-2/3 text-start text-white/95 pt-3">{lead}</p> : null}
-        <div
-          className="w-full pt-4 text-white prose prose-invert max-w-none"
-          dangerouslySetInnerHTML={{ __html: desc || "" }}
-        />
+        <aside className={cn("hidden max-lg:block w-full", className)}>
+          <h2 className="text-xl font-semibold mb-1">{name}</h2>
+          {lead ? (
+            <p
+              className="text-sm text-muted-foreground mb-3"
+              dangerouslySetInnerHTML={{ __html: lead }}
+            />
+          ) : null}
+        </aside>
+        <div className="w-full pt-4 text-white prose prose-invert max-w-none">
+          {renderTable()}
+        </div>
       </div>
     </div>
   );

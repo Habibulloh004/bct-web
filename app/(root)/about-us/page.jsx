@@ -27,10 +27,20 @@ export default async function AboutUs() {
     tag: ["vendors-about"],
     revalidate: 3600
   })
+    let companyStats = await getData({
+      endpoint: `/api/company-stats`,
+      tag: ["company-stats"],
+      revalidate: 3600
+    })
+    let experiments = await getData({
+      endpoint: `/api/experiments`,
+      tag: ["experiments"],
+      revalidate: 3600
+    })
   return (
     <main className='pt-8 space-y-4'>
       <AboutMain />
-      <Service />
+      <Service experiments={experiments?.data} companyStats={companyStats?.data} />
       <Vendors vendors={vendorsAbout?.data} />
       <MyProjects projects={projects?.data} />
       <MyClients partners={partners?.data} />

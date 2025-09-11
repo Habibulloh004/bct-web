@@ -3,11 +3,12 @@
 import React from 'react'
 import CompanyStats from './companyStats';
 import { useTranslation } from 'react-i18next';
+import { getTranslatedValue } from '@/lib/functions';
 
-export default function Service() {
-  const { t } = useTranslation();
+export default function Service({ experiments, companyStats }) {
+  const { t, i18n } = useTranslation();
 
-  const services = t('aboutUs.services.items', { returnObjects: true });
+  const services = experiments
 
   return (
     <>
@@ -24,13 +25,13 @@ export default function Service() {
               className="bg-[#F5F5F5] rounded-lg p-4 md:p-6 shadow-sm space-y-2"
             >
               <p className="text-md text-gray-500 font-medium">{String(index + 1).padStart(2, '0')}</p>
-              <h3 className="text-base md:text-lg font-semibold text-primary">{service.title}</h3>
-              <p className="text-sm text-gray-700">{service.description}</p>
+              <h3 className="text-base md:text-lg font-semibold text-primary">{getTranslatedValue(service.title, i18n?.language)}</h3>
+              <p className="text-sm text-gray-700">{getTranslatedValue(service.description, i18n?.language)}</p>
             </div>
           ))}
         </div>
       </div>
-      <CompanyStats />
+      <CompanyStats companyStats={companyStats} />
     </>
   )
 }

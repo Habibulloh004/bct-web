@@ -46,9 +46,19 @@ export default async function RootLayout({ children }) {
     tag: ["contacts"],
     revalidate: 3600
   })
+  let officialPartner = await getData({
+    endpoint: `/api/official-partner`,
+    tag: ["official-partner"],
+    revalidate: 3600
+  })
   let products = await getData({
     endpoint: `/api/products?page=1&limit=100`,
     tag: ["products"],
+    revalidate: 3600
+  })
+  let discount = await getData({
+    endpoint: `/api/discount`,
+    tag: ["discount"],
     revalidate: 3600
   })
   const colors = await getData({
@@ -62,7 +72,7 @@ export default async function RootLayout({ children }) {
   }))
 
   const cssVars = colorsToCSSVars(colorData);     // :root { --pr-card: ... }
-
+  console.log(officialPartner)
   const contactInfo = contact?.data[0]
   return (
     <html suppressHydrationWarning lang="en">
@@ -84,7 +94,7 @@ export default async function RootLayout({ children }) {
               speed={200}
               shadow="0 0 10px #29D, 0 0 5px #29D" // ixtiyoriy soyalar
             />
-            <Header products={products} contactInfo={contactInfo} />
+            <Header discount={discount} officialPartner={officialPartner} products={products} contactInfo={contactInfo} />
             <Toaster closeButton />
             <ColorsProvider >
               <div className="min-h-[calc(100vh-242px)] pb-4">{children}</div>

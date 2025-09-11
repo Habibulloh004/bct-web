@@ -25,22 +25,14 @@ import ChatWidget from "../chat/ChatWidget";
 import BackToTop from "./BackToTop";
 import { getTranslatedValue } from "@/lib/functions";
 import Marquee from "../ui/marquee";
+import { imageUrl } from "@/lib/utils";
 
-export default function Header({ products, contactInfo }) {
+export default function Header({ discount, officialPartner, products, contactInfo }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const filterProducts = products?.data?.filter(pr => Number(pr?.discount) > 0);
+  const randomProduct = products?.data?.find(pr => String(pr?.id) == String(discount?.product_id));
 
-  let randomProduct = null;
 
-  if (filterProducts?.length > 0) {
-    const randomIndex = Math.floor(Math.random() * filterProducts.length);
-    randomProduct = filterProducts[randomIndex];
-  }
-
-  // console.log({ randomProduct });
-
-  // Threshold holati: top bar balandligidan o‘tildimi?
   const [passedTopBar, setPassedTopBar] = useState(false);
 
   // Fixed rejimda nav balandligini spacerga beramiz
@@ -78,7 +70,6 @@ export default function Header({ products, contactInfo }) {
   }, []);
 
   const handleMobileMenuClose = () => setMobileMenuOpen(false);
-  console.log({ randomProduct, products })
   return (
     <>
       <header className="w-full z-[998] flex flex-col items-center max-md:overflow-hidden">
@@ -89,16 +80,13 @@ export default function Header({ products, contactInfo }) {
               <h1>{contactInfo?.email ? contactInfo?.email : "info@bctechnologies.uz"}</h1>
               <p>{contactInfo?.work_hours ? getTranslatedValue(contactInfo?.work_hours, i18n.language) : "Режим работы: ПН, ВТ, СР, ЧТ с 09:00 - 18:00 Выходной: ПТ"}</p>
             </div>
-            {randomProduct ? (
+            {discount && randomProduct ? (
               <div className="hidden md:flex justify-center items-center gap-1">
                 <Button className="bg-white text-black hover:bg-white/90 h-auto p-0 px-3 py-1 text-[11px] rounded-full">
                   {t("common.promo_title")}
                 </Button>
                 <h1 className="text-white text-[11px] line-clamp-1">
-                  {t("common.promotion", {
-                    discount: randomProduct?.discount,
-                    name: getTranslatedValue(randomProduct?.name, i18n.language),
-                  })}
+                  {getTranslatedValue(discount?.title, i18n.language)}
 
                 </h1>
                 <Link href={`/${randomProduct?.category_id}/${randomProduct?.id}`} className="text-white text-[12px] xl:text-[14px] font-poppins-italic underline">
@@ -116,7 +104,7 @@ export default function Header({ products, contactInfo }) {
           </section>
 
         </div>
-        {randomProduct ? (
+        {discount && randomProduct ? (
           <div className="bg-primary/15 max-md:block hidden max-sm:text-xs overflow-hidden">
             <Marquee pauseOnHover className="[--duration:20s]">
               <div className="w-full mx-auto hidden max-md:flex justify-center items-center gap-1">
@@ -124,10 +112,7 @@ export default function Header({ products, contactInfo }) {
                   {t("common.promo_title")}
                 </Button>
                 <h1 className="text-black text-[11px]">
-                  {t("common.promotion", {
-                    name: getTranslatedValue(randomProduct?.name, i18n.language),
-                  })}
-
+                  {getTranslatedValue(discount?.title, i18n.language)}
                 </h1>
                 <Link href={`/${randomProduct?.category_id}/${randomProduct?.id}`} className="text-primary text-[14px] font-poppins-italic underline">
                   {t("common.buy_now")}
@@ -206,7 +191,7 @@ export default function Header({ products, contactInfo }) {
             {/* O'ng: Qidiruv, Cart, User, Language */}
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="hidden md:flex justify-end items-center gap-2">
-                <Image src="/myClients/zebraH.png" alt="img" width={100} height={100} className="h-[27px] w-[83px]" />
+                <Image src={officialPartner ? `${imageUrl}${officialPartner?.image}` : "/myClients/zebraH.png"} alt="img" width={100} height={100} className="h-[27px] w-[83px]" />
                 <h1 className="text-end w-2/7 text-[10px]">{t("header.zebra")}</h1>
               </div>
               <Link href="/warranty-check">

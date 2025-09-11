@@ -3,13 +3,16 @@
 import React from "react";
 import Image from "next/image";
 import { useTranslation } from 'react-i18next';
+import { getTranslatedValue } from "@/lib/functions";
 
-const CompanyStats = () => {
-  const { t } = useTranslation();
+const CompanyStats = ({ companyStats }) => {
+  const { t, i18n } = useTranslation();
 
-  const stats = t('aboutUs.stats.items', { returnObjects: true });
-  const statsTop = stats.slice(0, 4);  
-  const statsBottom = stats.slice(4, 8);
+  const stats = companyStats ?? [];
+  const mid = Math.floor(stats.length / 2);
+  const statsTop = stats.slice(0, mid);
+  const statsBottom = stats.slice(mid);
+
 
   return (
     <div
@@ -28,8 +31,8 @@ const CompanyStats = () => {
               className="bg-white text-black p-4 md:p-5 rounded-xl shadow flex flex-col sm:flex-row sm:items-center sm:justify-between min-h-[120px] md:min-h-36"
             >
               <div className="mb-3 sm:mb-0">
-                <h3 className="text-xl md:text-2xl font-bold">{stat.value}</h3>
-                <p className="text-xs md:text-sm mt-1">{stat.label}</p>
+                <h3 className="text-xl md:text-2xl font-bold">{stat.title}</h3>
+                <p className="text-xs md:text-sm mt-1">{getTranslatedValue(stat.description, i18n.language)}</p>
               </div>
               <Image
                 src={`/stats/${idx + 1}.png`}
@@ -54,8 +57,8 @@ const CompanyStats = () => {
               className="bg-white text-black p-4 md:p-5 rounded-xl shadow flex flex-col sm:flex-row sm:items-center sm:justify-between min-h-[120px] md:min-h-36"
             >
               <div className="mb-3 sm:mb-0">
-                <h3 className="text-xl md:text-2xl font-bold">{stat.value}</h3>
-                <p className="text-xs md:text-sm mt-1">{stat.label}</p>
+                <h3 className="text-xl md:text-2xl font-bold">{stat.title}</h3>
+                <p className="text-xs md:text-sm mt-1">{getTranslatedValue(stat.description, i18n.language)}</p>
               </div>
               <Image
                 src={`/stats/${idx + 5}.png`}
