@@ -35,9 +35,9 @@ const poppinsRegular = Montserrat({
 });
 
 export const metadata = {
-  title: "BCT Market – Мобильные телефоны и современная электроника",
+  title: "Bar Code Technologies — Автоматизация бизнес-процессов для Horeca и Retail",
   description:
-    "BCT Market – надежный онлайн-магазин мобильных телефонов, POS-терминалов, аксессуаров и другой современной техники. Быстрая доставка и гарантия качества!",
+    "Компания Bar Code Technologies с 2005 года помогает бизнесам в сфере Horeca и Retail оптимизировать процессы, обучать сотрудников, внедрять современные методы управления и подключать инструменты анализа продаж и закупок.",
 };
 
 export default async function RootLayout({ children }) {
