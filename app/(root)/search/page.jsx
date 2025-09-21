@@ -6,11 +6,10 @@ export default async function SearchPage() {
       endpoint: `/api/currency`,
       revalidate: 3600,
     });
-    const currencyData = currency?.conversion_rates?.UZS || 13000; // Default qiymat
   
   return (
     <div className=" pb-10">
-      <SearchClient currency={currencyData} />
+      <SearchClient currency={currency} />
     </div>
   );
 }

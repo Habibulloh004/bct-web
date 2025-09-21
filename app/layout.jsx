@@ -76,8 +76,6 @@ export default async function RootLayout({ children }) {
     endpoint: `/api/currency`,
     revalidate: 3600,
   });
-  const currencyData = currency?.conversion_rates?.UZS || 13000; // Default qiymat
-
 
   const cssVars = colorsToCSSVars(colorData);     // :root { --pr-card: ... }
   const contactInfo = contact?.data[0]
@@ -101,7 +99,7 @@ export default async function RootLayout({ children }) {
               speed={200}
               shadow="0 0 10px #29D, 0 0 5px #29D" // ixtiyoriy soyalar
             />
-            <Header currency={currencyData} discount={discount} officialPartner={officialPartner} products={products} contactInfo={contactInfo} />
+            <Header currency={currency} discount={discount} officialPartner={officialPartner} products={products} contactInfo={contactInfo} />
             <Toaster closeButton />
             <ColorsProvider >
               <CurrencyProvider>

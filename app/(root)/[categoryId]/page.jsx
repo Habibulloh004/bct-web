@@ -21,12 +21,10 @@ export default async function CategoryPage({ searchParams, params }) {
     endpoint: `/api/currency`,
     revalidate: 3600,
   });
-  const currencyData = currency?.conversion_rates?.UZS || 13000; // Default qiymat
-
 
   return (
     <main className='font-poppins'>
-      <ProductsList currency={currencyData} limit={limit} categoryData={categoryData} products={products} page={page} />
+      <ProductsList currency={currency} limit={limit} categoryData={categoryData} products={products} page={page} />
     </main>
   )
 }

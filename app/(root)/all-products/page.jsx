@@ -16,11 +16,10 @@ export default async function AllProduct({ searchParams, params }) {
     endpoint: `/api/currency`,
     revalidate: 3600,
   });
-  const currencyData = currency?.conversion_rates?.UZS || 13000; // Default qiymat
 
   return (
     <main className=''>
-      <ProductsList currency={currencyData} url="/all-products" limit={limit} categoryData={{
+      <ProductsList currency={currency} url="/all-products" limit={limit} categoryData={{
         name:"All products***Все продукты***Barcha mahsulotlar"
       }} products={products} page={page} />
     </main>

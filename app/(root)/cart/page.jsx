@@ -8,9 +8,8 @@ export default async function Cart() {
     endpoint: `/api/currency`,
     revalidate: 3600,
   });
-  const currencyData = currency?.conversion_rates?.UZS || 13000; // Default qiymat
 
   return (
-    <CartComponent currency={currencyData} />
+    <CartComponent currency={currency} />
   )
 }

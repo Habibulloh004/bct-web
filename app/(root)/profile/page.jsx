@@ -8,9 +8,8 @@ export default async function ProfilePage() {
     revalidate: 3600,
   });
   
-  const currencyData = currency?.conversion_rates?.UZS || 13000; // Default qiymat
 
   return (
-    <ProfileComponent currency={currencyData} />
+    <ProfileComponent currency={currency} />
   )
 }

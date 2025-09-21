@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-
+const currencyApiUrl = process.env.CURRENCY_API || "https://v6.exchangerate-api.com/v6/286efca60d3bb4107182a63f/latest/USD";
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*", // barcha domenlarga ruxsat
   "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
@@ -14,13 +14,14 @@ export async function OPTIONS() {
 // GET uchun
 export async function GET() {
   const res = await fetch(
-    "https://v6.exchangerate-api.com/v6/286efca60d3bb4107182a63f/latest/USD",
+    currencyApiUrl,
     {
       next: { revalidate: 43200 }, // 12 soat cache
     }
   );
 
-  const data = await res.json();
+  const currencyData = await res.json();
+  const data = currencyData.conversion_rates?.UZS || 13000; // Default qiymat
 
   return NextResponse.json(data, { headers: CORS_HEADERS });
 }

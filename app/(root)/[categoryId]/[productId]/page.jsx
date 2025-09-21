@@ -14,12 +14,11 @@ export default async function Product({ params }) {
     endpoint: `/api/currency`,
     revalidate: 3600,
   });
-  const currencyData = currency?.conversion_rates?.UZS || 13000; // Default qiymat
   console.log({ productData });
   return (
     <main className="pt-8 font-poppins">
       {/* Desktopda tavsifni Hero ichida yon panelga joylaymiz */}
-      <ProductHero currency={currencyData} item={productData} showInlineFeatures />
+      <ProductHero currency={currency} item={productData} showInlineFeatures />
       {/* Mobil uchun eski (to‘liq) tavsif bloki qoladi */}
       <ProductFeatures productData={productData} variant="full" />
     </main>
