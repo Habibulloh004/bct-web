@@ -72,7 +72,6 @@ export default async function RootLayout({ children }) {
   }))
 
   const cssVars = colorsToCSSVars(colorData);     // :root { --pr-card: ... }
-  console.log(officialPartner)
   const contactInfo = contact?.data[0]
   return (
     <html suppressHydrationWarning lang="en">
