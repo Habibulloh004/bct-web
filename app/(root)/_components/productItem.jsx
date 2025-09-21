@@ -51,15 +51,15 @@ export default function ProductItem({ item }) {
   return (
     <div
       onClick={goToDetails}
-      className="flex-col-reverse cursor-pointer rounded-2xl p-2 flex gap-4 transition-all duration-300
+      className="h-full flex-col-reverse cursor-pointer rounded-2xl p-2 flex gap-4 transition-all duration-300
                  bg-[var(--pr-card)] hover:bg-[var(--pr-card)] hover:shadow-lg"
     >
       <div className="flex flex-col justify-between gap-2 w-full h-full p-2">
         <div className="space-y-1">
-          <h1 className="text-base font-bold text-[var(--pr-card-text)]">
+          <h1 className="text-sm sm:text-base font-bold text-[var(--pr-card-text)] line-clamp-1">
             {getTranslatedValue(item?.name || "", i18n.language)}
           </h1>
-          <p className="text-sm text-[var(--pr-card-text)] font-semibold line-clamp-2">
+          <p className="text-[12px] sm:text-sm text-[var(--pr-card-text)] font-semibold line-clamp-2">
             {getTranslatedValue(item?.ads_title || "", i18n.language)}
           </p>
         </div>
@@ -67,7 +67,7 @@ export default function ProductItem({ item }) {
         {!cartItem ? (
           <Button
             variant="default"
-            className="bg-[var(--pr-card-btn)] text-primary font-bold hover:bg-[var(--pr-card-btn)] hover:opacity-85 h-9 rounded-xl w-full transition-all duration-200 hover:scale-105"
+            className="bg-[var(--pr-card-btn)] text-primary font-bold hover:bg-[var(--pr-card-btn)] hover:opacity-85 h-9 rounded-xl w-full transition-all duration-200 hover:scale-105 max-sm:text-[12px]"
             onClick={(e) => {
               e.stopPropagation();
               addProduct(item);
