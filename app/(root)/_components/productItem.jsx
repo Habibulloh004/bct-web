@@ -3,13 +3,14 @@
 import CustomImage from "@/components/shared/customImage";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { getTranslatedValue } from "@/lib/functions";
+import { convertPriceToUzs, getTranslatedValue } from "@/lib/functions";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useCartStore } from "@/store/useCartStore";
 import { formatNumber, imageUrl } from "@/lib/utils";
 import Autoplay from "embla-carousel-autoplay";
+import { useCurrency } from "@/components/context/CurrencyContext";
 
 export default function ProductItem({ item }) {
   const { i18n } = useTranslation();
@@ -47,6 +48,7 @@ export default function ProductItem({ item }) {
   const handleMouseLeave = () => setIsHovered(false);
 
   const hasMultipleImages = (item?.image || []).length > 1;
+  const { convert } = useCurrency();
 
   return (
     <div
@@ -73,7 +75,7 @@ export default function ProductItem({ item }) {
               addProduct(item);
             }}
           >
-            {item?.price ? formatNumber(item.price) : 1000} сум
+            {item?.price ? formatNumber(convert(item?.price)) : 1000} сум
           </Button>
         ) : (
           <div

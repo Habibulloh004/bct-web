@@ -7,9 +7,10 @@ import { useCartStore } from "@/store/useCartStore";
 import { getTranslatedValue } from "@/lib/functions";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
-import { getInitialsFromName, imageUrl } from "@/lib/utils";
+import { formatNumber, getInitialsFromName, imageUrl } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, Minus, Plus, X, ZoomIn, ZoomOut } from "lucide-react";
 import ProductFeatures from "./productFeatures";
+import { useCurrency } from "@/components/context/CurrencyContext";
 
 export default function ProductHero({ item, showInlineFeatures }) {
   const { t, i18n } = useTranslation();
@@ -57,7 +58,7 @@ export default function ProductHero({ item, showInlineFeatures }) {
     }
   };
   const handleMouseUp = () => setIsDragging(false);
-
+  const { convert } = useCurrency();
   return (
     <>
       <section className="pb-2">
@@ -109,11 +110,10 @@ export default function ProductHero({ item, showInlineFeatures }) {
                 <button
                   key={index}
                   onClick={() => setActiveImageIndex(index)}
-                  className={`relative min-w-[56px] w-[56px] h-[56px] rounded-md overflow-hidden border-2 transition-all flex-shrink-0 ${
-                    index === activeImageIndex
-                      ? "border-primary ring-2 ring-primary/20 shadow-md"
-                      : "border-gray-200 hover:border-gray-400 hover:shadow-sm opacity-80 hover:opacity-100"
-                  }`}
+                  className={`relative min-w-[56px] w-[56px] h-[56px] rounded-md overflow-hidden border-2 transition-all flex-shrink-0 ${index === activeImageIndex
+                    ? "border-primary ring-2 ring-primary/20 shadow-md"
+                    : "border-gray-200 hover:border-gray-400 hover:shadow-sm opacity-80 hover:opacity-100"
+                    }`}
                 >
                   <Image
                     src={img ? `${imageUrl}${img}` : "/placeholder.svg"}
@@ -124,7 +124,9 @@ export default function ProductHero({ item, showInlineFeatures }) {
                 </button>
               ))}
             </div>
-
+            <h1 className="md:hidden text-black/40 text-2xl md:text-4xl font-bold">
+              {item?.price ? formatNumber(convert(item?.price)) : 1000} сум
+            </h1>
             <div className="lg:hidden flex flex-wrap items-center gap-3 pt-3">
               <div className="max-sm:w-full inline-flex items-center gap-1">
                 <Button
@@ -175,6 +177,9 @@ export default function ProductHero({ item, showInlineFeatures }) {
               <h1 className="text-2xl md:text-4xl font-bold">
                 {getTranslatedValue(item?.name, i18n.language)}
               </h1>
+              <h1 className="text-black/40 text-2xl md:text-4xl font-bold">
+                {item?.price ? formatNumber(convert(item?.price)) : 1000} сум
+              </h1>
             </div>
 
             <div className="hidden lg:inline-flex gap-3 flex-wrap items-center">
@@ -224,6 +229,7 @@ export default function ProductHero({ item, showInlineFeatures }) {
               </div>
             )}
           </div>
+
         </div>
 
         <div className="hidden w-full h-11 bg-black text-white items-center justify-center font-bold mt-6">

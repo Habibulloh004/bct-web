@@ -6,6 +6,7 @@ import { getData } from '@/actions/get'
 import Manufacture from './_components/manufacturer'
 import Vendors from './_components/vendors'
 import VendorsC from './_components/vendorsC'
+import { convertPriceToUzs } from '@/lib/functions'
 
 export default async function HomePage() {
   const categories = await getData({
@@ -46,7 +47,7 @@ export default async function HomePage() {
     tag: ["company-stats"],
     revalidate: 3600
   })
-  // console.log({ banners, categories, products, partners, vendors })
+ // console.log({ banners, categories, products, partners, vendors })
   return (
     <main className='max-w-[1440px] w-11/12 mx-auto font-poppins space-y-2 md:space-y-5'>
       <Banner companyStats={companyStats} contact={contact?.data[0]} partners={partners?.data} banners={banners?.data} />

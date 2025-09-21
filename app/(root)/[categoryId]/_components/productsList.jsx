@@ -76,7 +76,7 @@ export default function ProductsList({ url, limit, categoryData, page, products 
 
   return (
     <div className="max-w-[1440px] mx-auto w-11/12 space-y-4 pt-4">
-      <div className="w-11/12 mx-auto flex justify-between items-center flex-wrap gap-4">
+      <div className="w-full mx-auto flex justify-between items-center flex-wrap gap-4">
         <h1 className="font-medium text-[#323232] text-3xl">
           {getTranslatedValue(categoryData?.name, i18n.language) || "Все товары"}
         </h1>

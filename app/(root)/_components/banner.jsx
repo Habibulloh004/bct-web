@@ -11,7 +11,7 @@ import InfinityCard from "@/components/shared/infinityCard";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { Separator } from "@/components/ui/separator";
-import { getTranslatedValue } from "@/lib/functions";
+import { convertPriceToUzs, getTranslatedValue } from "@/lib/functions";
 import StatsQuadFlip from "./StatsQuadCarousel";
 
 const Banner = ({companyStats, partners, banners, contact }) => {

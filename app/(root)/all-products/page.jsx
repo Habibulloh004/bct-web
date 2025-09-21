@@ -15,7 +15,7 @@ export default async function AllProduct({ searchParams, params }) {
   return (
     <main className=''>
       <ProductsList url="/all-products" limit={limit} categoryData={{
-        name:"Все продукты***All products***Barcha mahsulotlar"
+        name:"All products***Все продукты***Barcha mahsulotlar"
       }} products={products} page={page} />
     </main>
   )
