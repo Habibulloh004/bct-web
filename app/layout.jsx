@@ -9,7 +9,6 @@ import { getBasicData, getData } from "@/actions/get";
 import NextTopLoader from "nextjs-toploader";
 import { ColorsProvider } from "@/components/providers/ColorsContext";
 import { colorsToCSSVars } from "@/lib/getColors";
-import { CurrencyProvider } from "@/components/context/CurrencyContext";
 
 // Montserrat normal (umumiy)
 const poppins = Montserrat({
@@ -102,9 +101,7 @@ export default async function RootLayout({ children }) {
             <Header currency={currency} discount={discount} officialPartner={officialPartner} products={products} contactInfo={contactInfo} />
             <Toaster closeButton />
             <ColorsProvider >
-              <CurrencyProvider>
                 <div className="min-h-[calc(100vh-242px)] pb-4">{children}</div>
-              </CurrencyProvider>
             </ColorsProvider>
             <Footer contactInfo={contactInfo} />
           </UserMigrationProvider>

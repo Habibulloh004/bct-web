@@ -10,8 +10,6 @@ import { useTranslation } from "react-i18next";
 import { useCartStore } from "@/store/useCartStore";
 import { formatNumber, imageUrl } from "@/lib/utils";
 import Autoplay from "embla-carousel-autoplay";
-import { useCurrency } from "@/components/context/CurrencyContext";
-import { Currency } from "lucide-react";
 
 export default function ProductItem({currency, item }) {
   const { i18n } = useTranslation();

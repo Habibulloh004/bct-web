@@ -10,7 +10,6 @@ import Link from "next/link";
 import { formatNumber, getInitialsFromName, imageUrl } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, Minus, Plus, X, ZoomIn, ZoomOut } from "lucide-react";
 import ProductFeatures from "./productFeatures";
-import { useCurrency } from "@/components/context/CurrencyContext";
 
 export default function ProductHero({ item, showInlineFeatures, currency }) {
   const { t, i18n } = useTranslation();
@@ -58,7 +57,6 @@ export default function ProductHero({ item, showInlineFeatures, currency }) {
     }
   };
   const handleMouseUp = () => setIsDragging(false);
-  const { convert } = useCurrency();
   return (
     <>
       <section className="pb-2">
