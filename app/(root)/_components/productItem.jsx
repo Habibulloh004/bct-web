@@ -3,7 +3,7 @@
 import CustomImage from "@/components/shared/customImage";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { convertPriceToUzs, getTranslatedValue } from "@/lib/functions";
+import { convertPriceToUzs, convertUsdtoUzb, getTranslatedValue } from "@/lib/functions";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,8 +11,9 @@ import { useCartStore } from "@/store/useCartStore";
 import { formatNumber, imageUrl } from "@/lib/utils";
 import Autoplay from "embla-carousel-autoplay";
 import { useCurrency } from "@/components/context/CurrencyContext";
+import { Currency } from "lucide-react";
 
-export default function ProductItem({ item }) {
+export default function ProductItem({currency, item }) {
   const { i18n } = useTranslation();
   const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
@@ -48,7 +49,6 @@ export default function ProductItem({ item }) {
   const handleMouseLeave = () => setIsHovered(false);
 
   const hasMultipleImages = (item?.image || []).length > 1;
-  const { convert } = useCurrency();
 
   return (
     <div
@@ -75,7 +75,7 @@ export default function ProductItem({ item }) {
               addProduct(item);
             }}
           >
-            {item?.price ? formatNumber(convert(item?.price)) : 1000} сум
+            {item?.price ? formatNumber(convertUsdtoUzb(item?.price, currency)) : 1000} сум
           </Button>
         ) : (
           <div

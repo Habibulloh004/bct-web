@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
 import { useCartStore } from "@/store/useCartStore";
 import { useUserStore } from "@/store/useUserStore";
-import { getTranslatedValue } from "@/lib/functions";
+import { convertUsdtoUzb, getTranslatedValue } from "@/lib/functions";
 import { formatNumber, getInitialsFromName } from "@/lib/utils";
 import { createOrder } from "@/actions/post";
 import { toast } from "sonner";
@@ -18,7 +18,7 @@ import { Loader2, CheckCircle2, Home } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useOrderStore } from "@/store/useOrderStore";
 
-export default function OrderConfirmForm() {
+export default function OrderConfirmForm({currency}) {
   const { t, i18n } = useTranslation();
   const { items, clearCart } = useCartStore();
   const { user, isAuthenticated } = useUserStore();
@@ -43,7 +43,7 @@ export default function OrderConfirmForm() {
   const onSubmit = async (values) => {
     console.log("✅ Order form values:", values);
     console.log("✅ Cart items:", items);
-    
+
     // Validate that we have items in cart
     if (!items || items.length === 0) {
       toast.error(t('confirmOrder.errors.noItems') || 'Корзина пуста', {
@@ -76,7 +76,7 @@ export default function OrderConfirmForm() {
       formData.append("phone", values.phone.trim());
       formData.append("pay_type", values.paymentType);
       formData.append("products", JSON.stringify(products));
-      
+
       // ✅ Zustand store'dan user ID olish (localStorage o'rniga)
       if (isAuthenticated && user?.id) {
         formData.append("client_id", user.id.toString());
@@ -103,7 +103,7 @@ export default function OrderConfirmForm() {
           phone: values.phone,
           paymentType: values.paymentType,
           items: [...items],
-          totalAmount: items.reduce((total, item) => total + (item.price * item.count), 0),
+          totalAmount: items.reduce((total, item) => total + (convertUsdtoUzb(item?.price, currency) * item.count), 0),
           created_at: new Date().toISOString()
         });
 
@@ -121,7 +121,7 @@ export default function OrderConfirmForm() {
           phone: values.phone,
           paymentType: values.paymentType,
           items: [...items],
-          totalAmount: items.reduce((total, item) => total + (item.price * item.count), 0)
+          totalAmount: items.reduce((total, item) => total + (convertUsdtoUzb(item?.price, currency)  * item.count), 0)
         });
 
         // Clear cart and reset form
@@ -186,7 +186,7 @@ export default function OrderConfirmForm() {
   ];
 
   // Calculate total
-  const totalAmount = items?.reduce((total, item) => total + (item.price * item.count), 0) || 0;
+  const totalAmount = items?.reduce((total, item) => total + (convertUsdtoUzb(item?.price, currency)  * item.count), 0) || 0;
 
   // Success Screen
   if (orderSuccess) {
@@ -339,7 +339,7 @@ export default function OrderConfirmForm() {
                         <div className="flex items-center gap-2">
                           <span className="text-muted-foreground text-sm">{item.count}x</span>
                           <span className="font-medium text-sm">
-                            {formatNumber(item.price * item?.count)} {t('common.currency') || 'сум'}
+                            {formatNumber(convertUsdtoUzb(item?.price, currency))} {t('common.currency') || 'сум'}
                           </span>
                         </div>
                       </div>

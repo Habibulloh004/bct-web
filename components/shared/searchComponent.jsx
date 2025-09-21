@@ -6,13 +6,13 @@ import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { Search, X } from "lucide-react";
 import CustomImage from "@/components/shared/customImage";
-import { getTranslatedValue } from "@/lib/functions";
+import { convertUsdtoUzb, getTranslatedValue } from "@/lib/functions";
 import { getData } from "@/actions/get";
 import { formatNumber, imageUrl } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
-export default function SearchComponent() {
+export default function SearchComponent({ currency }) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
@@ -176,7 +176,7 @@ export default function SearchComponent() {
           {getTranslatedValue(item.name || "", i18n.language)}
         </p>
         <p className="text-sm text-blue-600 font-semibold mt-1">
-          {formatNumber(item.price)} {t("common.currency")}
+          {formatNumber(convertUsdtoUzb(item?.price, currency))} {t("common.currency")}
         </p>
       </div>
     </button>

@@ -9,7 +9,7 @@ import ProductItem from './productItem'
 import { useTranslation } from 'react-i18next'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 
-export default function Discounts({ products }) {
+export default function Discounts({ currency, products }) {
   const productsData = products?.data
   const { t } = useTranslation();
   if (productsData?.length > 0) {
@@ -23,7 +23,7 @@ export default function Discounts({ products }) {
               key={index}
               className="w-[calc(100%/2-1rem)] sm:w-[calc(100%/3-1rem)] md:w-[calc(100%/4-1rem)] lg:w-[calc(100%/5-1rem)] 2xl:w-[calc(100%/6-1rem)]"
             >
-              <ProductItem item={item} />
+              <ProductItem currency={currency} item={item} />
             </div>
           ))}
         </div>

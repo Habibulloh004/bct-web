@@ -1,9 +1,15 @@
 import SearchClient from "./_components/SearchClient";
 
-export default function SearchPage() {
+export default async function SearchPage({currency}) {
+     const currency = await getBasicData({
+      endpoint: `/api/currency`,
+      revalidate: 3600,
+    });
+    const currencyData = currency?.conversion_rates?.UZS || 13000; // Default qiymat
+  
   return (
     <div className=" pb-10">
-      <SearchClient />
+      <SearchClient currency={currencyData} />
     </div>
   );
 }

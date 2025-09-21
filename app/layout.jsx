@@ -5,7 +5,7 @@ import Footer from "@/components/shared/footer";
 import { Toaster } from "sonner";
 import LanguageProvider from "@/components/providers/LanguageProvider";
 import UserMigrationProvider from "@/components/providers/UserMigrationProvider";
-import { getData } from "@/actions/get";
+import { getBasicData, getData } from "@/actions/get";
 import NextTopLoader from "nextjs-toploader";
 import { ColorsProvider } from "@/components/providers/ColorsContext";
 import { colorsToCSSVars } from "@/lib/getColors";
@@ -72,6 +72,13 @@ export default async function RootLayout({ children }) {
     key: cl?.email
   }))
 
+  const currency = await getBasicData({
+    endpoint: `/api/currency`,
+    revalidate: 3600,
+  });
+  const currencyData = currency?.conversion_rates?.UZS || 13000; // Default qiymat
+
+
   const cssVars = colorsToCSSVars(colorData);     // :root { --pr-card: ... }
   const contactInfo = contact?.data[0]
   return (
@@ -94,7 +101,7 @@ export default async function RootLayout({ children }) {
               speed={200}
               shadow="0 0 10px #29D, 0 0 5px #29D" // ixtiyoriy soyalar
             />
-            <Header discount={discount} officialPartner={officialPartner} products={products} contactInfo={contactInfo} />
+            <Header currency={currencyData} discount={discount} officialPartner={officialPartner} products={products} contactInfo={contactInfo} />
             <Toaster closeButton />
             <ColorsProvider >
               <CurrencyProvider>

@@ -3,11 +3,11 @@
 import { Input } from "@/components/ui/input";
 import CustomImage from "@/components/shared/customImage";
 import { useTranslation } from "react-i18next";
-import { getTranslatedValue } from "@/lib/functions";
+import { convertUsdtoUzb, getTranslatedValue } from "@/lib/functions";
 import { useState, useEffect } from "react";
 import { imageUrl } from "@/lib/utils";
 
-export default function SearchClient() {
+export default function SearchClient({ currency }) {
   const { i18n } = useTranslation();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
@@ -61,7 +61,7 @@ export default function SearchClient() {
               {getTranslatedValue(item.name || "", i18n.language)}
             </h3>
             <p className="text-red-500 font-semibold text-sm">
-              {item.price?.toLocaleString("ru-RU")} сум
+              {convertUsdtoUzb(item?.price, currency)?.toLocaleString("ru-RU")} сум
             </p>
           </div>
         ))}

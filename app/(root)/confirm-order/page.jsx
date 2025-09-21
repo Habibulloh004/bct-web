@@ -1,20 +1,15 @@
-"use client";
-
-import { Separator } from '@/components/ui/separator'
 import React from 'react'
-import OrderConfirmForm from './_components/orderConfirmForm'
-import { useTranslation } from 'react-i18next'
+import ConfirmOrder from './_components/ConfirmOrder'
+import { getBasicData } from '@/actions/get';
 
-export default function ConfirmOrder() {
-  const { t } = useTranslation();
+export default async function ConfirmOrderPage() {
+   const currency = await getBasicData({
+    endpoint: `/api/currency`,
+    revalidate: 3600,
+  });
+  const currencyData = currency?.conversion_rates?.UZS || 13000; // Default qiymat
 
   return (
-    <main className=" w-11/12 mx-auto max-w-[1440px] space-y-4">
-      <div className="flex justify-center items-center">
-        <h1 className="text-center font-bold text-xl md:text-2xl px-4">{t('confirmOrder.title')}</h1>
-      </div>
-      <Separator />
-      <OrderConfirmForm/>
-    </main>
+    <ConfirmOrder currency={currencyData} />
   )
 }

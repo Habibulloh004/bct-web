@@ -27,7 +27,7 @@ import { getTranslatedValue } from "@/lib/functions";
 import Marquee from "../ui/marquee";
 import { imageUrl } from "@/lib/utils";
 
-export default function Header({ discount, officialPartner, products, contactInfo }) {
+export default function Header({ currency, discount, officialPartner, products, contactInfo }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const randomProduct = products?.data?.find(pr => String(pr?.id) == String(discount?.product_id));
@@ -199,7 +199,7 @@ export default function Header({ discount, officialPartner, products, contactInf
                   {t("product.checkWarranty")}
                 </Button>
               </Link>
-              <SearchPopover />
+              <SearchPopover currency={currency} />
 
               {/* Cart */}
               <Link href="/cart" className="relative h-10 w-10 bg-primary rounded-full flex justify-center items-center">

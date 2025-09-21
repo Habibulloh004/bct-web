@@ -6,7 +6,7 @@ export async function getData({ endpoint, tag, revalidate }) {
   try {
     // Cache options obyektini yaratish
     const cacheOptions = {};
-    
+
     // Agar revalidate berilgan bo'lsa
     if (revalidate !== undefined) {
       if (revalidate === false) {
@@ -17,7 +17,7 @@ export async function getData({ endpoint, tag, revalidate }) {
         cacheOptions.next = { revalidate }; // Time-based revalidation
       }
     }
-    
+
     // Agar tag berilgan bo'lsa
     if (tag) {
       if (!cacheOptions.next) {
@@ -46,10 +46,31 @@ export async function getData({ endpoint, tag, revalidate }) {
   }
 }
 
+export async function getBasicData({ endpoint, tag, revalidate }) {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
+      next: {
+        revalidate: revalidate ?? 3600 * 12, // default 12 soat
+        tags: tag ? [tag] : [],
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Fetch error: ${res.status}`);
+    }
+
+    return res.json();
+  } catch (err) {
+    console.error("getBasicData error:", err);
+    return null;
+  }
+}
+
+
 // Revalidate qilish uchun yordamchi funksiya
 export async function revalidateData(tag) {
   const { revalidateTag } = await import('next/cache');
-  
+
   if (Array.isArray(tag)) {
     tag.forEach(t => revalidateTag(t));
   } else {

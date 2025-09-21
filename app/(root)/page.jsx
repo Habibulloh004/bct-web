@@ -2,7 +2,7 @@ import Banner from '@/app/(root)/_components/banner'
 import React from 'react'
 import Discounts from './_components/discounts'
 import AboutUs from './_components/aboutUs'
-import { getData } from '@/actions/get'
+import { getBasicData, getData } from '@/actions/get'
 import Manufacture from './_components/manufacturer'
 import Vendors from './_components/vendors'
 import VendorsC from './_components/vendorsC'
@@ -47,11 +47,17 @@ export default async function HomePage() {
     tag: ["company-stats"],
     revalidate: 3600
   })
+   const currency = await getBasicData({
+    endpoint: `/api/currency`,
+    revalidate: 3600,
+  });
+  const currencyData = currency?.conversion_rates?.UZS || 13000; // Default qiymat
+
  // console.log({ banners, categories, products, partners, vendors })
   return (
     <main className='max-w-[1440px] w-11/12 mx-auto font-poppins space-y-2 md:space-y-5'>
       <Banner companyStats={companyStats} contact={contact?.data[0]} partners={partners?.data} banners={banners?.data} />
-      <Discounts products={products} />
+      <Discounts currency={currencyData} products={products} />
       <VendorsC vendors={vendors?.data} />
       {/* <Vendors vendors={vendors?.data} /> */}
     </main>

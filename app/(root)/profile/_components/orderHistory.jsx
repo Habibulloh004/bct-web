@@ -6,9 +6,9 @@ import { formatNumber, getInitialsFromName } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Calendar, Phone, CreditCard } from "lucide-react";
-import { getTranslatedValue } from "@/lib/functions";
+import { convertUsdtoUzb, getTranslatedValue } from "@/lib/functions";
 
-export default function OrderHistorySection() {
+export default function OrderHistorySection({currency}) {
   const { t ,i18n} = useTranslation();
   const orders = useOrderStore((state) => state.orders);
 
@@ -67,7 +67,7 @@ export default function OrderHistorySection() {
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-gray-500">{item.count}x</span>
                       <span className="text-sm font-semibold">
-                        {formatNumber(item.price * item.count)} {t("common.currency") || "сум"}
+                        {formatNumber(convertUsdtoUzb(item?.price, currency))} {t("common.currency") || "сум"}
                       </span>
                     </div>
                   </div>

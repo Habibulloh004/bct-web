@@ -1,3 +1,4 @@
+import { convertUsdtoUzb } from "@/lib/functions";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -50,8 +51,8 @@ export const useCartStore = create(
           items: get().items.filter((item) => item.id !== productId),
         });
       },
-      getTotalPrice: () => {
-        return get().items.reduce((sum, item) => sum + item.price * item.count, 0);
+      getTotalPrice: (currency) => {
+        return get().items.reduce((sum, item) => sum + convertUsdtoUzb(item?.price, currency) * item.count, 0);
       }
       ,
 

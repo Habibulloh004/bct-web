@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import React, { useState, useRef } from "react";
 import { useCartStore } from "@/store/useCartStore";
-import { getTranslatedValue } from "@/lib/functions";
+import { convertUsdtoUzb, getTranslatedValue } from "@/lib/functions";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { formatNumber, getInitialsFromName, imageUrl } from "@/lib/utils";
@@ -12,7 +12,7 @@ import { ChevronLeft, ChevronRight, Minus, Plus, X, ZoomIn, ZoomOut } from "luci
 import ProductFeatures from "./productFeatures";
 import { useCurrency } from "@/components/context/CurrencyContext";
 
-export default function ProductHero({ item, showInlineFeatures }) {
+export default function ProductHero({ item, showInlineFeatures, currency }) {
   const { t, i18n } = useTranslation();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -125,7 +125,7 @@ export default function ProductHero({ item, showInlineFeatures }) {
               ))}
             </div>
             <h1 className="md:hidden text-black/40 text-2xl md:text-4xl font-bold">
-              {item?.price ? formatNumber(convert(item?.price)) : 1000} сум
+              {item?.price ? formatNumber(convertUsdtoUzb(item?.price, currency)) : 1000} сум
             </h1>
             <div className="lg:hidden flex flex-wrap items-center gap-3 pt-3">
               <div className="max-sm:w-full inline-flex items-center gap-1">
@@ -178,7 +178,7 @@ export default function ProductHero({ item, showInlineFeatures }) {
                 {getTranslatedValue(item?.name, i18n.language)}
               </h1>
               <h1 className="text-black/40 text-2xl md:text-4xl font-bold">
-                {item?.price ? formatNumber(convert(item?.price)) : 1000} сум
+                {item?.price ? formatNumber(convertUsdtoUzb(item?.price, currency)) : 1000} сум
               </h1>
             </div>
 
