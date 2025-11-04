@@ -30,7 +30,7 @@ export function useCategories() {
           // Agar backendda faqat kerakli maydonlarni beradigan query bo'lsa, shuni ishlating:
           // endpoint: '/api/products?fields=id,category_id'
           getData({
-            endpoint: '/api/products',
+            endpoint: '/api/products?page=1&limit=1000',
             tag: ['products'],
             revalidate: 600,
           }),
@@ -39,17 +39,8 @@ export function useCategories() {
         setTopCategories(topRes?.data || []);
         setCategories(catRes?.data || []);
 
-        // Normalize products: category_id || categoryId
-        const normalizedProducts = (prodRes?.data || []).map((p) => ({
-          id: p.id,
-          category_id:
-            p.category_id !== undefined
-              ? p.category_id
-              : p.categoryId !== undefined
-              ? p.categoryId
-              : null,
-        }));
-        setProducts(normalizedProducts);
+        setProducts(prodRes?.data || []); // <-- set products
+        console.log('Fetched products:', prodRes?.data || []); // <-- log products
       } catch (e) {
         console.error('Failed to fetch categories/products:', e);
       } finally {
@@ -68,10 +59,17 @@ export function useCategories() {
   const hasProducts = useMemo(() => {
     const set = new Set(
       products
-        .map((p) => p.category_id)
-        .filter((cid) => cid !== null && cid !== undefined)
+        .map((p) => {
+          const cid = p.category_id ?? p.categoryId ?? null;
+          return cid !== null && cid !== undefined ? String(cid) : null;
+        })
+        .filter(Boolean)
     );
-    return (categoryId) => set.has(categoryId);
+
+    return (categoryId) => {
+      if (categoryId === null || categoryId === undefined) return false;
+      return set.has(String(categoryId));
+    };
   }, [products]);
 
   return {
