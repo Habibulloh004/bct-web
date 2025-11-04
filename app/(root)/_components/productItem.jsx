@@ -56,7 +56,7 @@ export default function ProductItem({currency, item }) {
     >
       <div className="flex flex-col justify-between gap-2 w-full h-full p-2">
         <div className="space-y-1">
-          <h1 className="text-sm sm:text-base font-bold text-[var(--pr-card-text)] line-clamp-1">
+          <h1 className="text-sm sm:text-base font-bold text-[var(--pr-card-text)] line-clamp-2">
             {getTranslatedValue(item?.name || "", i18n.language)}
           </h1>
           <p className="text-[12px] sm:text-sm text-[var(--pr-card-text)] font-semibold line-clamp-2">

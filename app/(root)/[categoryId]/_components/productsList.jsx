@@ -14,7 +14,7 @@ import PaginationComponent from "./paginationComponent";
 import { getTranslatedValue } from "@/lib/functions";
 import { useTranslation } from "react-i18next";
 
-export default function ProductsList({ currency, url, limit, categoryData, page, products }) {
+export default function ProductsList({ currency, url, limit, categoryData, page, products, showPagination = true }) {
   const { t, i18n } = useTranslation();
 
   const sortOptions = [
@@ -140,13 +140,15 @@ export default function ProductsList({ currency, url, limit, categoryData, page,
         </div>
       )}
 
-      <PaginationComponent
-        limit={limit}
-        url={url ? url : `/${categoryData?.id}`}
-        currentPage={page}
-        totalPages={totalPages}
-        totalPagesCount={products.total}
-      />
+      {showPagination && (
+        <PaginationComponent
+          limit={limit}
+          url={url ? url : `/${categoryData?.id}`}
+          currentPage={page}
+          totalPages={totalPages}
+          totalPagesCount={products.total}
+        />
+      )}
     </div>
   );
 }

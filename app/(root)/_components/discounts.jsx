@@ -18,7 +18,7 @@ export default function Discounts({ currency, products }) {
         <h1 className='ml-2 text-start font-bold text-2xl md:text-4xl'>{t("homePage.discountTitle")}</h1>
         {/* Grid version */}
         <div className="pt-5 flex flex-wrap justify-center gap-4">
-          {productsData?.map((item, index) => (
+          {productsData?.slice(0, 18)?.map((item, index) => (
             <div
               key={index}
               className="w-[calc(100%/2-1rem)] sm:w-[calc(100%/3-1rem)] md:w-[calc(100%/4-1rem)] lg:w-[calc(100%/5-1rem)] 2xl:w-[calc(100%/6-1rem)]"
