@@ -8,9 +8,8 @@ import { Search, X } from "lucide-react";
 import CustomImage from "@/components/shared/customImage";
 import { convertUsdtoUzb, getTranslatedValue } from "@/lib/functions";
 import { getData } from "@/actions/get";
-import { formatNumber, imageUrl } from "@/lib/utils";
+import { extractProductImages, formatNumber } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
 
 export default function SearchComponent({ currency }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -154,33 +153,34 @@ export default function SearchComponent({ currency }) {
   );
 
   // Result item
-  const ResultItem = ({ item }) => (
-    <button
-      onClick={() => handleSelect(item.id, item.category_id)}
-      className="w-full text-left flex items-center gap-3 p-3 bg-gray-50 transition-colors"
-    >
-      <div className="relative w-14 h-14 shrink-0 rounded-md overflow-hidden bg-gray-50 border">
-        <CustomImage
-          src={
-            item?.image?.length > 0
-              ? `${imageUrl}${item.image[0]}`
-              : "/placeholder.svg"
-          }
-          alt={getTranslatedValue(item.name || "", i18n.language)}
-          fill
-          className="object-contain"
-        />
-      </div>
-      <div className="flex flex-col min-w-0 flex-1">
-        <p className="text-sm font-medium text-gray-900 line-clamp-2">
-          {getTranslatedValue(item.name || "", i18n.language)}
-        </p>
-        <p className="text-sm text-blue-600 font-semibold mt-1">
-          {formatNumber(convertUsdtoUzb(item?.price, currency))} {t("common.currency")}
-        </p>
-      </div>
-    </button>
-  );
+  const ResultItem = ({ item }) => {
+    const productImages = extractProductImages(item);
+    const primaryImage = productImages[0];
+
+    return (
+      <button
+        onClick={() => handleSelect(item.id, item.category_id)}
+        className="w-full text-left flex items-center gap-3 p-3 bg-gray-50 transition-colors"
+      >
+        <div className="relative w-14 h-14 shrink-0 rounded-md overflow-hidden bg-gray-50 border">
+          <CustomImage
+            src={primaryImage ?? "/placeholder.svg"}
+            alt={getTranslatedValue(item.name || "", i18n.language)}
+            fill
+            className="object-contain"
+          />
+        </div>
+        <div className="flex flex-col min-w-0 flex-1">
+          <p className="text-sm font-medium text-gray-900 line-clamp-2">
+            {getTranslatedValue(item.name || "", i18n.language)}
+          </p>
+          <p className="text-sm text-blue-600 font-semibold mt-1">
+            {formatNumber(convertUsdtoUzb(item?.price, currency))} {t("common.currency")}
+          </p>
+        </div>
+      </button>
+    );
+  };
 
   // Results content
   const ResultsContent = () => {

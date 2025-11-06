@@ -7,7 +7,7 @@ import { useCartStore } from "@/store/useCartStore";
 import { convertUsdtoUzb, getTranslatedValue } from "@/lib/functions";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
-import { formatNumber, getInitialsFromName, imageUrl } from "@/lib/utils";
+import { extractProductImages, formatNumber, getInitialsFromName } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, Minus, Plus, X, ZoomIn, ZoomOut } from "lucide-react";
 import ProductFeatures from "./productFeatures";
 
@@ -25,10 +25,19 @@ export default function ProductHero({ item, showInlineFeatures, currency }) {
   const increment = (id) => useCartStore.getState().increment(id);
   const decrement = (id) => useCartStore.getState().decrement(id);
   const cartItem = useCartStore((s) => s.items.find((ci) => ci.id == item?.id));
-
-  const images = item?.image || [];
-  const nextImage = () => setActiveImageIndex((p) => (p + 1) % images.length);
-  const prevImage = () => setActiveImageIndex((p) => (p - 1 + images.length) % images.length);
+  const images = extractProductImages(item);
+  const activeImage = images[activeImageIndex] ?? null;
+  const hasMultipleImages = images.length > 1;
+  const nextImage = () => {
+    if (images.length > 1) {
+      setActiveImageIndex((p) => (p + 1) % images.length);
+    }
+  };
+  const prevImage = () => {
+    if (images.length > 1) {
+      setActiveImageIndex((p) => (p - 1 + images.length) % images.length);
+    }
+  };
 
   const openFullscreen = () => {
     setIsFullscreen(true);
@@ -63,7 +72,7 @@ export default function ProductHero({ item, showInlineFeatures, currency }) {
         <div className="max-w-[1440px] w-11/12 md:w-10/12 mx-auto flex flex-col lg:flex-row lg:items-start justify-between gap-4">
           <div className="order-1 w-full lg:w-1/2 flex flex-col gap-3">
             <div className="relative">
-              {images.length > 1 && (
+              {hasMultipleImages && (
                 <>
                   <button
                     onClick={prevImage}
@@ -85,7 +94,7 @@ export default function ProductHero({ item, showInlineFeatures, currency }) {
                 onClick={openFullscreen}
               >
                 <Image
-                  src={images[activeImageIndex] ? `${imageUrl}${images[activeImageIndex]}` : "/placeholder.svg"}
+                  src={activeImage ?? "/placeholder.svg"}
                   alt={`${getTranslatedValue(item?.name, i18n.language)} - view ${activeImageIndex + 1}`}
                   fill
                   priority
@@ -96,7 +105,7 @@ export default function ProductHero({ item, showInlineFeatures, currency }) {
                 </div>
               </div>
 
-              {images.length > 1 && (
+              {hasMultipleImages && (
                 <div className="absolute bottom-3 left-3 bg-black/70 text-white px-2 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
                   {activeImageIndex + 1} / {images.length}
                 </div>
@@ -114,7 +123,7 @@ export default function ProductHero({ item, showInlineFeatures, currency }) {
                     }`}
                 >
                   <Image
-                    src={img ? `${imageUrl}${img}` : "/placeholder.svg"}
+                    src={img ?? "/placeholder.svg"}
                     alt={`Thumbnail ${index + 1}`}
                     fill
                     className="object-cover"
@@ -291,7 +300,7 @@ export default function ProductHero({ item, showInlineFeatures, currency }) {
             onMouseLeave={handleMouseUp}
           >
             <Image
-              src={images[activeImageIndex] ? `${imageUrl}${images[activeImageIndex]}` : "/placeholder.svg"}
+              src={activeImage ?? "/placeholder.svg"}
               alt={`${getTranslatedValue(item?.name, i18n.language)} - fullscreen view ${activeImageIndex + 1}`}
               width={900}
               height={700}

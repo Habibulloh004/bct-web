@@ -1,5 +1,7 @@
 "use server";
 
+import { headers } from "next/headers";
+
 const backUrl = process.env.BACKEND_URL;
 
 export async function getData({ endpoint, tag, revalidate }) {
@@ -46,9 +48,40 @@ export async function getData({ endpoint, tag, revalidate }) {
   }
 }
 
+function resolveApiBaseUrl() {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+
+  try {
+    const headersList = headers();
+    const host = headersList.get("host");
+
+    if (host) {
+      const proto =
+        headersList.get("x-forwarded-proto") ??
+        (host.includes("localhost") ? "http" : "https");
+      return `${proto}://${host}`;
+    }
+  } catch {
+    // headers() throws outside request lifecycle, fall back below
+  }
+
+  return process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
+}
+
 export async function getBasicData({ endpoint, tag, revalidate }) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
+    const baseUrl = resolveApiBaseUrl();
+
+    if (!baseUrl) {
+      throw new Error("Missing base URL for getBasicData");
+    }
+
+    const isAbsoluteUrl = /^https?:\/\//.test(endpoint);
+    const requestUrl = isAbsoluteUrl ? endpoint : `${baseUrl}${endpoint}`;
+
+    const res = await fetch(requestUrl, {
       next: {
         revalidate: revalidate ?? 3600 * 12, // default 12 soat
         tags: tag ? [tag] : [],

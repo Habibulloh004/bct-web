@@ -5,7 +5,7 @@ import CustomImage from "@/components/shared/customImage";
 import { useTranslation } from "react-i18next";
 import { convertUsdtoUzb, getTranslatedValue } from "@/lib/functions";
 import { useState, useEffect } from "react";
-import { imageUrl } from "@/lib/utils";
+import { extractProductImages } from "@/lib/utils";
 
 export default function SearchClient({ currency }) {
   const { i18n } = useTranslation();
@@ -47,11 +47,7 @@ export default function SearchClient({ currency }) {
           <div key={item.id} className="border rounded-lg bg-white shadow-sm p-3 space-y-2">
             <div className="relative aspect-[4/3] w-full">
               <CustomImage
-                src={
-                  item?.image?.length > 0
-                    ? `${imageUrl}${item.image[0]}`
-                    : "/placeholder.svg"
-                }
+                src={extractProductImages(item)[0] ?? "/placeholder.svg"}
                 alt={item.name}
                 fill
                 className="object-contain"

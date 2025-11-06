@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useTranslation } from 'react-i18next';
 import { useCartStore } from "@/store/useCartStore";
 import { convertUsdtoUzb, getTranslatedValue } from "@/lib/functions";
-import { formatNumber, imageUrl } from "@/lib/utils";
+import { extractProductImages, formatNumber } from "@/lib/utils";
 import CustomImage from "@/components/shared/customImage";
 
 export default function CartComponent({ currency }) {
@@ -32,7 +32,10 @@ export default function CartComponent({ currency }) {
 
   const getTotalPrice = useCartStore((state) => state.getTotalPrice);
 
-  const total = useMemo(() => getTotalPrice(currency), [items, getTotalPrice]);
+  const total = useMemo(
+    () => getTotalPrice(currency),
+    [items, currency, getTotalPrice]
+  );
 
   return (
     <main className=" w-11/12 2xl:w-9/12 mx-auto max-w-[1440px] space-y-4">
@@ -48,15 +51,18 @@ export default function CartComponent({ currency }) {
           <div className="space-y-4">
             {items?.length > 0 ? (
               <>
-                {items?.map((item, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-xl p-4"
-                  >
+                {items?.map((item, index) => {
+                  const productImages = extractProductImages(item);
+                  const primaryImage = productImages[0];
+                  return (
+                    <div
+                      key={index}
+                      className="bg-white rounded-xl p-4"
+                    >
                     <div className="flex flex-col items-center text-center">
                       <div className="relative w-32 h-32 shrink-0 rounded-md overflow-hidden">
                         <CustomImage
-                          src={item?.image[0] ? `${imageUrl}${item?.image[0]}` : '/placeholder.svg'}
+                          src={primaryImage ?? "/placeholder.svg"}
                           alt="Product"
                           fill={true}
                           className="object-contain"
@@ -94,8 +100,9 @@ export default function CartComponent({ currency }) {
                         {t('cart.buttons.remove')}
                       </button>
                     </div>
-                  </div>
-                ))}
+                    </div>
+                  );
+                })}
               </>
             ) : (
               <div className="text-center text-sm text-gray-500">
@@ -144,11 +151,14 @@ export default function CartComponent({ currency }) {
             <div className="scrollbar-custom overflow-y-auto max-h-[500px] space-y-4 pr-2">
               {items?.length > 0 ? (
                 <>
-                  {items?.map((item, index) => (
-                    <div
-                      key={index}
-                      className="border bg-white rounded-xl flex items-center justify-between p-4"
-                    >
+                  {items?.map((item, index) => {
+                    const productImages = extractProductImages(item);
+                    const primaryImage = productImages[0];
+                    return (
+                      <div
+                        key={index}
+                        className="border bg-white rounded-xl flex items-center justify-between p-4"
+                      >
                       <div className="w-full flex justify-center items-center flex-col  space-y-2 max-w-[70%]">
                         <div className="w-full flex justify-between items-center gap-2">
                           <h3 className="text-sm font-semibold">
@@ -186,14 +196,15 @@ export default function CartComponent({ currency }) {
                       </div>
                       <div className="relative w-32 h-32 shrink-0 rounded-md overflow-hidden">
                         <CustomImage
-                          src={item?.image[0] ? `${imageUrl}${item?.image[0]}` : '/placeholder.svg'}
+                          src={primaryImage ?? "/placeholder.svg"}
                           alt="Product"
                           fill={true}
                           className="object-contain"
                         />
                       </div>
-                    </div>
-                  ))}
+                      </div>
+                    );
+                  })}
                 </>
               ) : (
                 <div className="text-center text-sm text-gray-500">

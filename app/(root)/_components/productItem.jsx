@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useCartStore } from "@/store/useCartStore";
-import { formatNumber, imageUrl } from "@/lib/utils";
+import { extractProductImages, formatNumber } from "@/lib/utils";
 import Autoplay from "embla-carousel-autoplay";
 
 export default function ProductItem({currency, item }) {
@@ -29,6 +29,9 @@ export default function ProductItem({currency, item }) {
   const allItems = useCartStore((state) => state.items);
   const cartItem = allItems?.find((cartItem) => cartItem.id == item.id);
 
+  const productImages = extractProductImages(item);
+  const hasMultipleImages = productImages.length > 1;
+
   const goToDetails = () => {
     router.push(`/${item?.category_id}/${item?.id}`);
   };
@@ -42,11 +45,9 @@ export default function ProductItem({currency, item }) {
   );
 
   const handleMouseEnter = () => {
-    if (item?.image?.length > 1) setIsHovered(true);
+    if (productImages.length > 1) setIsHovered(true);
   };
   const handleMouseLeave = () => setIsHovered(false);
-
-  const hasMultipleImages = (item?.image || []).length > 1;
 
   return (
     <div
@@ -102,21 +103,21 @@ export default function ProductItem({currency, item }) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {(item?.image || []).length > 0 ? (
+        {productImages.length > 0 ? (
           <Carousel
             plugins={isHovered && hasMultipleImages ? [autoplayPlugin.current] : []}
             className="w-full h-full"
             opts={{ align: "center", loop: true }}
           >
             <CarouselContent className="w-full h-full">
-              {item.image.map((img, index) => (
+              {productImages.map((img, index) => (
                 <CarouselItem
                   key={index}
                   className={`${index === 0 ? "pl-8" : "pl-4"} basis-full w-full h-full`}
                 >
                   <div className="relative w-full h-full overflow-hidden rounded-md">
                     <CustomImage
-                      src={`${imageUrl}${img}`}
+                      src={img ?? "/placeholder.svg"}
                       alt={`Product image ${index + 1}`}
                       width={100}
                       height={100}
