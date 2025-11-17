@@ -16,14 +16,14 @@ export default async function AllProduct() {
 
   const restResponses = additionalPages.length
     ? await Promise.all(
-        additionalPages.map((page) =>
-          getData({
-            endpoint: `/api/products?page=${page}&limit=${pageSize}`,
-            tag: ["products", "top-products", "categories"],
-            revalidate: 3600,
-          })
-        )
+      additionalPages.map((page) =>
+        getData({
+          endpoint: `/api/products?page=${page}&limit=${pageSize}`,
+          tag: ["products", "top-products", "categories"],
+          revalidate: 3600,
+        })
       )
+    )
     : [];
 
   const mergedProducts = Array.isArray(firstPage?.data) ? [...firstPage.data] : [];
@@ -41,13 +41,13 @@ export default async function AllProduct() {
 
   const currency = await getBasicData({
     endpoint: `/api/currency`,
-    revalidate: 3600,
+    revalidate: 43200
   });
 
   return (
     <main className=''>
       <ProductsList currency={currency} url="/all-products" limit={products.data.length || pageSize} categoryData={{
-        name:"All products***Все продукты***Barcha mahsulotlar"
+        name: "All products***Все продукты***Barcha mahsulotlar"
       }} products={products} page={1} showPagination={false} />
     </main>
   )

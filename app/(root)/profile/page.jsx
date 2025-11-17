@@ -5,9 +5,9 @@ import { getBasicData } from '@/actions/get';
 export default async function ProfilePage() {
   const currency = await getBasicData({
     endpoint: `/api/currency`,
-    revalidate: 3600,
+    revalidate: 43200
   });
-  
+
 
   return (
     <ProfileComponent currency={currency} />

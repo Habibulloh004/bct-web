@@ -6,7 +6,7 @@ export default async function Cart() {
 
   const currency = await getBasicData({
     endpoint: `/api/currency`,
-    revalidate: 3600,
+    revalidate: 43200
   });
 
   return (

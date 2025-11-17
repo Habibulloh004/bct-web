@@ -47,12 +47,12 @@ export default async function HomePage() {
     tag: ["company-stats"],
     revalidate: 3600
   })
-   const currency = await getBasicData({
+  const currency = await getBasicData({
     endpoint: `/api/currency`,
-    revalidate: 3600,
+    revalidate: 43200
   });
 
- // console.log({ banners, categories, products, partners, vendors })
+  // console.log({ banners, categories, products, partners, vendors })
   return (
     <main className='max-w-[1440px] w-11/12 mx-auto font-poppins space-y-2 md:space-y-5'>
       <Banner companyStats={companyStats} contact={contact?.data[0]} partners={partners?.data} banners={banners?.data} />

@@ -12,7 +12,7 @@ export default async function Product({ params }) {
   });
   const currency = await getBasicData({
     endpoint: `/api/currency`,
-    revalidate: 3600,
+    revalidate: 43200
   });
   console.log({ productData });
   return (

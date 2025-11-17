@@ -73,7 +73,7 @@ export default async function RootLayout({ children }) {
 
   const currency = await getBasicData({
     endpoint: `/api/currency`,
-    revalidate: 3600,
+    revalidate: 43200
   });
 
   const cssVars = colorsToCSSVars(colorData);     // :root { --pr-card: ... }
@@ -101,7 +101,7 @@ export default async function RootLayout({ children }) {
             <Header currency={currency} discount={discount} officialPartner={officialPartner} products={products} contactInfo={contactInfo} />
             <Toaster closeButton />
             <ColorsProvider >
-                <div className="min-h-[calc(100vh-242px)] pb-4">{children}</div>
+              <div className="min-h-[calc(100vh-242px)] pb-4">{children}</div>
             </ColorsProvider>
             <Footer contactInfo={contactInfo} />
           </UserMigrationProvider>

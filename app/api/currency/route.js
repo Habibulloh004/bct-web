@@ -15,13 +15,10 @@ export async function OPTIONS() {
 export async function GET() {
   const res = await fetch(
     currencyApiUrl,
-    {
-      next: { revalidate: 43200 }, // 12 soat cache
-    }
   );
 
   const currencyData = await res.json();
-  const data = currencyData.conversion_rates?.UZS || 13000; // Default qiymat
+  const data = currencyData.conversion_rates?.UZS || 12000; // Default qiymat
 
   return NextResponse.json(data, { headers: CORS_HEADERS });
 }
