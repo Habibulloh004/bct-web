@@ -66,6 +66,7 @@ export default function ProductHero({ item, showInlineFeatures, currency }) {
     }
   };
   const handleMouseUp = () => setIsDragging(false);
+
   return (
     <>
       <section className="pb-2">
@@ -238,7 +239,6 @@ export default function ProductHero({ item, showInlineFeatures, currency }) {
           </div>
 
         </div>
-
         <div className="hidden w-full h-11 bg-black text-white items-center justify-center font-bold mt-6">
           <h1>
             {getTranslatedValue(item?.category_name, i18n.language)}{" "}

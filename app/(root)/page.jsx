@@ -49,7 +49,7 @@ export default async function HomePage() {
   })
   const currency = await getBasicData({
     endpoint: `/api/currency`,
-    revalidate: 43200
+    revalidate: 60
   });
 
   // console.log({ banners, categories, products, partners, vendors })

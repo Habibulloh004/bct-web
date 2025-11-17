@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-const currencyApiUrl = process.env.CURRENCY_API || "https://v6.exchangerate-api.com/v6/286efca60d3bb4107182a63f/latest/USD";
+const currencyApiUrl = process.env.CURRENCY_API || "https://cbu.uz/ru/arkhiv-kursov-valyut/json";
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*", // barcha domenlarga ruxsat
   "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
@@ -18,7 +18,8 @@ export async function GET() {
   );
 
   const currencyData = await res.json();
-  const data = currencyData.conversion_rates?.UZS || 12000; // Default qiymat
+  const findData = currencyData.find(cr => cr.Ccy === "USD");
+  const data = Number(findData?.Rate) || 12000; // Default qiymat
 
   return NextResponse.json(data, { headers: CORS_HEADERS });
 }

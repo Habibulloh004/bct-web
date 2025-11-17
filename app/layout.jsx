@@ -73,7 +73,7 @@ export default async function RootLayout({ children }) {
 
   const currency = await getBasicData({
     endpoint: `/api/currency`,
-    revalidate: 43200
+    revalidate: 60
   });
 
   const cssVars = colorsToCSSVars(colorData);     // :root { --pr-card: ... }

@@ -41,7 +41,7 @@ export default async function AllProduct() {
 
   const currency = await getBasicData({
     endpoint: `/api/currency`,
-    revalidate: 43200
+    revalidate: 60
   });
 
   return (

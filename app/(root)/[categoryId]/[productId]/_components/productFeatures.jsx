@@ -12,6 +12,7 @@ import {
 import { getTranslatedValue } from "@/lib/functions";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
+import ProductRichText from "./ProductRichText";
 
 export default function ProductFeatures({ productData, variant = "full", className }) {
   const { i18n, t } = useTranslation();
@@ -64,9 +65,16 @@ export default function ProductFeatures({ productData, variant = "full", classNa
       <aside className={cn("w-full bg-white border rounded-xl p-2 shadow-sm", className)}>
         <h2 className="text-xl font-semibold mb-1">{name}</h2>
         {lead ? (
-          <p
-            className="text-sm text-muted-foreground mb-3"
-            dangerouslySetInnerHTML={{ __html: lead }}
+          <ProductRichText
+            value={lead}
+            collapsedHeight={120}
+            minLengthForToggle={80}
+            className="mt-1"
+            richTextClassName="prose prose-sm max-w-none text-muted-foreground"
+            plainTextClassName="text-sm text-muted-foreground whitespace-pre-line"
+            toggleClassName="mt-1 text-primary font-medium"
+            moreLabel={t("product.showMore")}
+            lessLabel={t("product.showLess")}
           />
         ) : null}
       </aside>
@@ -79,9 +87,16 @@ export default function ProductFeatures({ productData, variant = "full", classNa
         <aside className={cn("hidden max-lg:block w-full", className)}>
           <h2 className="text-xl font-semibold mb-1">{name}</h2>
           {lead ? (
-            <p
-              className="text-sm text-muted-foreground mb-3"
-              dangerouslySetInnerHTML={{ __html: lead }}
+            <ProductRichText
+              value={lead}
+              collapsedHeight={160}
+              minLengthForToggle={80}
+              className="mt-1 mb-2"
+              richTextClassName="prose prose-sm max-w-none text-muted-foreground"
+              plainTextClassName="text-sm text-muted-foreground whitespace-pre-line"
+              toggleClassName="mt-2 text-primary font-medium"
+              moreLabel={t("product.showMore")}
+              lessLabel={t("product.showLess")}
             />
           ) : null}
         </aside>
