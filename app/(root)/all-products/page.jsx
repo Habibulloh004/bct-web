@@ -1,5 +1,5 @@
 import React from 'react'
-import { getBasicData, getData } from '@/actions/get'
+import {  getCurrencyData, getData } from '@/actions/get'
 import ProductsList from '../[categoryId]/_components/productsList';
 
 export default async function AllProduct() {
@@ -39,10 +39,8 @@ export default async function AllProduct() {
     total: firstPage?.total ?? mergedProducts.length,
   };
 
-  const currency = await getBasicData({
-    endpoint: `/api/currency`,
-    revalidate: 60
-  });
+   const currency = await getCurrencyData()
+
 
   return (
     <main className=''>

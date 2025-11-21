@@ -98,6 +98,30 @@ export async function getBasicData({ endpoint, tag, revalidate }) {
     return null;
   }
 }
+export async function getCurrencyData() {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_API_CURRENCY || "https://bct-admin-eight.vercel.app/api/currency"
+
+    if (!baseUrl) {
+      throw new Error("Missing base URL for getBasicData");
+    }
+
+    const res = await fetch(baseUrl, {
+      next: {
+        cache: "no-store"
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Fetch error: ${res.status}`);
+    }
+
+    return res.json();
+  } catch (err) {
+    console.error("getBasicData error:", err);
+    return null;
+  }
+}
 
 
 // Revalidate qilish uchun yordamchi funksiya

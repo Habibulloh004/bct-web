@@ -5,7 +5,7 @@ import Footer from "@/components/shared/footer";
 import { Toaster } from "sonner";
 import LanguageProvider from "@/components/providers/LanguageProvider";
 import UserMigrationProvider from "@/components/providers/UserMigrationProvider";
-import { getBasicData, getData } from "@/actions/get";
+import {  getCurrencyData, getData } from "@/actions/get";
 import NextTopLoader from "nextjs-toploader";
 import { ColorsProvider } from "@/components/providers/ColorsContext";
 import { colorsToCSSVars } from "@/lib/getColors";
@@ -71,10 +71,7 @@ export default async function RootLayout({ children }) {
     key: cl?.email
   }))
 
-  const currency = await getBasicData({
-    endpoint: `/api/currency`,
-    revalidate: 60
-  });
+  const currency = await getCurrencyData()
 
   const cssVars = colorsToCSSVars(colorData);     // :root { --pr-card: ... }
   const contactInfo = contact?.data[0]

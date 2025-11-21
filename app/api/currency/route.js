@@ -6,19 +6,13 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Headers": "*",
 };
 
-// Keep this endpoint dynamic so we always fetch fresh rates
-export const dynamic = "force-dynamic";
-
-// OPTIONS (preflight) uchun
 export async function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS_HEADERS });
 }
 
-// GET uchun
 export async function GET() {
   try {
     const res = await fetch(currencyApiUrl, {
-      // avoid cache issues on deploy
       cache: "no-store",
     });
 
@@ -37,7 +31,5 @@ export async function GET() {
   } catch (err) {
     console.error("[currency] fetch failed", err);
   }
-
-  // Fallback if the upstream API fails
   return NextResponse.json(12000, { headers: CORS_HEADERS, status: 200 });
 }

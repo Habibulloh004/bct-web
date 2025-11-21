@@ -1,11 +1,9 @@
-import { getBasicData } from "@/actions/get";
+import {  getCurrencyData } from "@/actions/get";
 import SearchClient from "./_components/SearchClient";
 
 export default async function SearchPage() {
-  const currency = await getBasicData({
-    endpoint: `/api/currency`,
-    revalidate: 60
-  });
+   const currency = await getCurrencyData()
+
 
   return (
     <div className="pb-10">

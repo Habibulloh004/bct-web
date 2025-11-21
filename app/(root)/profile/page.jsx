@@ -1,12 +1,10 @@
 import React from 'react'
 import ProfileComponent from './_components/profileComponent'
-import { getBasicData } from '@/actions/get';
+import {  getCurrencyData } from '@/actions/get';
 
 export default async function ProfilePage() {
-  const currency = await getBasicData({
-    endpoint: `/api/currency`,
-    revalidate: 60
-  });
+   const currency = await getCurrencyData()
+
 
 
   return (

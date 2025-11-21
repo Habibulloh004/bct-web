@@ -1,7 +1,7 @@
 import React from 'react'
 import ProductHero from './_components/productHero'
 import ProductFeatures from './_components/productFeatures'
-import { getBasicData, getData } from '@/actions/get';
+import {  getCurrencyData, getData } from '@/actions/get';
 
 export default async function Product({ params }) {
   const productId = params.productId;
@@ -10,10 +10,8 @@ export default async function Product({ params }) {
     tag: ['products', 'categories', 'top-categories'],
     revalidate: 3600,
   });
-  const currency = await getBasicData({
-    endpoint: `/api/currency`,
-    revalidate: 60
-  });
+   const currency = await getCurrencyData()
+
   console.log({ productData });
   return (
     <main className="pt-8 font-poppins">

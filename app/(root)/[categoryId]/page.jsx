@@ -1,6 +1,6 @@
 import React from 'react'
 import ProductsList from './_components/productsList'
-import { getBasicData, getData } from '@/actions/get';
+import {  getCurrencyData, getData } from '@/actions/get';
 
 export default async function CategoryPage({ searchParams, params }) {
   const resolvedSearchParams = await searchParams;
@@ -17,11 +17,9 @@ export default async function CategoryPage({ searchParams, params }) {
     tag: ["category", "top-categories"],
     revalidate: 3600
   });
-  const currency = await getBasicData({
-    endpoint: `/api/currency`,
-    revalidate: 60
-  });
+  const currency = await getCurrencyData()
 
+  console.log(currency)
   return (
     <main className='font-poppins'>
       <ProductsList currency={currency} limit={limit} categoryData={categoryData} products={products} page={page} />

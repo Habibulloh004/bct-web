@@ -2,7 +2,7 @@ import Banner from '@/app/(root)/_components/banner'
 import React from 'react'
 import Discounts from './_components/discounts'
 import AboutUs from './_components/aboutUs'
-import { getBasicData, getData } from '@/actions/get'
+import {  getCurrencyData, getData } from '@/actions/get'
 import Manufacture from './_components/manufacturer'
 import Vendors from './_components/vendors'
 import VendorsC from './_components/vendorsC'
@@ -47,10 +47,7 @@ export default async function HomePage() {
     tag: ["company-stats"],
     revalidate: 3600
   })
-  const currency = await getBasicData({
-    endpoint: `/api/currency`,
-    revalidate: 60
-  });
+  const currency = await getCurrencyData()
 
   // console.log({ banners, categories, products, partners, vendors })
   return (

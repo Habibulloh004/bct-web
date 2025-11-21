@@ -48,6 +48,8 @@ export default function ProductItem({currency, item }) {
     if (productImages.length > 1) setIsHovered(true);
   };
   const handleMouseLeave = () => setIsHovered(false);
+  const adsTitle = getTranslatedValue(item?.ads_title || "", i18n.language);
+  const isAdsTitleRich = typeof adsTitle === "string" && /<\/?[a-z][\s\S]*>/i.test(adsTitle);
 
   return (
     <div
@@ -60,9 +62,18 @@ export default function ProductItem({currency, item }) {
           <h1 className="text-sm sm:text-base font-bold text-[var(--pr-card-text)] line-clamp-2">
             {getTranslatedValue(item?.name || "", i18n.language)}
           </h1>
-          <p className="text-[12px] sm:text-sm text-[var(--pr-card-text)] font-semibold line-clamp-2">
-            {getTranslatedValue(item?.ads_title || "", i18n.language)}
-          </p>
+          {adsTitle ? (
+            isAdsTitleRich ? (
+              <div
+                className="text-[12px] sm:text-sm text-[var(--pr-card-text)] font-semibold line-clamp-2"
+                dangerouslySetInnerHTML={{ __html: adsTitle }}
+              />
+            ) : (
+              <p className="text-[12px] sm:text-sm text-[var(--pr-card-text)] font-semibold line-clamp-2">
+                {adsTitle}
+              </p>
+            )
+          ) : null}
         </div>
 
         {!cartItem ? (
