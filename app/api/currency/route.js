@@ -6,6 +6,9 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Headers": "*",
 };
 
+// Keep this endpoint dynamic so we always fetch fresh rates
+export const dynamic = "force-dynamic";
+
 // OPTIONS (preflight) uchun
 export async function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS_HEADERS });
@@ -13,13 +16,28 @@ export async function OPTIONS() {
 
 // GET uchun
 export async function GET() {
-  const res = await fetch(
-    currencyApiUrl,
-  );
+  try {
+    const res = await fetch(currencyApiUrl, {
+      // avoid cache issues on deploy
+      cache: "no-store",
+    });
 
-  const currencyData = await res.json();
-  const findData = currencyData.find(cr => cr.Ccy === "USD");
-  const data = Number(findData?.Rate) || 12000; // Default qiymat
+    if (!res.ok) {
+      throw new Error(`Currency API responded with ${res.status}`);
+    }
 
-  return NextResponse.json(data, { headers: CORS_HEADERS });
+    const currencyData = await res.json();
+    const findData = currencyData.find(cr => cr.Ccy === "USD");
+    const data = Number(findData?.Rate);
+
+    // If the API schema changes or USD not found, fall back gracefully
+    if (Number.isFinite(data)) {
+      return NextResponse.json(data, { headers: CORS_HEADERS });
+    }
+  } catch (err) {
+    console.error("[currency] fetch failed", err);
+  }
+
+  // Fallback if the upstream API fails
+  return NextResponse.json(12000, { headers: CORS_HEADERS, status: 200 });
 }
