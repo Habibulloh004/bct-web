@@ -23,7 +23,7 @@ export function useCategories() {
             revalidate: 3600,
           }),
           getData({
-            endpoint: '/api/categories',
+            endpoint: '/api/categories?page=1&limit=200',
             tag: ['top-categories', 'categories'],
             revalidate: 3600,
           }),

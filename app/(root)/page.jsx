@@ -10,7 +10,7 @@ import { convertPriceToUzs } from '@/lib/functions'
 
 export default async function HomePage() {
   const categories = await getData({
-    endpoint: "/api/categories",
+    endpoint: "/api/categories?page=1&limit=200",
     tag: ["top-categories", "categories"],
     revalidate: 3600
   });
