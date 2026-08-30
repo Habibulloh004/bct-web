@@ -150,7 +150,7 @@ const Banner = ({companyStats, partners, banners, contact }) => {
                                 alt={`banner-img`}
                                 fill
                                 loading="eager"
-                                className="w-full mx-auto aspect-video object-cover"
+                                className="w-full h-full object-contain object-center"
                                 property={"true"}
                               />
                             </div>
@@ -212,7 +212,7 @@ const Banner = ({companyStats, partners, banners, contact }) => {
                           alt={`banner-img`}
                           fill
                           loading="eager"
-                          className="bg-top w-full mx-auto aspect-[15/6] object-cover"
+                          className="w-full h-full object-contain object-center"
                           property={"true"}
                         />
                       </div>
