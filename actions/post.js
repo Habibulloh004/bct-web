@@ -3,6 +3,7 @@
 import { revalidateTag, revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { formatTelegramOrderMessage, sendTelegramMessage } from '@/lib/telegram';
 
 function resolveBackendUrl() {
   return (
@@ -89,12 +90,30 @@ export async function createOrder(formData) {
     client_id: formData.get('client_id')
   };
 
-  return await postData({
+  const result = await postData({
     endpoint: '/api/orders',
     data: orderData,
     tag: ['orders'],
     revalidatePaths: ['/admin/orders'],
   });
+
+  if (result.success) {
+    try {
+      const orderDetailsRaw = formData.get('order_details');
+      const orderDetails = orderDetailsRaw ? JSON.parse(orderDetailsRaw) : null;
+      await sendTelegramMessage(
+        formatTelegramOrderMessage({
+          order: orderData,
+          orderDetails,
+          result: result.data,
+        })
+      );
+    } catch (error) {
+      console.error("Telegram order notification error:", error);
+    }
+  }
+
+  return result;
 }
 
 // Review actions

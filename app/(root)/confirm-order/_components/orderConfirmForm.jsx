@@ -68,6 +68,15 @@ export default function OrderConfirmForm({currency}) {
         product_id: item.id,
         count: item.count || 1
       }));
+      const orderDetails = {
+        totalAmount: items.reduce((total, item) => total + (convertUsdtoUzb(item?.price, currency) * item.count), 0),
+        products: items.map((item) => ({
+          product_id: item.id,
+          name: getTranslatedValue(item?.name, "ru"),
+          count: item.count || 1,
+          price: item?.price ? formatNumber(convertUsdtoUzb(item?.price, currency)) : "",
+        })),
+      };
 
       console.log("✅ Prepared products for backend:", products);
 
@@ -76,6 +85,7 @@ export default function OrderConfirmForm({currency}) {
       formData.append("phone", values.phone.trim());
       formData.append("pay_type", values.paymentType);
       formData.append("products", JSON.stringify(products));
+      formData.append("order_details", JSON.stringify(orderDetails));
 
       // ✅ Zustand store'dan user ID olish (localStorage o'rniga)
       if (isAuthenticated && user?.id) {
