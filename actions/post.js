@@ -4,7 +4,14 @@ import { revalidateTag, revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-const backUrl = process.env.BACKEND_URL;
+function resolveBackendUrl() {
+  return (
+    process.env.BACKEND_URL ||
+    process.env.NEXT_PUBLIC_BACKEND_URL ||
+    process.env.NEXT_PUBLIC_API_URL ||
+    "http://localhost:8080"
+  ).replace(/\/$/, "");
+}
 
 // Universal POST action
 export async function postData({ 
@@ -29,7 +36,11 @@ export async function postData({
       }
     }
 
-    const response = await fetch(`${backUrl}${endpoint}`, {
+    const backUrl = resolveBackendUrl();
+    const isAbsoluteUrl = /^https?:\/\//.test(endpoint);
+    const requestUrl = isAbsoluteUrl ? endpoint : `${backUrl}${endpoint}`;
+
+    const response = await fetch(requestUrl, {
       method: "POST",
       headers,
       body: JSON.stringify(data),
@@ -129,7 +140,7 @@ export async function loginUser(formData) {
       password: formData.get('password')
     };
 
-    const response = await fetch(`${backUrl}/api/auth/login`, {
+    const response = await fetch(`${resolveBackendUrl()}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -173,7 +184,7 @@ export async function registerUser(formData) {
     phone: formData.get('phone'),
   };
 
-    const response = await fetch(`${backUrl}/api/auth/register`, {
+    const response = await fetch(`${resolveBackendUrl()}/api/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -205,4 +216,3 @@ export async function registerUser(formData) {
     return { success: false, error: error.message };
   }
 }
-

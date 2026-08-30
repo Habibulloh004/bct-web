@@ -2,7 +2,14 @@
 
 import { headers } from "next/headers";
 
-const backUrl = process.env.BACKEND_URL;
+function resolveBackendUrl() {
+  return (
+    process.env.BACKEND_URL ||
+    process.env.NEXT_PUBLIC_BACKEND_URL ||
+    process.env.NEXT_PUBLIC_API_URL ||
+    "http://localhost:8080"
+  ).replace(/\/$/, "");
+}
 
 export async function getData({ endpoint, tag, revalidate }) {
   try {
@@ -28,7 +35,11 @@ export async function getData({ endpoint, tag, revalidate }) {
       cacheOptions.next.tags = Array.isArray(tag) ? tag : [tag];
     }
 
-    const response = await fetch(`${backUrl}${endpoint}`, {
+    const baseUrl = resolveBackendUrl();
+    const isAbsoluteUrl = /^https?:\/\//.test(endpoint);
+    const requestUrl = isAbsoluteUrl ? endpoint : `${baseUrl}${endpoint}`;
+
+    const response = await fetch(requestUrl, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -6,7 +6,20 @@ import {  getCurrencyData, getData } from '@/actions/get'
 import Manufacture from './_components/manufacturer'
 import Vendors from './_components/vendors'
 import VendorsC from './_components/vendorsC'
-import { convertPriceToUzs } from '@/lib/functions'
+import JsonLd from '@/components/seo/JsonLd'
+import { createCollectionPageJsonLd, createPageMetadata } from '@/lib/seo'
+
+export const metadata = createPageMetadata({
+  title: "Автоматизация торговли, HoReCa и складов в Узбекистане",
+  description:
+    "Bar Code Technologies внедряет решения для автоматизации бизнеса в Узбекистане: POS-оборудование, сканеры штрих-кода, терминалы сбора данных, маркировка, учет и интеграции для Retail, HoReCa, складов и производства.",
+  path: "/",
+  keywords: [
+    "автоматизация бизнеса Ташкент",
+    "оборудование для магазина Узбекистан",
+    "оборудование для ресторана Ташкент",
+  ],
+});
 
 export default async function HomePage() {
   const categories = await getData({
@@ -52,6 +65,13 @@ export default async function HomePage() {
   // console.log({ banners, categories, products, partners, vendors })
   return (
     <main className='max-w-[1440px] w-11/12 mx-auto font-poppins space-y-2 md:space-y-5'>
+      <JsonLd
+        data={createCollectionPageJsonLd({
+          name: "Автоматизация бизнеса в Узбекистане",
+          description: metadata.description,
+          path: "/",
+        })}
+      />
       <Banner companyStats={companyStats} contact={contact?.data[0]} partners={partners?.data} banners={banners?.data} />
       <Discounts currency={currency} products={products} />
       <VendorsC vendors={vendors?.data} />

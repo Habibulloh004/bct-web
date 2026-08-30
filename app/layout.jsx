@@ -9,6 +9,13 @@ import {  getCurrencyData, getData } from "@/actions/get";
 import NextTopLoader from "nextjs-toploader";
 import { ColorsProvider } from "@/components/providers/ColorsContext";
 import { colorsToCSSVars } from "@/lib/getColors";
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  baseMetadata,
+  createLocalBusinessJsonLd,
+  createOrganizationJsonLd,
+  createWebSiteJsonLd,
+} from "@/lib/seo";
 
 // Montserrat normal (umumiy)
 const poppins = Montserrat({
@@ -34,19 +41,7 @@ const poppinsRegular = Montserrat({
   style: "normal",
 });
 
-export const metadata = {
-  title: "Bar Code Technologies — Автоматизация бизнес-процессов для Horeca и Retail",
-  description:
-    "Компания Bar Code Technologies с 2005 года помогает бизнесам в сфере Horeca и Retail оптимизировать процессы, обучать сотрудников, внедрять современные методы управления и подключать инструменты анализа продаж и закупок.",
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/logo.svg", type: "image/svg+xml" },
-    ],
-    shortcut: "/favicon.ico",
-    apple: "/favicon.png",
-  },
-};
+export const metadata = baseMetadata;
 
 export default async function RootLayout({ children }) {
   let contact = await getData({
@@ -84,8 +79,15 @@ export default async function RootLayout({ children }) {
   const cssVars = colorsToCSSVars(colorData);     // :root { --pr-card: ... }
   const contactInfo = contact?.data[0]
   return (
-    <html suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning lang="ru">
       <head>
+        <JsonLd
+          data={[
+            createOrganizationJsonLd(),
+            createLocalBusinessJsonLd(),
+            createWebSiteJsonLd(),
+          ]}
+        />
         <style id="theme-colors" dangerouslySetInnerHTML={{ __html: cssVars }} />
       </head>
       <body className={`${poppins.variable} ${poppinsItalic.variable} ${poppinsRegular.variable} antialiased`}>

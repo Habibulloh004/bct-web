@@ -5,6 +5,20 @@ import MyProjects from './_components/myProjects'
 import MyClients from './_components/myClients'
 import AboutMain from './_components/AboutMain';
 import { getData } from '@/actions/get'
+import JsonLd from '@/components/seo/JsonLd';
+import { createBreadcrumbJsonLd, createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata({
+  title: "О компании и внедрении автоматизации в Узбекистане",
+  description:
+    "Bar Code Technologies с 2005 года помогает компаниям Retail, HoReCa, складов и производства в Узбекистане внедрять POS-оборудование, учет, маркировку и решения автоматизации.",
+  path: "/about-us",
+  keywords: [
+    "Bar Code Technologies Узбекистан",
+    "автоматизация предприятий Ташкент",
+    "внедрение POS систем",
+  ],
+});
 
 export default async function AboutUs() {
   let partners = await getData({
@@ -39,6 +53,12 @@ export default async function AboutUs() {
     })
   return (
     <main className='pt-8 space-y-4'>
+      <JsonLd
+        data={createBreadcrumbJsonLd([
+          { name: "Главная", path: "/" },
+          { name: "О компании", path: "/about-us" },
+        ])}
+      />
       <AboutMain />
       <Service experiments={experiments?.data} companyStats={companyStats?.data} />
       <Vendors vendors={vendorsAbout?.data} />

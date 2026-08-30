@@ -130,6 +130,7 @@ const Banner = ({companyStats, partners, banners, contact }) => {
                 >
                   <CarouselContent className="w-full">
                     {banners?.map((item, i) => {
+                      const bannerTitle = getTranslatedValue(item?.title, i18n?.language);
                       return (
                         <CarouselItem key={i} className={`basis-full rounded-md`}>
                           <Link
@@ -141,13 +142,13 @@ const Banner = ({companyStats, partners, banners, contact }) => {
                                 <h1 className="font-medium text-sm lg:text-base">{getTranslatedValue(item?.description, i18n?.language)}</h1>
                               </div>
                               <p className="line-clamp-3 text-2xl xl:text-3xl font-bold leading-tight">
-                                {getTranslatedValue(item?.title, i18n?.language)}
+                                {bannerTitle}
                               </p>
                             </div>
                             <div className="w-[250px] xl:w-[350px] h-[170px] rounded-2xl overflow-hidden flex-shrink-0">
                               <CustomImage
                                 src={`${imageUrl}${item?.image}`}
-                                alt={`banner-img`}
+                                alt={bannerTitle || "Баннер оборудования Bar Code Technologies"}
                                 fill
                                 loading="eager"
                                 className="w-full h-full object-contain object-center"
@@ -192,6 +193,7 @@ const Banner = ({companyStats, partners, banners, contact }) => {
           >
             <CarouselContent className="w-full">
               {banners?.map((item, i) => {
+                const bannerTitle = getTranslatedValue(item?.title, i18n?.language);
                 return (
                   <CarouselItem key={i} className={`basis-full`}>
                     <Link
@@ -203,13 +205,13 @@ const Banner = ({companyStats, partners, banners, contact }) => {
                           <h1 className="font-medium text-sm lg:text-base line-clamp-1">{getTranslatedValue(item?.description, i18n?.language)}</h1>
                         </div>
                         <p className="line-clamp-3 text-2xl xl:text-3xl font-bold leading-tight">
-                          {getTranslatedValue(item?.title, i18n?.language)}
+                          {bannerTitle}
                         </p>
                       </div>
                       <div className="w-full sm:w-2/3 h-[150px] sm:h-[200px] rounded-2xl overflow-hidden flex-shrink-0">
                         <CustomImage
                           src={`${imageUrl}${item?.image}`}
-                          alt={`banner-img`}
+                          alt={bannerTitle || "Баннер оборудования Bar Code Technologies"}
                           fill
                           loading="eager"
                           className="w-full h-full object-contain object-center"

@@ -48,6 +48,7 @@ export default function ProductItem({currency, item }) {
     if (productImages.length > 1) setIsHovered(true);
   };
   const handleMouseLeave = () => setIsHovered(false);
+  const productName = getTranslatedValue(item?.name || "", i18n.language);
   const adsTitle = getTranslatedValue(item?.ads_title || "", i18n.language);
   const isAdsTitleRich = typeof adsTitle === "string" && /<\/?[a-z][\s\S]*>/i.test(adsTitle);
 
@@ -60,7 +61,7 @@ export default function ProductItem({currency, item }) {
       <div className="flex flex-col justify-between gap-2 w-full h-full p-2">
         <div className="space-y-1">
           <h1 className="text-sm sm:text-base font-bold text-[var(--pr-card-text)] line-clamp-2">
-            {getTranslatedValue(item?.name || "", i18n.language)}
+            {productName}
           </h1>
           {adsTitle ? (
             isAdsTitleRich ? (
@@ -129,7 +130,7 @@ export default function ProductItem({currency, item }) {
                   <div className="relative w-full h-full overflow-hidden rounded-md">
                     <CustomImage
                       src={img ?? "/placeholder.svg"}
-                      alt={`Product image ${index + 1}`}
+                      alt={`${productName || "Товар Bar Code Technologies"} - фото ${index + 1}`}
                       width={100}
                       height={100}
                       loading="eager"

@@ -98,7 +98,7 @@ export default function Header({ currency, discount, officialPartner, products, 
               </div>
             ) : (<div></div>)}
             <div className="w-auto flex justify-end items-center gap-1 text-white text-[11px]">
-              <Image src="/icons/Symbol.svg" alt="img" width={100} height={100} className="w-6 h-6" />
+              <Image src="/icons/Symbol.svg" alt="" width={100} height={100} className="w-6 h-6" />
               <Link target="_blank" href={`tel:${SUPPORT_PHONE_TEL}`} className="flex flex-col">
                 <h1>{t("common.support")}</h1>
                 <p>{SUPPORT_PHONE_DISPLAY}</p>
@@ -176,7 +176,7 @@ export default function Header({ currency, discount, officialPartner, products, 
               {/* Logo */}
               <Link href="/" className="flex items-center shrink-0">
                 <div className="header-logo">
-                  <Image src="/logo.png" alt="Logo" width={100} height={60} priority={100} />
+                  <Image src="/logo.png" alt="Bar Code Technologies" width={100} height={60} priority={100} />
                 </div>
               </Link>
 
@@ -194,10 +194,10 @@ export default function Header({ currency, discount, officialPartner, products, 
             {/* O'ng: Qidiruv, Cart, User, Language */}
             <div className="flex items-center gap-2 sm:gap-3">
                <div className="hidden md:flex justify-end items-end gap-2">
-                <Image src={"/images/datalogic.png"} alt="img" width={100} height={100} className="object-contain h-[27px] w-full" />
+                <Image src={"/images/datalogic.png"} alt="Datalogic" width={100} height={100} className="object-contain h-[27px] w-full" />
               </div>
               <div className="hidden md:flex justify-end items-center gap-2">
-                <Image src={officialPartner ? `${imageUrl}${officialPartner?.image}` : "/myClients/zebraH.png"} alt="img" width={100} height={100} className="h-[27px] w-[83px]" />
+                <Image src={officialPartner ? `${imageUrl}${officialPartner?.image}` : "/myClients/zebraH.png"} alt="Zebra official partner" width={100} height={100} className="h-[27px] w-[83px]" />
                 <h1 className="max-lg:hidden text-end w-2/7 text-[10px]">{t("header.zebra")}</h1>
               </div>
               <Link href="/warranty-check">
