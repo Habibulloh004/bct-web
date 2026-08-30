@@ -27,6 +27,9 @@ import { getTranslatedValue } from "@/lib/functions";
 import Marquee from "../ui/marquee";
 import { imageUrl } from "@/lib/utils";
 
+const SUPPORT_PHONE_DISPLAY = "+998 91 162 35 99";
+const SUPPORT_PHONE_TEL = "+998911623599";
+
 export default function Header({ currency, discount, officialPartner, products, contactInfo }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -96,9 +99,9 @@ export default function Header({ currency, discount, officialPartner, products, 
             ) : (<div></div>)}
             <div className="w-auto flex justify-end items-center gap-1 text-white text-[11px]">
               <Image src="/icons/Symbol.svg" alt="img" width={100} height={100} className="w-6 h-6" />
-              <Link target="_blank" href="tel:+998712058089" className="flex flex-col">
+              <Link target="_blank" href={`tel:${SUPPORT_PHONE_TEL}`} className="flex flex-col">
                 <h1>{t("common.support")}</h1>
-                <p>{contactInfo?.phone1 ? contactInfo?.phone1 : "+998 (71) 234-56-78"}</p>
+                <p>{SUPPORT_PHONE_DISPLAY}</p>
               </Link>
             </div>
           </section>

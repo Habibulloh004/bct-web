@@ -252,7 +252,7 @@ export default function OrderConfirmForm({currency}) {
               <strong>{t('confirmOrder.success.contactInfo') || 'Контактная информация:'}</strong>
             </p>
             <p className="text-sm text-blue-700 mt-1">
-              {t('confirmOrder.success.contactDetails') || 'Если у вас есть вопросы, звоните: +998 (71) 123-45-67'}
+              {t('confirmOrder.success.contactDetails') || 'Если у вас есть вопросы, звоните: +998 91 162 35 99'}
             </p>
           </div>
 
