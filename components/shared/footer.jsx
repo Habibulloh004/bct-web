@@ -12,23 +12,18 @@ export default function Footer({ contactInfo }) {
   const socialLinks = [
     {
       name: 'Facebook',
-      href: contactInfo?.facebook,
+      href: 'https://www.facebook.com/bct.uz',
       icon: '/icons/facebook.svg'
     },
     {
       name: 'Instagram',
-      href: contactInfo?.instagram,
+      href: 'https://www.instagram.com/bctechnologies/',
       icon: '/icons/instagram.svg'
     },
     {
       name: 'Telegram',
-      href: contactInfo?.telegram,
+      href: 'https://t.me/bct_fazliddin',
       icon: '/icons/telegram.webp'
-    },
-    {
-      name: 'YouTube',
-      href: contactInfo?.youtube,
-      icon: '/icons/youtube.svg'
     }
   ];
 
