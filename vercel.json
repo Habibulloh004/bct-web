@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "bct-shop.uz"
+        }
+      ],
+      "destination": "https://www.bct-shop.uz/:path*",
+      "permanent": true
+    }
+  ]
+}
