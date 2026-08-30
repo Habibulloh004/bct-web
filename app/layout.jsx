@@ -38,6 +38,14 @@ export const metadata = {
   title: "Bar Code Technologies — Автоматизация бизнес-процессов для Horeca и Retail",
   description:
     "Компания Bar Code Technologies с 2005 года помогает бизнесам в сфере Horeca и Retail оптимизировать процессы, обучать сотрудников, внедрять современные методы управления и подключать инструменты анализа продаж и закупок.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/logo.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/favicon.png",
+  },
 };
 
 export default async function RootLayout({ children }) {
@@ -78,7 +86,6 @@ export default async function RootLayout({ children }) {
   return (
     <html suppressHydrationWarning lang="en">
       <head>
-        <link rel="icon" href="/logo.svg" />
         <style id="theme-colors" dangerouslySetInnerHTML={{ __html: cssVars }} />
       </head>
       <body className={`${poppins.variable} ${poppinsItalic.variable} ${poppinsRegular.variable} antialiased`}>
