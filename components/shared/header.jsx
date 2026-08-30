@@ -198,7 +198,6 @@ export default function Header({ currency, discount, officialPartner, products, 
               </div>
               <div className="hidden md:flex justify-end items-center gap-2">
                 <Image src={officialPartner ? `${imageUrl}${officialPartner?.image}` : "/myClients/zebraH.png"} alt="Zebra official partner" width={100} height={100} className="h-[27px] w-[83px]" />
-                <h1 className="max-lg:hidden text-end w-2/7 text-[10px]">{t("header.zebra")}</h1>
               </div>
               <Link href="/warranty-check">
                 <Button className={"max-sm:hidden h-10 bg-transparent hover:bg-white/10 text-primary border-primary rounded-full px-3 py-2 border-2"}>
