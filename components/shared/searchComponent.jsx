@@ -10,6 +10,7 @@ import { convertUsdtoUzb, getTranslatedValue } from "@/lib/functions";
 import { getData } from "@/actions/get";
 import { extractProductImages, formatNumber } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
+import { createProductPath } from "@/lib/routes";
 
 export default function SearchComponent({ currency }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -96,9 +97,9 @@ export default function SearchComponent({ currency }) {
     setResults([]);
   };
 
-  const handleSelect = (id, categoryId) => {
+  const handleSelect = (item) => {
     handleClose();
-    router.push(`/${categoryId}/${id}`);
+    router.push(createProductPath(item, i18n.language));
   };
 
   const handleKeyDown = (event) => {
@@ -159,7 +160,7 @@ export default function SearchComponent({ currency }) {
 
     return (
       <button
-        onClick={() => handleSelect(item.id, item.category_id)}
+        onClick={() => handleSelect(item)}
         className="w-full text-left flex items-center gap-3 p-3 bg-gray-50 transition-colors"
       >
         <div className="relative w-14 h-14 shrink-0 rounded-md overflow-hidden bg-gray-50 border">

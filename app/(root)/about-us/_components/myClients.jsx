@@ -10,7 +10,7 @@ export default function MyClients({ partners }) {
   return (
     <div className='space-y-5'>
       <div className='flex justify-center items-center pt-5'>
-        <h1 className='text-base md:text-lg font-semibold'>{t('aboutUs.clients.title')}</h1>
+        <h2 className='text-base md:text-lg font-semibold'>{t('aboutUs.clients.title')}</h2>
       </div>
       <InfinityCard
         className={"gap-6"}

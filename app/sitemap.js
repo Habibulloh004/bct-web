@@ -1,5 +1,6 @@
 import { getData } from "@/actions/get";
 import { absoluteUrl } from "@/lib/seo";
+import { createCategoryPath, createProductPath } from "@/lib/routes";
 
 export const revalidate = 3600;
 
@@ -105,7 +106,7 @@ export default async function sitemap() {
     ...categories
       .filter((category) => category?.id)
       .map((category) => ({
-        path: `/${category.id}`,
+        path: createCategoryPath(category),
         changeFrequency: "weekly",
         priority: 0.8,
         lastModified: getLastModified(category),
@@ -113,7 +114,7 @@ export default async function sitemap() {
     ...products
       .filter((product) => product?.id && product?.category_id)
       .map((product) => ({
-        path: `/${product.category_id}/${product.id}`,
+        path: createProductPath(product),
         changeFrequency: "weekly",
         priority: 0.75,
         lastModified: getLastModified(product),

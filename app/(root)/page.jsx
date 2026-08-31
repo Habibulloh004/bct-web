@@ -72,6 +72,9 @@ export default async function HomePage() {
           path: "/",
         })}
       />
+      <h1 className="sr-only">
+        Bar Code Technologies - автоматизация торговли, HoReCa и складов в Узбекистане
+      </h1>
       <Banner companyStats={companyStats} contact={contact?.data[0]} partners={partners?.data} banners={banners?.data} />
       <Discounts currency={currency} products={products} />
       <VendorsC vendors={vendors?.data} />

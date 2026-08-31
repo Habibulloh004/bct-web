@@ -24,9 +24,9 @@ export default function ManufactureItem({ item }) {
         </div>
 
         <div className="flex flex-col items-start gap-1 w-full">
-          <h1 className="text-md text-[var(--partner-text)] font-medium text-start">
+          <h3 className="text-md text-[var(--partner-text)] font-medium text-start">
             {item?.name || "No name"}
-          </h1>
+          </h3>
 
           <p className="text-xs line-clamp-3 text-[var(--partner-text)] opacity-50">
             {item?.description

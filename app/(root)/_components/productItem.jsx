@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useCartStore } from "@/store/useCartStore";
 import { extractProductImages, formatNumber } from "@/lib/utils";
 import Autoplay from "embla-carousel-autoplay";
+import { createProductPath } from "@/lib/routes";
 
 export default function ProductItem({currency, item }) {
   const { i18n } = useTranslation();
@@ -33,7 +34,7 @@ export default function ProductItem({currency, item }) {
   const hasMultipleImages = productImages.length > 1;
 
   const goToDetails = () => {
-    router.push(`/${item?.category_id}/${item?.id}`);
+    router.push(createProductPath(item, i18n.language));
   };
 
   const autoplayPlugin = React.useRef(
@@ -60,9 +61,9 @@ export default function ProductItem({currency, item }) {
     >
       <div className="flex flex-col justify-between gap-2 w-full h-full p-2">
         <div className="space-y-1">
-          <h1 className="text-sm sm:text-base font-bold text-[var(--pr-card-text)] line-clamp-2">
+          <h3 className="text-sm sm:text-base font-bold text-[var(--pr-card-text)] line-clamp-2">
             {productName}
-          </h1>
+          </h3>
           {adsTitle ? (
             isAdsTitleRich ? (
               <div

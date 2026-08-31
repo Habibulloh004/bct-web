@@ -28,9 +28,9 @@ export default function Vendors({ vendors }) {
   return (
     <div className="w-11/12 max-w-[1440px] mx-auto space-y-5">
       <div className="flex justify-center items-center pt-5">
-        <h1 className="text-base md:text-lg font-semibold">
+        <h2 className="text-base md:text-lg font-semibold">
           {t("aboutUs.vendors.title")}
-        </h1>
+        </h2>
       </div>
 
       {/* GRID: centered last row items with responsive columns */}

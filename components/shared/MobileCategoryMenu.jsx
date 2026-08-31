@@ -9,6 +9,7 @@ import { useCategories } from "@/hooks/useCategories";
 import { getTranslatedValue } from "@/lib/functions";
 import { imageUrl } from "@/lib/utils";
 import Image from "next/image";
+import { createCategoryPath } from "@/lib/routes";
 
 export default function MobileCategoryMenu({ onLinkClick }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +57,7 @@ export default function MobileCategoryMenu({ onLinkClick }) {
                   return enabled ? (
                     <Link
                       key={category.id}
-                      href={`/${category.id}`}
+                      href={createCategoryPath(category, i18n.language)}
                       onClick={onLinkClick}
                       className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-100 transition-colors"
                     >

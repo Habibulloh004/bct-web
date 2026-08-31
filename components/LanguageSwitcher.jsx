@@ -38,7 +38,7 @@ export default function LanguageSwitcher() {
               i18n.language === lang.locale ? 'bg-blue-50' : 'bg-white hover:bg-gray-50'
             }`}
           >
-            <h1>{lang?.title}</h1>
+            <span>{lang?.title}</span>
             <Image
               src={lang.icon}
               alt={lang.title}

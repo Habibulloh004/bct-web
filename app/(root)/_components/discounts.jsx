@@ -15,7 +15,7 @@ export default function Discounts({ currency, products }) {
   if (productsData?.length > 0) {
     return (
       <main className='space-y-4' >
-        <h1 className='ml-2 text-start font-bold text-2xl md:text-4xl'>{t("homePage.discountTitle")}</h1>
+        <h2 className='ml-2 text-start font-bold text-2xl md:text-4xl'>{t("homePage.discountTitle")}</h2>
         {/* Grid version */}
         <div className="pt-5 flex flex-wrap justify-center gap-4">
           {productsData?.slice(0, 18)?.map((item, index) => (

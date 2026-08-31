@@ -59,6 +59,9 @@ export default async function AboutUs() {
           { name: "О компании", path: "/about-us" },
         ])}
       />
+      <h1 className="sr-only">
+        О компании Bar Code Technologies и автоматизации бизнеса в Узбекистане
+      </h1>
       <AboutMain />
       <Service experiments={experiments?.data} companyStats={companyStats?.data} />
       <Vendors vendors={vendorsAbout?.data} />

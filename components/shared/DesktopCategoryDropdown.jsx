@@ -9,6 +9,7 @@ import { useCategories } from '@/hooks/useCategories';
 import { getTranslatedValue } from '@/lib/functions';
 import { imageUrl } from '@/lib/utils';
 import Image from 'next/image';
+import { createCategoryPath } from '@/lib/routes';
 
 export default function DesktopCategoryDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -81,7 +82,7 @@ export default function DesktopCategoryDropdown() {
                 return enabled ? (
                   <Link
                     key={category.id}
-                    href={`/${category.id}`}
+                    href={createCategoryPath(category, i18n.language)}
                     onClick={handleDropdownClose}
                     className="flex justify-start items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors gap-2"
                   >

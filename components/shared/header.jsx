@@ -26,6 +26,7 @@ import BackToTop from "./BackToTop";
 import { getTranslatedValue } from "@/lib/functions";
 import Marquee from "../ui/marquee";
 import { imageUrl } from "@/lib/utils";
+import { createProductPath } from "@/lib/routes";
 
 const SUPPORT_PHONE_DISPLAY = "+998 91 162 35 99";
 const SUPPORT_PHONE_TEL = "+998911623599";
@@ -80,7 +81,7 @@ export default function Header({ currency, discount, officialPartner, products, 
         <div ref={topBarRef} className="w-full bg-primary">
           <section className="grid max-w-[1440px] w-11/12 mx-auto grid-cols-2 md:grid-cols-3 gap-1 md:gap-4">
             <div className="w-auto flex flex-col text-[11px] py-2 text-white">
-              <h1>{contactInfo?.email ? contactInfo?.email : "info@bctechnologies.uz"}</h1>
+              <p>{contactInfo?.email ? contactInfo?.email : "info@bctechnologies.uz"}</p>
               <p>{contactInfo?.work_hours ? getTranslatedValue(contactInfo?.work_hours, i18n.language) : "Режим работы: ПН, ВТ, СР, ЧТ с 09:00 - 18:00 Выходной: ПТ"}</p>
             </div>
             {discount && randomProduct ? (
@@ -88,11 +89,11 @@ export default function Header({ currency, discount, officialPartner, products, 
                 <Button className="bg-white text-black hover:bg-white/90 h-auto p-0 px-3 py-1 text-[11px] rounded-full">
                   {t("common.promo_title")}
                 </Button>
-                <h1 className="text-white text-[11px] line-clamp-1">
+                <p className="text-white text-[11px] line-clamp-1">
                   {getTranslatedValue(discount?.title, i18n.language)}
 
-                </h1>
-                <Link href={`/${randomProduct?.category_id}/${randomProduct?.id}`} className="text-white text-[12px] xl:text-[14px] font-poppins-italic underline">
+                </p>
+                <Link href={createProductPath(randomProduct, i18n.language)} className="text-white text-[12px] xl:text-[14px] font-poppins-italic underline">
                   {t("common.buy_now")}
                 </Link>
               </div>
@@ -100,7 +101,7 @@ export default function Header({ currency, discount, officialPartner, products, 
             <div className="w-auto flex justify-end items-center gap-1 text-white text-[11px]">
               <Image src="/icons/Symbol.svg" alt="" width={100} height={100} className="w-6 h-6" />
               <Link target="_blank" href={`tel:${SUPPORT_PHONE_TEL}`} className="flex flex-col">
-                <h1>{t("common.support")}</h1>
+                <span>{t("common.support")}</span>
                 <p>{SUPPORT_PHONE_DISPLAY}</p>
               </Link>
             </div>
@@ -114,10 +115,10 @@ export default function Header({ currency, discount, officialPartner, products, 
                 <Button className="bg-white text-black hover:bg-white/90 h-auto p-0 px-3 py-1 text-[11px] rounded-full">
                   {t("common.promo_title")}
                 </Button>
-                <h1 className="text-black text-[11px]">
+                <p className="text-black text-[11px]">
                   {getTranslatedValue(discount?.title, i18n.language)}
-                </h1>
-                <Link href={`/${randomProduct?.category_id}/${randomProduct?.id}`} className="text-primary text-[14px] font-poppins-italic underline">
+                </p>
+                <Link href={createProductPath(randomProduct, i18n.language)} className="text-primary text-[14px] font-poppins-italic underline">
                   {t("common.buy_now")}
                 </Link>
               </div>

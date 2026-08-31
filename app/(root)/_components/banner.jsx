@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { Separator } from "@/components/ui/separator";
 import { convertPriceToUzs, getTranslatedValue } from "@/lib/functions";
 import StatsQuadFlip from "./StatsQuadCarousel";
+import { createProductPath } from "@/lib/routes";
 
 const Banner = ({companyStats, partners, banners, contact }) => {
   const { t, i18n } = useTranslation();
@@ -42,16 +43,16 @@ const Banner = ({companyStats, partners, banners, contact }) => {
 
             {/* Company Section */}
             <section className="z-[100] space-y-1 md:space-y-4 lg:space-y-6">
-              <h1 className=" font-bold md:-translate-y-[16px] text-[20px] md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-poppins-regular text-black leading-tight">
+              <p className=" font-bold md:-translate-y-[16px] text-[20px] md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-poppins-regular text-black leading-tight">
                 {contact?.company_name ? contact?.company_name : "BarCodeTechnologies"}
-              </h1>
+              </p>
               <p className="text-primary text-xs md:text-lg lg:text-xl max-w-full xl:max-w-[80%] leading-relaxed">
                 {t('banner.company.description')}
               </p>
               <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center gap-4 lg:gap-5 mt-6">
                 <Link href="all-products">
                   <Button className="bg-primary hover:bg-primary hover:opacity-95 w-auto text-md md:text-lg lg:text-xl px-4 py-2 md:px-6 md:py-3 h-auto flex justify-center items-center gap-2 rounded-full">
-                    <h1>{t('banner.buttons.catalog')}</h1>
+                    <span>{t('banner.buttons.catalog')}</span>
                     <ArrowRight className="mt-1" />
                   </Button>
                 </Link>
@@ -63,7 +64,7 @@ const Banner = ({companyStats, partners, banners, contact }) => {
 
             {/* Partners Section */}
             <section className="max-sm:hidden space-y-3 lg:space-y-4 lg:pt-10">
-              <h1 className="font-bold text-xl">{t('banner.partners.title')}</h1>
+              <h2 className="font-bold text-xl">{t('banner.partners.title')}</h2>
               <div className="max-w-11/12 xl:max-w-full">
                 <InfinityCard
                   type="online"
@@ -135,11 +136,19 @@ const Banner = ({companyStats, partners, banners, contact }) => {
                         <CarouselItem key={i} className={`basis-full rounded-md`}>
                           <Link
                             className="mt-1 relative flex flex-row p-4 gap-4 bg-[var(--banner-primary)] rounded-md"
-                            href={`/${item?.category_id}/${item?.product_id}`}
+                            href={createProductPath(
+                              {
+                                id: item?.product_id,
+                                name: item?.title,
+                                category_id: item?.category_id,
+                                category_name: item?.category_name,
+                              },
+                              i18n.language
+                            )}
                           >
                             <div className="w-full lg:w-[250px] flex flex-col justify-center">
                               <div className="flex justify-start items-center gap-2 mb-4">
-                                <h1 className="font-medium text-sm lg:text-base">{getTranslatedValue(item?.description, i18n?.language)}</h1>
+                                <p className="font-medium text-sm lg:text-base">{getTranslatedValue(item?.description, i18n?.language)}</p>
                               </div>
                               <p className="line-clamp-3 text-2xl xl:text-3xl font-bold leading-tight">
                                 {bannerTitle}
@@ -167,7 +176,7 @@ const Banner = ({companyStats, partners, banners, contact }) => {
           </div>
         </div>
         <section className="sm:hidden space-y-3 lg:space-y-4">
-          <h1 className="font-bold text-xl">{t('banner.partners.title')}</h1>
+          <h2 className="font-bold text-xl">{t('banner.partners.title')}</h2>
           <div className="">
             <InfinityCard
               type="online"
@@ -198,11 +207,19 @@ const Banner = ({companyStats, partners, banners, contact }) => {
                   <CarouselItem key={i} className={`basis-full`}>
                     <Link
                       className="w-full mt-1 relative flex flex-col sm:flex-row p-4 pb-6 gap-4 bg-[var(--banner-primary)] rounded-md"
-                      href={`/${item?.category_id}/${item?.product_id}`}
+                      href={createProductPath(
+                        {
+                          id: item?.product_id,
+                          name: item?.title,
+                          category_id: item?.category_id,
+                          category_name: item?.category_name,
+                        },
+                        i18n.language
+                      )}
                     >
                       <div className="w-full sm:w-1/3 flex flex-col justify-center max-sm:items-center">
                         <div className="flex justify-start items-center gap-2 mb-4">
-                          <h1 className="font-medium text-sm lg:text-base line-clamp-1">{getTranslatedValue(item?.description, i18n?.language)}</h1>
+                          <p className="font-medium text-sm lg:text-base line-clamp-1">{getTranslatedValue(item?.description, i18n?.language)}</p>
                         </div>
                         <p className="line-clamp-3 text-2xl xl:text-3xl font-bold leading-tight">
                           {bannerTitle}

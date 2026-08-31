@@ -49,14 +49,14 @@ const PasswordInput = React.forwardRef(({ className, ...props }, ref) => {
             className={`${showPassword ? "text-[#ABAFB1]" : "text-[#ABAFB1]"}`}
           />
         )}
-        <h1
+        <span
           className={`textSmall2 ${
             showPassword ? "text-[#ABAFB1]" : "text-[#bdc5c9]"
           }`}
         >
           {/* {t("password")} */}
           Password
-        </h1>
+        </span>
         <span className="sr-only">
           {showPassword ? "Hide password" : "Show password"}
         </span>

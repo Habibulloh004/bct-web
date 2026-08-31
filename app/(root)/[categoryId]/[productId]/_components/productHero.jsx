@@ -132,9 +132,9 @@ export default function ProductHero({ item, showInlineFeatures, currency }) {
                 </button>
               ))}
             </div>
-            <h1 className="md:hidden text-black/40 text-2xl md:text-4xl font-bold">
+            <p className="md:hidden text-black/40 text-2xl md:text-4xl font-bold">
               {item?.price ? formatNumber(convertUsdtoUzb(item?.price, currency)) : 1000} сум
-            </h1>
+            </p>
             <div className="lg:hidden flex flex-wrap items-center gap-3 pt-3">
               <div className="max-sm:w-full inline-flex items-center gap-1">
                 <Button
@@ -185,9 +185,9 @@ export default function ProductHero({ item, showInlineFeatures, currency }) {
               <h1 className="text-2xl md:text-4xl font-bold">
                 {getTranslatedValue(item?.name, i18n.language)}
               </h1>
-              <h1 className="text-black/40 text-2xl md:text-4xl font-bold">
+              <p className="text-black/40 text-2xl md:text-4xl font-bold">
                 {item?.price ? formatNumber(convertUsdtoUzb(item?.price, currency)) : 1000} сум
-              </h1>
+              </p>
             </div>
 
             <div className="hidden lg:inline-flex gap-3 flex-wrap items-center">
@@ -240,10 +240,10 @@ export default function ProductHero({ item, showInlineFeatures, currency }) {
 
         </div>
         <div className="hidden w-full h-11 bg-black text-white items-center justify-center font-bold mt-6">
-          <h1>
+          <p>
             {getTranslatedValue(item?.category_name, i18n.language)}{" "}
             {getInitialsFromName(getTranslatedValue(item?.name, i18n.language))}
-          </h1>
+          </p>
         </div>
       </section>
 

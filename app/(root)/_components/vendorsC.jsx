@@ -11,9 +11,9 @@ export default function VendorsC({ vendors }) {
 
   return (
     <main className="space-y-4">
-      <h1 className="ml-2 text-start font-bold text-2xl md:text-4xl">
+      <h2 className="ml-2 text-start font-bold text-2xl md:text-4xl">
         {t("aboutUs.vendors.title")}
-      </h1>
+      </h2>
 
       {/* GRID: responsive ustunlar soni + markazlash */}
       {/* <div className="pt-5 flex flex-wrap justify-center gap-4">

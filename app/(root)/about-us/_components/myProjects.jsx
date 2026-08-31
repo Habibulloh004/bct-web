@@ -68,9 +68,9 @@ export default function MyProjects({ projects }) {
   return (
     <div className="w-11/12 max-w-[1440px] mx-auto space-y-5">
       <div className="pb-5 flex justify-center items-center pt-5">
-        <h1 className="text-base md:text-lg font-semibold">
+        <h2 className="text-base md:text-lg font-semibold">
           {t("aboutUs.projects.title")}
-        </h1>
+        </h2>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">

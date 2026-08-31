@@ -10,6 +10,8 @@ import {
   getSeoText,
 } from '@/lib/seo';
 import { convertUsdtoUzb } from '@/lib/functions';
+import { createCategoryPath, createProductPath, extractMongoId } from '@/lib/routes';
+import { permanentRedirect } from 'next/navigation';
 
 async function getProductData(productId) {
   try {
@@ -25,8 +27,8 @@ async function getProductData(productId) {
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
-  const productId = resolvedParams?.productId;
-  const categoryId = resolvedParams?.categoryId;
+  const productId = extractMongoId(resolvedParams?.productId);
+  const categoryId = extractMongoId(resolvedParams?.categoryId);
   const productData = await getProductData(productId);
 
   return createProductMetadata({ product: productData, categoryId, productId });
@@ -34,8 +36,8 @@ export async function generateMetadata({ params }) {
 
 export default async function Product({ params }) {
   const resolvedParams = await params;
-  const productId = resolvedParams?.productId;
-  const categoryId = resolvedParams?.categoryId;
+  const productId = extractMongoId(resolvedParams?.productId);
+  const categoryId = extractMongoId(resolvedParams?.categoryId);
   const productData = await getProductData(productId);
   const currency = await getCurrencyData()
   const productName = getSeoText(productData?.name) || "Оборудование";
@@ -44,6 +46,20 @@ export default async function Product({ params }) {
     ? Math.round(convertUsdtoUzb(productData.price, currency))
     : null;
   const productPrice = Number.isFinite(convertedPrice) ? convertedPrice : null;
+  const canonicalProductPath = productData
+    ? createProductPath(productData)
+    : `/${categoryId}/${productId}`;
+  const canonicalCategoryPath = productData
+    ? createCategoryPath({ id: productData?.category_id || categoryId, name: productData?.category_name })
+    : `/${categoryId}`;
+
+  if (
+    productData &&
+    (resolvedParams?.categoryId !== canonicalCategoryPath.slice(1) ||
+      resolvedParams?.productId !== canonicalProductPath.split("/").pop())
+  ) {
+    permanentRedirect(canonicalProductPath);
+  }
 
   return (
     <main className="pt-8 font-poppins">
@@ -51,8 +67,8 @@ export default async function Product({ params }) {
         data={[
           createBreadcrumbJsonLd([
             { name: "Главная", path: "/" },
-            { name: categoryName, path: `/${categoryId}` },
-            { name: productName, path: `/${categoryId}/${productId}` },
+            { name: categoryName, path: canonicalCategoryPath },
+            { name: productName, path: canonicalProductPath },
           ]),
           createProductJsonLd({
             product: productData,

@@ -14,9 +14,9 @@ export default function Service({ experiments, companyStats }) {
     <>
       <div className="max-w-[1440px] mx-auto w-11/12">
         <div className="flex flex-col items-center justify-center pt-16 md:pt-20">
-          <h1 className="font-medium w-full md:w-[70%] lg:w-[50%] text-sm md:text-base text-center">
+          <h2 className="font-medium w-full md:w-[70%] lg:w-[50%] text-sm md:text-base text-center">
             {t('aboutUs.services.title')}
-          </h1>
+          </h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mx-auto py-8 md:py-10">
           {services.map((service, index) => (
