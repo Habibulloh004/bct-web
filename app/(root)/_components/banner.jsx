@@ -34,19 +34,19 @@ const Banner = ({companyStats, partners, banners, contact }) => {
 
 
   return (
-    <main className="w-full py-6">
+    <main className="w-full overflow-hidden py-5 sm:py-6">
       <div className="">
-        <div className=" grid grid-cols-3 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-12">
 
           {/* Left Column */}
-          <div className="flex flex-col max-lg:col-span-2 gap-6 lg:gap-8 order-1 xl:order-1">
+          <div className="order-1 flex min-w-0 flex-col gap-6 lg:gap-8 xl:order-1">
 
             {/* Company Section */}
             <section className="z-[100] space-y-1 md:space-y-4 lg:space-y-6">
-              <p className=" font-bold md:-translate-y-[16px] text-[20px] md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-poppins-regular text-black leading-tight">
+              <p className="break-words text-[clamp(1.75rem,8vw,2.5rem)] font-bold leading-tight text-black md:-translate-y-[16px] md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl">
                 {contact?.company_name ? contact?.company_name : "BarCodeTechnologies"}
               </p>
-              <p className="text-primary text-xs md:text-lg lg:text-xl max-w-full xl:max-w-[80%] leading-relaxed">
+              <p className="max-w-full text-base leading-relaxed text-primary md:text-lg lg:text-xl xl:max-w-[80%]">
                 {t('banner.company.description')}
               </p>
               <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center gap-4 lg:gap-5 mt-6">
@@ -76,17 +76,17 @@ const Banner = ({companyStats, partners, banners, contact }) => {
           </div>
 
           {/* Right Column */}
-          <div className="flex flex-col col-span-1 gap-6 lg:gap-8 order-2 xl:order-2">
+          <div className="order-2 flex min-w-0 flex-col gap-6 lg:col-span-1 lg:gap-8 xl:order-2">
 
             {/* Stats and Decorative Section */}
             <section className="w-full flex flex-col lg:flex-row gap-4">
-              <div className="w-full flex items-end justify-end lg:items-center">
-                <div className="relative flex flex-col-reverse lg:flex-row justify-end items-end lg:items-center gap-4">
+              <div className="flex w-full items-end justify-center lg:items-center lg:justify-end">
+                <div className="relative flex w-full max-w-[310px] flex-row-reverse items-stretch justify-between gap-3 sm:max-w-[360px] lg:max-w-none lg:flex-row lg:items-center lg:justify-end lg:gap-4">
                   {/* Decorative Background */}
                   <div className="relative w-[150px] md:w-[200px] lg:w-[250px] h-[150px] md:h-[200px] lg:h-[250px] xl:w-[300px] xl:h-[300px] flex-shrink-0">
                     <div className="w-full h-full aspect-square bg-primary rounded-tl-[100%] rounded-tr-[8px] rounded-bl-[8px]" />
                     <Image
-                      className="w-[100px] md:w-[125px] lg:w-[160px] xl:w-[200px] absolute top-8 md:top-10 -right-4 md:-right-6"
+                      className="absolute right-0 top-8 w-[100px] md:-right-6 md:top-10 md:w-[125px] lg:w-[160px] xl:w-[200px]"
                       src="/images/banner1.png"
                       alt="img"
                       width={100}
@@ -95,7 +95,7 @@ const Banner = ({companyStats, partners, banners, contact }) => {
                       sizes="(max-width: 1280px) 160px, 300px"
                     />
                     <Image
-                      className="w-[100px] md:w-[125px] lg:w-[160px] xl:w-[200px] absolute top-10 md:top-14 -left-6 md:-left-10"
+                      className="absolute left-0 top-10 w-[100px] md:-left-10 md:top-14 md:w-[125px] lg:w-[160px] xl:w-[200px]"
                       src="/images/banner2.png"
                       alt="img"
                       width={100}

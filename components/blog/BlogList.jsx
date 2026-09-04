@@ -48,7 +48,9 @@ function BlogCard({ blog, featured = false }) {
   const id = blog?.id || blog?._id;
   const title = getTranslatedValue(blog?.title, language);
   const text = getTranslatedValue(blog?.text, language);
-  const image = resolveImageUrl(blog?.image);
+  const image = resolveImageUrl(
+    getTranslatedValue(blog?.image, language)
+  );
   const date = formatDate(blog?.created_at, language);
 
   if (!id) return null;
@@ -92,7 +94,7 @@ function BlogCard({ blog, featured = false }) {
               {date}
             </p>
           )}
-          <h2 className={featured ? "text-3xl font-semibold leading-tight text-[#2e4669] sm:text-4xl" : "text-xl font-semibold leading-snug text-[#2e4669]"}>
+          <h2 className={featured ? "break-words text-3xl font-semibold leading-tight text-[#2e4669] sm:text-4xl" : "break-words text-xl font-semibold leading-snug text-[#2e4669]"}>
             <Link href={`/blog/${id}`} className="transition-colors hover:text-[#172a47]">
               {title}
             </Link>
@@ -121,12 +123,12 @@ export default function BlogList({ blogs = [] }) {
   const [featured, ...rest] = blogs;
 
   return (
-    <main className="mx-auto w-11/12 max-w-[1440px] py-12 sm:py-16 lg:py-20">
+    <main className="mx-auto w-11/12 max-w-[1440px] overflow-hidden py-10 sm:py-16 lg:py-20">
       <header className="mb-10 max-w-3xl sm:mb-14">
         <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-[#2e4669]/65">
           {t("blog.eyebrow")}
         </p>
-        <h1 className="text-4xl font-semibold tracking-[-0.035em] text-[#203754] sm:text-5xl lg:text-6xl">
+        <h1 className="break-words text-4xl font-semibold tracking-[-0.035em] text-[#203754] sm:text-5xl lg:text-6xl">
           {t("blog.title")}
         </h1>
         <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">

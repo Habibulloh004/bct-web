@@ -79,10 +79,10 @@ export default function Header({ currency, discount, officialPartner, products, 
       <header className="w-full z-[998] flex flex-col items-center max-md:overflow-hidden">
         {/* Top info bar */}
         <div ref={topBarRef} className="w-full bg-primary">
-          <section className="grid max-w-[1440px] w-11/12 mx-auto grid-cols-2 md:grid-cols-3 gap-1 md:gap-4">
-            <div className="w-auto flex flex-col text-[11px] py-2 text-white">
-              <p>{contactInfo?.email ? contactInfo?.email : "info@bctechnologies.uz"}</p>
-              <p>{contactInfo?.work_hours ? getTranslatedValue(contactInfo?.work_hours, i18n.language) : "Режим работы: ПН, ВТ, СР, ЧТ с 09:00 - 18:00 Выходной: ПТ"}</p>
+          <section className="mx-auto grid w-11/12 max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 md:grid-cols-3 md:gap-4">
+            <div className="flex min-w-0 flex-col py-2 text-[10px] leading-4 text-white sm:text-[11px]">
+              <p className="truncate">{contactInfo?.email ? contactInfo?.email : "info@bctechnologies.uz"}</p>
+              <p className="line-clamp-2 md:line-clamp-none">{contactInfo?.work_hours ? getTranslatedValue(contactInfo?.work_hours, i18n.language) : "Режим работы: ПН, ВТ, СР, ЧТ с 09:00 - 18:00 Выходной: ПТ"}</p>
             </div>
             {discount && randomProduct ? (
               <div className="hidden md:flex justify-center items-center gap-1">
@@ -97,11 +97,11 @@ export default function Header({ currency, discount, officialPartner, products, 
                   {t("common.buy_now")}
                 </Link>
               </div>
-            ) : (<div></div>)}
-            <div className="w-auto flex justify-end items-center gap-1 text-white text-[11px]">
-              <Image src="/icons/Symbol.svg" alt="" width={100} height={100} className="w-6 h-6" />
-              <Link target="_blank" href={`tel:${SUPPORT_PHONE_TEL}`} className="flex flex-col">
-                <span>{t("common.support")}</span>
+            ) : (<div className="hidden md:block" />)}
+            <div className="flex w-auto shrink-0 items-center justify-end gap-1.5 text-[10px] leading-4 text-white sm:text-[11px]">
+              <Image src="/icons/Symbol.svg" alt="" width={100} height={100} className="h-5 w-5 sm:h-6 sm:w-6" />
+              <Link href={`tel:${SUPPORT_PHONE_TEL}`} className="flex flex-col whitespace-nowrap">
+                <span className="hidden sm:inline">{t("common.support")}</span>
                 <p>{SUPPORT_PHONE_DISPLAY}</p>
               </Link>
             </div>
@@ -133,15 +133,15 @@ export default function Header({ currency, discount, officialPartner, products, 
           className={`w-full ${passedTopBar ? "fixed top-0 left-0 z-[999] bg-white shadow-md" : "sticky top-0 z-[999]"
             }`}
         >
-          <main className="w-11/12 max-w-[1440px] h-full mx-auto flex items-center justify-between">
+          <main className="mx-auto flex h-full w-full max-w-[1440px] items-center justify-between gap-2 px-3 sm:w-11/12 sm:px-0">
             {/* Chap: Mobile menu + Logo */}
             <div className="flex items-center gap-2 sm:gap-5 py-2">
-              <div className="lg:hidden">
+              <div className="shrink-0 lg:hidden">
                 <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                   <SheetTrigger asChild>
-                    <Menu className="cursor-pointer h-8 w-8 text-primary" />
+                    <Menu className="h-7 w-7 cursor-pointer text-primary sm:h-8 sm:w-8" />
                   </SheetTrigger>
-                  <SheetContent side="left" className="w-80 p-0 z-[9999]">
+                  <SheetContent side="left" className="z-[9999] w-[88vw] max-w-80 p-0">
                     <SheetHeader className="p-6 border-b">
                       <SheetTitle className="text-left">{t("header.menu")}</SheetTitle>
                     </SheetHeader>
@@ -206,7 +206,7 @@ export default function Header({ currency, discount, officialPartner, products, 
             </div>
 
             {/* O'ng: Qidiruv, Cart, User, Language */}
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex shrink-0 items-center gap-1.5 sm:gap-3">
                <div className="hidden md:flex justify-end items-end gap-2">
                 <Image src={"/images/datalogic.png"} alt="Datalogic" width={100} height={100} className="object-contain h-[27px] w-full" />
               </div>
@@ -221,7 +221,7 @@ export default function Header({ currency, discount, officialPartner, products, 
               <SearchPopover currency={currency} />
 
               {/* Cart */}
-              <Link href="/cart" className="relative h-10 w-10 bg-primary rounded-full flex justify-center items-center">
+              <Link href="/cart" className="relative flex h-9 w-9 items-center justify-center rounded-full bg-primary sm:h-10 sm:w-10">
                 <Image src="/icons/shopCard.svg" alt="icon" width={28} height={28} />
                 {items.length > 0 && (
                   <span className="absolute bottom-1 right-1 bg-red-500 text-white text-[10px] font-semibold rounded-full w-4 h-4 flex items-center justify-center">
@@ -253,7 +253,7 @@ export default function Header({ currency, discount, officialPartner, products, 
                     <Link href="/login">
                       <Button
                         variant="none"
-                        className="rounded-full text-white h-10 w-auto px-3 py-2 bg-primary hover:bg-primary/90 transition-all duration-150 cursor-pointer ease-in-out"
+                        className="h-9 w-auto cursor-pointer rounded-full bg-primary px-3 py-2 text-sm text-white transition-all duration-150 ease-in-out hover:bg-primary/90 sm:h-10 sm:text-base"
                       >
                         {t("login.buttons.submit")}
                       </Button>

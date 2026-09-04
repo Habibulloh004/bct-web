@@ -32,10 +32,10 @@ export default function BlogArticle({ blog }) {
   const title = localizedValue(blog?.title, language);
   const text = localizedValue(blog?.text, language);
   const date = formatDate(blog?.created_at, language);
-  const image = resolveImageUrl(blog?.image);
+  const image = resolveImageUrl(localizedValue(blog?.image, language));
 
   return (
-    <main className="mx-auto w-11/12 max-w-[1180px] py-10 sm:py-14 lg:py-20">
+    <main className="mx-auto w-11/12 max-w-[1180px] overflow-hidden py-8 sm:py-14 lg:py-20">
       <Link
         href="/blog"
         className="mb-9 inline-flex items-center gap-2 text-sm font-semibold text-[#2e4669] transition hover:-translate-x-1"
@@ -52,7 +52,7 @@ export default function BlogArticle({ blog }) {
               {date}
             </p>
           )}
-          <h1 className="text-4xl font-semibold leading-[1.08] tracking-[-0.04em] text-[#203754] sm:text-5xl lg:text-6xl">
+          <h1 className="break-words text-4xl font-semibold leading-[1.08] tracking-[-0.04em] text-[#203754] sm:text-5xl lg:text-6xl">
             {title}
           </h1>
         </header>

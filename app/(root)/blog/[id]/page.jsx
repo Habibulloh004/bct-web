@@ -35,12 +35,13 @@ export async function generateMetadata({ params }) {
 
   const title = parseLocalizedBlogField(blog.title);
   const text = parseLocalizedBlogField(blog.text);
+  const image = parseLocalizedBlogField(blog.image);
 
   return createPageMetadata({
     title: title.ru || title.en || title.uz,
     description: truncateText(text.ru || text.en || text.uz),
     path: `/blog/${id}`,
-    image: resolveImageUrl(blog.image),
+    image: resolveImageUrl(image.ru || image.en || image.uz),
   });
 }
 
@@ -58,6 +59,7 @@ export default async function BlogDetailPage({ params }) {
         ...blog,
         title: parseLocalizedBlogField(blog.title),
         text: sanitizeLocalizedBlogText(blog.text),
+        image: parseLocalizedBlogField(blog.image),
       }}
     />
   );
