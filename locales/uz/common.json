@@ -72,6 +72,7 @@
   "header": {
     "categories": "Kategoriyalar",
     "aboutUs": "Biz haqimizda",
+    "blog": "Blog",
     "warrantyCheck": "Kafolat tekshiruvi",
     "menu": "Menyu",
     "categoryList": {
@@ -80,6 +81,16 @@
       "accessories": "Aksessuarlar"
     },
     "zebra": "Rasmiy hamkor"
+  },
+  "blog": {
+    "eyebrow": "Maqolalar va yangiliklar",
+    "title": "Aqlli biznes uchun g‘oyalar",
+    "description": "Retail, HoReCa, ombor va ishlab chiqarishni avtomatlashtirish bo‘yicha amaliy qo‘llanmalar, soha yangiliklari va sinalgan yechimlar.",
+    "readMore": "Maqolani o‘qish",
+    "back": "Blogga qaytish",
+    "imageAlt": "Blog maqolasi muqovasi",
+    "emptyTitle": "Maqolalar tez orada chiqadi",
+    "emptyDescription": "Uskunalar va biznesni avtomatlashtirish bo‘yicha foydali materiallar tayyorlayapmiz."
   },
   "login": {
     "title": "Akkountga kirish",

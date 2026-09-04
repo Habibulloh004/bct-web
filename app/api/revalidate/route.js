@@ -1,5 +1,5 @@
 // app/api/revalidate/route.js
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 const CORS_HEADERS = {
@@ -21,23 +21,34 @@ export async function GET() {
 
 export async function POST(req) {
   try {
-    const { tag } = await req.json();
+    const { tag, paths } = await req.json();
 
-    if (!tag || (Array.isArray(tag) && tag.length === 0)) {
+    const tags = (Array.isArray(tag) ? tag : [tag]).filter(
+      (value) => typeof value === "string" && value.trim()
+    );
+    const requestedPaths = (Array.isArray(paths) ? paths : [paths]).filter(
+      (value) => typeof value === "string" && value.startsWith("/")
+    );
+
+    if (tags.length === 0 && requestedPaths.length === 0) {
       return NextResponse.json(
         { success: false, error: "Tag is required" },
         { status: 400, headers: CORS_HEADERS }
       );
     }
 
-    if (Array.isArray(tag)) {
-      for (const t of tag) {
-        await revalidateTag(t);
-        console.log("Revalidated:", t);
+    for (const cacheTag of tags) {
+      revalidateTag(cacheTag);
+      console.log("Revalidated tag:", cacheTag);
+    }
+
+    for (const path of requestedPaths) {
+      if (path.includes("[")) {
+        revalidatePath(path, "page");
+      } else {
+        revalidatePath(path);
       }
-    } else {
-      await revalidateTag(tag);
-      console.log("Revalidated:", tag);
+      console.log("Revalidated path:", path);
     }
 
     return NextResponse.json({ success: true }, { headers: CORS_HEADERS });

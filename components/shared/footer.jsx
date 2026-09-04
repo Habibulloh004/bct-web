@@ -89,6 +89,14 @@ export default function Footer({ contactInfo }) {
               </li>
               <li>
                 <Link
+                  href="/blog"
+                  className='text-sm md:text-base text-gray-600 hover:text-blue-600 transition-colors duration-200'
+                >
+                  {t('header.blog')}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/contact"
                   className='text-sm md:text-base text-gray-600 hover:text-blue-600 transition-colors duration-200'
                 >

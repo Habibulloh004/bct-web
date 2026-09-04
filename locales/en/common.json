@@ -72,6 +72,7 @@
   "header": {
     "categories": "Categories",
     "aboutUs": "About Us",
+    "blog": "Blog",
     "warrantyCheck": "Warranty Check",
     "menu": "Menu",
     "categoryList": {
@@ -80,6 +81,16 @@
       "accessories": "Accessories"
     },
     "zebra": "Official partner"
+  },
+  "blog": {
+    "eyebrow": "Insights & updates",
+    "title": "Ideas for smarter business",
+    "description": "Practical guides, industry updates and proven approaches to automating retail, HoReCa, warehouses and production.",
+    "readMore": "Read article",
+    "back": "Back to blog",
+    "imageAlt": "Blog article cover",
+    "emptyTitle": "Articles are coming soon",
+    "emptyDescription": "We are preparing useful materials about equipment and business automation."
   },
   "login": {
     "title": "Login to Account",

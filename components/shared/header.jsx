@@ -158,6 +158,13 @@ export default function Header({ currency, discount, officialPartner, products, 
                           {t("header.aboutUs")}
                         </Link>
                         <Link
+                          href="/blog"
+                          onClick={handleMobileMenuClose}
+                          className="block px-3 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+                        >
+                          {t("header.blog")}
+                        </Link>
+                        <Link
                           href="/warranty-check"
                           onClick={handleMobileMenuClose}
                           className="block px-3 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
@@ -188,6 +195,12 @@ export default function Header({ currency, discount, officialPartner, products, 
                   className="text-primary text-lg font-[400] hover:text-primary/80 transition-colors"
                 >
                   {t("header.aboutUs")}
+                </Link>
+                <Link
+                  href="/blog"
+                  className="text-primary text-lg font-[400] hover:text-primary/80 transition-colors"
+                >
+                  {t("header.blog")}
                 </Link>
               </div>
             </div>

@@ -8,6 +8,7 @@ const staticRoutes = [
   { path: "/", changeFrequency: "daily", priority: 1 },
   { path: "/all-products", changeFrequency: "daily", priority: 0.9 },
   { path: "/about-us", changeFrequency: "monthly", priority: 0.7 },
+  { path: "/blog", changeFrequency: "weekly", priority: 0.75 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.7 },
   { path: "/warranty-check", changeFrequency: "monthly", priority: 0.5 },
   { path: "/privacy", changeFrequency: "yearly", priority: 0.2 },
@@ -87,14 +88,25 @@ async function getAllProducts() {
   return products;
 }
 
+async function getAllBlogs() {
+  const response = await safeGetData({
+    endpoint: "/api/blogs?page=1&limit=100",
+    tag: ["blogs"],
+    revalidate,
+  });
+
+  return Array.isArray(response?.data) ? response.data : [];
+}
+
 export default async function sitemap() {
-  const [categoriesResponse, products] = await Promise.all([
+  const [categoriesResponse, products, blogs] = await Promise.all([
     safeGetData({
       endpoint: "/api/categories?page=1&limit=500",
       tag: ["top-categories", "categories"],
       revalidate,
     }),
     getAllProducts(),
+    getAllBlogs(),
   ]);
 
   const categories = Array.isArray(categoriesResponse?.data)
@@ -118,6 +130,14 @@ export default async function sitemap() {
         changeFrequency: "weekly",
         priority: 0.75,
         lastModified: getLastModified(product),
+      })),
+    ...blogs
+      .filter((blog) => blog?.id || blog?._id)
+      .map((blog) => ({
+        path: `/blog/${blog.id || blog._id}`,
+        changeFrequency: "monthly",
+        priority: 0.65,
+        lastModified: getLastModified(blog),
       })),
   ];
 
